@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodayILearned", "TodayILearned\TodayILearned.csproj", "{EE444FC1-61E9-442A-8C52-D2CF6F5D618C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodayILearned.Core", "TodayILearned.Core\TodayILearned.Core.csproj", "{56F388D4-0B38-4E08-BAD4-0ECF5815F550}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{EE444FC1-61E9-442A-8C52-D2CF6F5D618C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE444FC1-61E9-442A-8C52-D2CF6F5D618C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EE444FC1-61E9-442A-8C52-D2CF6F5D618C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{56F388D4-0B38-4E08-BAD4-0ECF5815F550}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56F388D4-0B38-4E08-BAD4-0ECF5815F550}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56F388D4-0B38-4E08-BAD4-0ECF5815F550}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56F388D4-0B38-4E08-BAD4-0ECF5815F550}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
