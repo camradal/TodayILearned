@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>AgFx</id>
+    <version>1.1.0.1101</version>
+    <title>AgFx</title>
+    <authors>Shawn Burke,  Microsoft Corporation</authors>
+    <owners>Shawn Burke,  Microsoft Corporation</owners>
+    <licenseUrl>http://agfx.codeplex.com/license</licenseUrl>
+    <projectUrl>http://agfx.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>AgFx is a data caching framework that makes it easy to build data-connected Windows Phone applications.</description>
+    <summary>AgFx is a data caching framework that makes it easy to build data-connected Windows Phone applications.</summary>
+    <tags>agfx windows phone wp7</tags>
+  </metadata>
+</package>
