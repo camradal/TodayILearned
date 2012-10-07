@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Net;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 
 namespace TodayILearned
@@ -88,6 +91,7 @@ namespace TodayILearned
 
         void client_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
+            var result = JObject.Parse(e.Result);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
