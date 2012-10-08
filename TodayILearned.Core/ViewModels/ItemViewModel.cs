@@ -18,6 +18,7 @@ namespace TodayILearned
         private string _title;
         private string _description;
         private string _url;
+        private string _domain;
 
         public string Title
         {
@@ -63,6 +64,22 @@ namespace TodayILearned
                 {
                     _url = value;
                     NotifyPropertyChanged("Url");
+                }
+            }
+        }
+        
+        public string Domain
+        {
+            get
+            {
+                return _domain;
+            }
+            set
+            {
+                if (value != _domain)
+                {
+                    _domain = value;
+                    NotifyPropertyChanged("Domain");
                 }
             }
         }

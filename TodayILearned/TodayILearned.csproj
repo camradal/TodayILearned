@@ -92,6 +92,10 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\appbar.favs.addto.rest.png" />
+    <Content Include="Images\appbar.feature.email.rest.png" />
+    <Content Include="Images\appbar.refresh.rest.png" />
+    <Content Include="Images\appbar.share.rest.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TodayILearned.Core\TodayILearned.Core.csproj">
