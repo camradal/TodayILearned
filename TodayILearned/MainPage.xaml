@@ -5,6 +5,7 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696" 
@@ -13,12 +14,14 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    Style="{StaticResource TransitionPageStyle}"
+    toolkit:TiltEffect.IsTiltEnabled="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <controls:Pivot Title="TODAY I LEARNED">
+        <controls:Pivot Title="{Binding Source={StaticResource Strings}, Path=Resources.AppTitleCapitalized}">
             <!--Pivot item one-->
             <controls:PivotItem Header="new">
                 <ListBox x:Name="NewListBox" Margin="0,0,-12,0" ItemsSource="{Binding Items}">
@@ -61,6 +64,7 @@
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.refresh.rest.png" Text="refresh"/>
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.favs.addto.rest.png" Text="favorite"/>
             <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Rate this app"/>
                 <shell:ApplicationBarMenuItem Text="Pin to start"/>
                 <shell:ApplicationBarMenuItem Text="About"/>
             </shell:ApplicationBar.MenuItems>
