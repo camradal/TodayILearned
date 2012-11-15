@@ -19,6 +19,7 @@ namespace TodayILearned
         private string _description;
         private string _url;
         private string _domain;
+        private string _thumbnail;
 
         public string Title
         {
@@ -80,6 +81,22 @@ namespace TodayILearned
                 {
                     _domain = value;
                     NotifyPropertyChanged("Domain");
+                }
+            }
+        }
+
+        public string Thumbnail
+        {
+            get
+            {
+                return _thumbnail;
+            }
+            set
+            {
+                if (value != _thumbnail)
+                {
+                    _thumbnail = value;
+                    NotifyPropertyChanged("Thumbnail");
                 }
             }
         }

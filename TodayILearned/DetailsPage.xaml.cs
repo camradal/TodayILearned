@@ -35,8 +35,7 @@ namespace TodayILearned
             if (NavigationContext.QueryString.TryGetValue("uri", out uri))
             {
                 string decodedUri = HttpUtility.HtmlDecode(uri);
-                string sourceString = string.Format(sourceUriFormat, decodedUri);
-                sourceUrl = new Uri(sourceString, UriKind.Absolute);
+                sourceUrl = new Uri(decodedUri, UriKind.Absolute);
                 webBrowser1.Source = sourceUrl;
             }
             //else if (isNewPage && State.ContainsKey("SourceUrl"))

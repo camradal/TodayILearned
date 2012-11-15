@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,6 +31,46 @@ namespace TodayILearned
             {
                 App.ViewModel.LoadData();
             }
+        }
+
+        private void NewListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listBox = (LongListSelector)sender;
+
+            // if selected index is null (no selection) do nothing
+            var selectedItem = listBox.SelectedItem as ItemViewModel;
+            if (selectedItem == null)
+                return;
+
+            // navigate to the new page
+            var root = Application.Current.RootVisual as FrameworkElement;
+            if (root == null)
+                return;
+
+            root.DataContext = selectedItem;
+
+            OpenDetailsPage(selectedItem.Url);
+
+            // reset selected index to null (no selection)
+            listBox.SelectedItem = null;
+        }
+
+        private void OpenDetailsPage(string url)
+        {
+            string encodedUri = HttpUtility.HtmlEncode(url);
+            var uri = new Uri("/DetailsPage.xaml?uri=" + encodedUri, UriKind.Relative);
+            Dispatcher.BeginInvoke(() =>
+            {
+                try
+                {
+                    NavigationService.Navigate(uri);
+                }
+                catch (Exception)
+                {
+                    // prevent double-click errors
+                }
+            });
+
         }
     }
 }

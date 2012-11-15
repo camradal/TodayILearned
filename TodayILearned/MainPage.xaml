@@ -16,6 +16,24 @@
     shell:SystemTray.IsVisible="True"
     Style="{StaticResource TransitionPageStyle}"
     toolkit:TiltEffect.IsTiltEnabled="True">
+    
+    <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="HightlightsTemplate">
+            <Grid Margin="0,0,6,17">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <Image Source="{Binding Thumbnail}" Stretch="Uniform" Margin="12,6,3,0" VerticalAlignment="Top"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <TextBlock Text="{Binding Domain}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -23,16 +41,14 @@
         <controls:Pivot Title="{Binding Source={StaticResource Strings}, Path=Resources.AppTitleCapitalized}">
             <!--Pivot item one-->
             <controls:PivotItem Header="new">
-                <ListBox x:Name="NewListBox" Margin="0,0,-12,0" ItemsSource="{Binding Items}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Margin="0,0,0,17">
-                                <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}"/>
-                                <TextBlock Text="{Binding Domain}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <toolkit:LongListSelector
+                    x:Name="NewListBox"
+                    IsFlatList="True" 
+                    Margin="0,0,-12,0"
+                    ItemsSource="{Binding Items}"
+                    ItemTemplate="{StaticResource HightlightsTemplate}"
+                    SelectionChanged="NewListBox_SelectionChanged">
+                </toolkit:LongListSelector>
             </controls:PivotItem>
  
             <!--Pivot item two-->

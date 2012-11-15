@@ -59,7 +59,8 @@ namespace TodayILearned.Core
                 {
                     Title = entry["data"]["title"].Value<string>(),
                     Url = entry["data"]["url"].Value<string>(),
-                    Domain = entry["data"]["domain"].Value<string>()
+                    Domain = entry["data"]["domain"].Value<string>(),
+                    Thumbnail = entry["data"]["thumbnail"].Value<string>()
                 };
                 this.Items.Add(itemViewModel);
             }
