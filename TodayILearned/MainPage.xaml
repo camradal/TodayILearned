@@ -21,15 +21,15 @@
         <DataTemplate x:Key="HightlightsTemplate">
             <Grid Margin="0,0,6,17">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
-                    <Image Source="{Binding Thumbnail}" Stretch="Uniform" Margin="12,6,3,0" VerticalAlignment="Top"/>
-                </StackPanel>
-                <StackPanel Grid.Column="1">
                     <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}"/>
                     <TextBlock Text="{Binding Domain}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <Image Source="{Binding Thumbnail}" Margin="3,6,15,0" Stretch="Uniform" VerticalAlignment="Top"/>
                 </StackPanel>
             </Grid>
         </DataTemplate>

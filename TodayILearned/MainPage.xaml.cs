@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using Utilities;
 
 namespace TodayILearned
 {
@@ -27,8 +28,10 @@ namespace TodayILearned
         // Load data for the ViewModel Items
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+            GlobalLoading.Instance.IsLoading = true;
             if (!App.ViewModel.IsDataLoaded)
             {
+                App.ViewModel.OnLoaded += () => GlobalLoading.Instance.IsLoading = false;
                 App.ViewModel.LoadData();
             }
         }

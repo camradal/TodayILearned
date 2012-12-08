@@ -8,6 +8,8 @@ namespace TodayILearned.Core
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        public Action OnLoaded;
+
         public MainViewModel()
         {
             this.Items = new ObservableCollection<ItemViewModel>();
@@ -51,20 +53,34 @@ namespace TodayILearned.Core
 
         void client_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
-            var result = JObject.Parse(e.Result);
-            var entries = result["data"]["children"];
-            foreach (var entry in entries)
+            try
             {
-                var itemViewModel = new ItemViewModel
+                var result = JObject.Parse(e.Result);
+                var entries = result["data"]["children"];
+                foreach (var entry in entries)
                 {
-                    Title = entry["data"]["title"].Value<string>(),
-                    Url = entry["data"]["url"].Value<string>(),
-                    Domain = entry["data"]["domain"].Value<string>(),
-                    Thumbnail = entry["data"]["thumbnail"].Value<string>()
-                };
-                this.Items.Add(itemViewModel);
+                    var itemViewModel = new ItemViewModel
+                    {
+                        Title = entry["data"]["title"].Value<string>(),
+                        Url = entry["data"]["url"].Value<string>(),
+                        Domain = entry["data"]["domain"].Value<string>(),
+                        Thumbnail = entry["data"]["thumbnail"].Value<string>()
+                    };
+                    this.Items.Add(itemViewModel);
+                }
+                this.IsDataLoaded = true;
             }
-            this.IsDataLoaded = true;
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (OnLoaded != null)
+                {
+                    OnLoaded();
+                }
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

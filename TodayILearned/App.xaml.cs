@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TodayILearned.Core;
+using Utilities;
 
 namespace TodayILearned
 {
@@ -144,6 +145,9 @@ namespace TodayILearned
 
             // Handle navigation failures
             RootFrame.NavigationFailed += RootFrame_NavigationFailed;
+
+            // Add global loading
+            GlobalLoading.Instance.Initialize(RootFrame);
 
             // Ensure we don't initialize again
             phoneApplicationInitialized = true;
