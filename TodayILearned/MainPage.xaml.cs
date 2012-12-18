@@ -28,9 +28,9 @@ namespace TodayILearned
         // Load data for the ViewModel Items
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            GlobalLoading.Instance.IsLoading = true;
             if (!App.ViewModel.IsDataLoaded)
             {
+                GlobalLoading.Instance.IsLoading = true;
                 App.ViewModel.OnLoaded += () => GlobalLoading.Instance.IsLoading = false;
                 App.ViewModel.LoadData();
             }
@@ -57,6 +57,25 @@ namespace TodayILearned
             // reset selected index to null (no selection)
             listBox.SelectedItem = null;
         }
+        
+        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            var menuItem = sender as MenuItem;
+            if (menuItem == null) return;
+
+            var selected = menuItem.Header as string;
+            if (selected == null) return;
+
+            if (selected == "share...")
+            {
+            }
+            else if (selected == "email...")
+            {
+            }
+            else if (selected == "add to favorites")
+            {
+            }
+        }
 
         private void OpenDetailsPage(string url)
         {
@@ -73,7 +92,6 @@ namespace TodayILearned
                     // prevent double-click errors
                 }
             });
-
         }
     }
 }
