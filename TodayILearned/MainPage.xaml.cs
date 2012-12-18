@@ -33,10 +33,11 @@ namespace TodayILearned
                 GlobalLoading.Instance.IsLoading = true;
                 App.ViewModel.OnLoaded += () => GlobalLoading.Instance.IsLoading = false;
                 App.ViewModel.LoadData();
+                App.ViewModel.LoadFavorites();
             }
         }
 
-        private void NewListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var listBox = (LongListSelector)sender;
 
@@ -66,6 +67,9 @@ namespace TodayILearned
             var selected = menuItem.Header as string;
             if (selected == null) return;
 
+            var model = menuItem.DataContext as ItemViewModel;
+            if (model == null) return;
+
             if (selected == "share...")
             {
             }
@@ -74,6 +78,13 @@ namespace TodayILearned
             }
             else if (selected == "add to favorites")
             {
+                App.ViewModel.AddFavorite(model);
+                App.ViewModel.SaveFavorites();
+            }
+            else if (selected == "remove from favorites")
+            {
+                App.ViewModel.RemoveFavorite(model);
+                App.ViewModel.SaveFavorites();
             }
         }
 

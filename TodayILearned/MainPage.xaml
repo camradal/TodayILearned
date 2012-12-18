@@ -36,17 +36,16 @@
                         <toolkit:MenuItem Header="share..." Click="MenuItem_OnClick"/>
                         <toolkit:MenuItem Header="email..." Click="MenuItem_OnClick"/>
                         <toolkit:MenuItem Header="add to favorites" Click="MenuItem_OnClick"/>
+                        <toolkit:MenuItem Header="remove from favorites" Click="MenuItem_OnClick"/>
                     </toolkit:ContextMenu>
                 </toolkit:ContextMenuService.ContextMenu>
             </Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
         <controls:Pivot Title="{Binding Source={StaticResource Strings}, Path=Resources.AppTitleCapitalized}">
-            <!--Pivot item one-->
             <controls:PivotItem Header="new">
                 <toolkit:LongListSelector
                     x:Name="NewListBox"
@@ -54,23 +53,19 @@
                     Margin="0,0,-12,0"
                     ItemsSource="{Binding Items}"
                     ItemTemplate="{StaticResource HightlightsTemplate}"
-                    SelectionChanged="NewListBox_SelectionChanged">
+                    SelectionChanged="ListBox_SelectionChanged">
                 </toolkit:LongListSelector>
             </controls:PivotItem>
  
-            <!--Pivot item two-->
-            <controls:PivotItem Header="favorites"> 
-                <!--Triple line list no text wrapping-->
-                    <ListBox x:Name="FavoritesListBox" Margin="0,0,-12,0" ItemsSource="{Binding Items}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Margin="0,0,0,17">
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="NoWrap" Margin="12,0,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    <TextBlock Text="{Binding LineThree}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+            <controls:PivotItem Header="favorites">
+                <toolkit:LongListSelector
+                    x:Name="FavoritesListBox"
+                    IsFlatList="True" 
+                    Margin="0,0,-12,0"
+                    ItemsSource="{Binding Favorites}"
+                    ItemTemplate="{StaticResource HightlightsTemplate}"
+                    SelectionChanged="ListBox_SelectionChanged">
+                </toolkit:LongListSelector>
             </controls:PivotItem>
 
             <!--Pivot item two-->
