@@ -59,9 +59,10 @@ namespace TodayILearned.Core
                 var entries = result["data"]["children"];
                 foreach (var entry in entries)
                 {
+                    string title = ProcessString(entry["data"]["title"].Value<string>());
                     var itemViewModel = new ItemViewModel
                     {
-                        Title = entry["data"]["title"].Value<string>(),
+                        Title = title,
                         Url = entry["data"]["url"].Value<string>(),
                         Domain = entry["data"]["domain"].Value<string>(),
                         Thumbnail = entry["data"]["thumbnail"].Value<string>()
@@ -81,6 +82,16 @@ namespace TodayILearned.Core
                     OnLoaded();
                 }
             }
+        }
+
+        private string ProcessString(string value)
+        {
+            const string tilThat = "TIL that ";
+            const string til = "TIL ";
+            if (value.StartsWith(tilThat)) value = value.Substring(tilThat.Length);
+            if (value.StartsWith(til)) value = value.Substring(til.Length);
+            if (value.Length > 0) value = char.ToUpper(value[0]) + value.Substring(1);
+            return value;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
