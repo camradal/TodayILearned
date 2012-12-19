@@ -11,7 +11,7 @@ namespace TodayILearned
     public class NewItem
     {
         public string Version { get; set; }
-        public string[] Description { get; set; }
+        public string Description { get; set; }
     }
 
     public partial class AboutPage : PhoneApplicationPage
@@ -20,16 +20,19 @@ namespace TodayILearned
         {
             get
             {
-                return new List<NewItem>
-                           {
+                return new List<NewItem>()
+                {
                     new NewItem
-                    {
-                        Version = "1.0",
-                        Description = new[]
                         {
-                            "On This Day... is released!"
+                            Version = "",
+                            Description = "We read all emails, please drop us a line with any suggestions."
+                        },
+                    new NewItem
+                        {
+                            Version = "1.0",
+                            Description =
+                                "- Initial release"
                         }
-                    }
                 };
             }
         }
@@ -37,12 +40,6 @@ namespace TodayILearned
         public AboutPage()
         {
             InitializeComponent();
-        }
-
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-
             ReadVersionFromManifest();
             DataContext = this;
         }
@@ -67,7 +64,7 @@ namespace TodayILearned
         {
             try
             {
-                MarketplaceReviewTask task = new MarketplaceReviewTask();
+                var task = new MarketplaceReviewTask();
                 task.Show();
             }
             catch
