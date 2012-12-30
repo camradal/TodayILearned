@@ -88,7 +88,7 @@ namespace TodayILearned
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
             // Ensure that application state is restored appropriately
-            if (!App.ViewModel.IsDataLoaded)
+            if (!App.ViewModel.IsLoaded)
             {
                 App.ViewModel.LoadData();
                 App.ViewModel.LoadFavorites();

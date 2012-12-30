@@ -6,6 +6,7 @@ using System.IO.IsolatedStorage;
 using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Utilities;
 
 namespace TodayILearned.Core
 {
@@ -19,38 +20,59 @@ namespace TodayILearned.Core
             this.Favorites = new ObservableCollection<ItemViewModel>();
         }
 
+        public bool IsLoading { get; private set; }
+        public bool IsLoaded { get; private set; }
+        public string LastItem { get; private set; }
+
         public ObservableCollection<ItemViewModel> Items { get; private set; }
         public ObservableCollection<ItemViewModel> Favorites { get; private set; }
 
-        private string _sampleProperty = "Sample Runtime Property Value";
-        public string SampleProperty
-        {
-            get
-            {
-                return _sampleProperty;
-            }
-            set
-            {
-                if (value != _sampleProperty)
-                {
-                    _sampleProperty = value;
-                    NotifyPropertyChanged("SampleProperty");
-                }
-            }
-        }
-
-        public bool IsDataLoaded
-        {
-            get;
-            private set;
-        }
-
         public void LoadData()
         {
-            var uri = new Uri("http://www.reddit.com/r/todayilearned.json");
+            LoadData("");
+        }
+
+        public void LoadData(string lastItem)
+        {
+            IsLoading = true;
+            GlobalLoading.Instance.IsLoading = true;
+
+            string uriString = "http://www.reddit.com/r/todayilearned.json";
+            if (!string.IsNullOrEmpty(lastItem))
+            {
+                uriString += "?after=" + lastItem;
+            }
+            var uri = new Uri(uriString);
             var client = new WebClient();
             client.DownloadStringAsync(uri);
             client.DownloadStringCompleted += client_DownloadStringCompleted;
+        }
+
+        private void client_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            try
+            {
+                var result = JObject.Parse(e.Result);
+                foreach (ItemViewModel item in Serializer.GetItems(result))
+                {
+                    this.Items.Add(item);
+                }
+                LastItem = result["data"]["after"].ToString();
+                this.IsLoaded = true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                IsLoading = false;
+                GlobalLoading.Instance.IsLoading = false;
+                if (OnLoaded != null)
+                {
+                    OnLoaded();
+                }
+            }
         }
 
         public void LoadFavorites()
@@ -91,30 +113,6 @@ namespace TodayILearned.Core
         {
             this.Favorites.Remove(item);
             NotifyPropertyChanged("Favorites");
-        }
-
-        private void client_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
-        {
-            try
-            {
-                var result = JObject.Parse(e.Result);
-                foreach (var item in Serializer.GetItems(result))
-                {
-                    this.Items.Add(item);
-                }
-                this.IsDataLoaded = true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                if (OnLoaded != null)
-                {
-                    OnLoaded();
-                }
-            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
