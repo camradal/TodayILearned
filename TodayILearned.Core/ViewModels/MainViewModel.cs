@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.IO.IsolatedStorage;
+using System.Linq;
 using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -12,6 +13,8 @@ namespace TodayILearned.Core
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        private ItemViewModel item;
+
         public Action OnLoaded;
 
         public MainViewModel()
@@ -26,6 +29,16 @@ namespace TodayILearned.Core
 
         public ObservableCollection<ItemViewModel> Items { get; private set; }
         public ObservableCollection<ItemViewModel> Favorites { get; private set; }
+
+        public ItemViewModel Item
+        {
+            get { return item; }
+            set
+            {
+                item = value;
+                NotifyPropertyChanged("Item");
+            }
+        }
 
         public void LoadData()
         {
@@ -57,6 +70,7 @@ namespace TodayILearned.Core
                 {
                     this.Items.Add(item);
                 }
+                Item = this.Items.FirstOrDefault();
                 LastItem = result["data"]["after"].ToString();
                 this.IsLoaded = true;
             }

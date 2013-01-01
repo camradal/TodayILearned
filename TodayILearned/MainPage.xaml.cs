@@ -38,6 +38,9 @@ namespace TodayILearned
                 App.ViewModel.LoadData();
                 App.ViewModel.LoadFavorites();
             }
+
+            var listener = GestureService.GetGestureListener(MainItem);
+            listener.Flick += GestureListener_OnFlick;
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -143,6 +146,43 @@ namespace TodayILearned
             {
                 App.ViewModel.LoadData(App.ViewModel.LastItem);
             }
+        }
+
+        private void GestureListener_OnFlick(object sender, FlickGestureEventArgs e)
+        {
+            if (App.ViewModel == null) return;
+            if (App.ViewModel.Item == null) return;
+            if (e.Direction != System.Windows.Controls.Orientation.Vertical) return;
+
+            int index = App.ViewModel.Items.IndexOf(App.ViewModel.Item);
+            int increment = e.VerticalVelocity > 0 ? -1 : 1;
+            index = index + increment;
+            index = Math.Max(index, 0);
+            index = Math.Min(index, App.ViewModel.Items.Count - 1);
+            
+            // TODO: load more items
+
+            SlideTransition transitionOut;
+            SlideTransition transitionIn;
+
+            if (increment > 0)
+            {
+                transitionOut = new SlideTransition { Mode = SlideTransitionMode.SlideUpFadeOut};
+                transitionIn = new SlideTransition { Mode = SlideTransitionMode.SlideUpFadeIn };
+            }
+            else
+            {
+                transitionOut = new SlideTransition { Mode = SlideTransitionMode.SlideDownFadeOut };
+                transitionIn = new SlideTransition { Mode = SlideTransitionMode.SlideDownFadeIn };
+            }
+
+            ITransition tran = transitionOut.GetTransition(MainItem);
+            tran.Completed += (o, args) =>
+            {
+                App.ViewModel.Item = App.ViewModel.Items[index];
+                transitionIn.GetTransition(MainItem).Begin();
+            };
+            tran.Begin();
         }
     }
 }

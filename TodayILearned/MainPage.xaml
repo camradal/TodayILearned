@@ -25,7 +25,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
-                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}" FontSize="{StaticResource PhoneFontSizeMedium}"/>
+                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}"/>
                     <TextBlock Text="{Binding Domain}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
@@ -44,19 +44,24 @@
     </phone:PhoneApplicationPage.Resources>
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <!--Pivot Control-->
         <controls:Pivot Title="{Binding Source={StaticResource Strings}, Path=Resources.AppTitleCapitalized}">
             <controls:PivotItem Header="new">
-                <toolkit:LongListSelector
-                    x:Name="NewListBox"
-                    IsFlatList="True" 
-                    Margin="0,0,-12,0"
-                    ItemsSource="{Binding Items}"
-                    ItemTemplate="{StaticResource HightlightsTemplate}"
-                    SelectionChanged="ListBox_SelectionChanged" Link="NewListBox_Link">
-                </toolkit:LongListSelector>
+                <Grid Name="MainItem" Margin="0,0,6,17" VerticalAlignment="Stretch" Background="Transparent">
+                    <Grid VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="{Binding Item.Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}" FontSize="{StaticResource PhoneFontSizeMedium}"/>
+                            <TextBlock Text="{Binding Item.Domain}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <Image Source="{Binding Item.Thumbnail}" Margin="3,6,15,0" Stretch="Uniform" VerticalAlignment="Top"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
             </controls:PivotItem>
- 
             <controls:PivotItem Header="favorites">
                 <toolkit:LongListSelector
                     x:Name="FavoritesListBox"
@@ -66,10 +71,6 @@
                     ItemTemplate="{StaticResource HightlightsTemplate}"
                     SelectionChanged="ListBox_SelectionChanged">
                 </toolkit:LongListSelector>
-            </controls:PivotItem>
-
-            <!--Pivot item two-->
-            <controls:PivotItem Header="settings">
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>
