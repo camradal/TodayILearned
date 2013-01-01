@@ -48,11 +48,12 @@ namespace TodayILearned.Core
 
         private static string ProcessString(string value)
         {
-            const string tilThat = "TIL that ";
-            const string til = "TIL ";
+            const string tilThat = "TIL that";
+            const string til = "TIL";
             if (value.StartsWith(tilThat)) value = value.Substring(tilThat.Length);
             if (value.StartsWith(til)) value = value.Substring(til.Length);
-            if (value.Length > 0) value = char.ToUpper(value[0]) + value.Substring(1);
+            value = value.TrimStart(new[] { ' ', '-', '.', ':' });
+            value = char.ToUpper(value[0]) + value.Substring(1);
             return value;
         }
     }
