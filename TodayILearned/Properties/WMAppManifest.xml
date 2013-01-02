@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{722d2aba-a0a6-49c1-85ff-79b885c76745}" Title="Trivia Buff" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Dapper Panda" Description="Trivia Buff is a perfect app for trivia &amp; random fact lovers. Updated daily with new interesting facts and includes sources for more info!" Publisher="Dapper Panda">
+  <App xmlns="" ProductID="{722d2aba-a0a6-49c1-85ff-79b885c76745}" Title="Trivia Buff" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Dapper Panda" Description="Trivia Buff is a perfect app for trivia &amp; random fact lovers. Updated daily with new interesting facts and includes sources for even more info!" Publisher="Dapper Panda">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_GAMERSERVICES" />

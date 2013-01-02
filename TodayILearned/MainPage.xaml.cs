@@ -26,6 +26,10 @@ namespace TodayILearned
             // Set the data context of the listbox control to the sample data
             DataContext = App.ViewModel;
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
+            
+            // ads
+            AdBox.ErrorOccurred += AdBox_ErrorOccurred;
+            AdBox.AdRefreshed += AdBox_AdRefreshed;
         }
 
         // Load data for the ViewModel Items
@@ -184,5 +188,27 @@ namespace TodayILearned
             };
             tran.Begin();
         }
+
+        #region Ads
+
+        void AdBox_AdRefreshed(object sender, EventArgs e)
+        {
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            {
+                AdDuplexAdControl.Visibility = Visibility.Collapsed;
+                AdBox.Visibility = Visibility.Visible;
+            });
+        }
+
+        void AdBox_ErrorOccurred(object sender, Microsoft.Advertising.AdErrorEventArgs e)
+        {
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            {
+                AdBox.Visibility = Visibility.Collapsed;
+                AdDuplexAdControl.Visibility = Visibility.Visible;
+            });
+        }
+
+        #endregion
     }
 }
