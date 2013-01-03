@@ -52,7 +52,7 @@ namespace TodayILearned.Core
             const string til = "TIL";
             if (value.StartsWith(tilThat)) value = value.Substring(tilThat.Length);
             if (value.StartsWith(til)) value = value.Substring(til.Length);
-            value = value.TrimStart(new[] { ' ', '-', '.', ':' });
+            value = value.TrimStart(new[] { ' ', '-', '.', ':', ',' });
             value = char.ToUpper(value[0]) + value.Substring(1);
             return value;
         }
