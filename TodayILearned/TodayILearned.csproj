@@ -77,6 +77,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\AppSettings.cs" />
+    <Compile Include="Utilities\BackgroundAgent.cs" />
     <Compile Include="DetailsPage.xaml.cs">
       <DependentUpon>DetailsPage.xaml</DependentUpon>
     </Compile>
@@ -89,7 +91,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="StringProvider.cs" />
+    <Compile Include="Utilities\LowMemHelper.cs" />
+    <Compile Include="Utilities\ReviewThisAppTask.cs" />
+    <Compile Include="Utilities\StringProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -146,6 +150,10 @@
     <ProjectReference Include="..\TodayILearned.Core\TodayILearned.Core.csproj">
       <Project>{56F388D4-0B38-4E08-BAD4-0ECF5815F550}</Project>
       <Name>TodayILearned.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TodayILearned.LiveTileScheduledTask\TodayILearned.LiveTileScheduledTask.csproj">
+      <Project>{081035A5-15E9-41B1-B256-3AF6EE08037C}</Project>
+      <Name>TodayILearned.LiveTileScheduledTask</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

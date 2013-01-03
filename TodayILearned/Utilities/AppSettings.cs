@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO.IsolatedStorage;
 
-namespace TodayILearned.Core
+namespace TodayILearned.Utilities
 {
     /// <summary>
     /// Class for handling application settings

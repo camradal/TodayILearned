@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Phone.Info;
 
-namespace TodayILearned.Core
+namespace TodayILearned.Utilities
 {
     public static class LowMemoryHelper
     {

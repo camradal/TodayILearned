@@ -1,6 +1,6 @@
 ﻿using TodayILearned.Resources;
 
-namespace TodayILearned
+namespace TodayILearned.Utilities
 {
     /// <summary>
     /// Localized resource provider

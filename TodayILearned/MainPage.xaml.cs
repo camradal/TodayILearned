@@ -1,27 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
+using TodayILearned.Core;
+using TodayILearned.Utilities;
 using Utilities;
 
 namespace TodayILearned
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        private readonly BackgroundAgent backgroundAgent = new BackgroundAgent();
+
         // Constructor
         public MainPage()
         {
             InitializeComponent();
+            ShowReviewPane();
 
             // Set the data context of the listbox control to the sample data
             DataContext = App.ViewModel;
@@ -35,16 +35,59 @@ namespace TodayILearned
         // Load data for the ViewModel Items
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+            int numberOfStarts = AppSettings.NumberOfStarts;
+            AppSettings.NumberOfStarts++;
+
             if (!App.ViewModel.IsLoaded)
             {
                 GlobalLoading.Instance.IsLoading = true;
-                App.ViewModel.OnLoaded += () => GlobalLoading.Instance.IsLoading = false;
+                App.ViewModel.OnLoaded += () =>
+                {
+                    GlobalLoading.Instance.IsLoading = false;
+                    if (!App.IsMemoryLimited && App.FirstLoad)
+                    {
+                        SetUpLiveTile(numberOfStarts);
+                    }
+
+                    if (App.IsMemoryLimited)
+                    {
+                        ((ApplicationBarMenuItem)ApplicationBar.MenuItems[2]).IsEnabled = false;
+                    }
+                };
                 App.ViewModel.LoadData();
                 App.ViewModel.LoadFavorites();
             }
 
             var listener = GestureService.GetGestureListener(MainItem);
             listener.Flick += GestureListener_OnFlick;
+        }
+
+        private void SetUpLiveTile(int numberOfStarts)
+        {
+            bool agentStarted = backgroundAgent.StartIfEnabled();
+            if (agentStarted && (numberOfStarts == 0))
+            {
+                InitialTileSetup();
+            }
+            if (!agentStarted)
+            {
+                AppSettings.LiveTileDisabled = true;
+                backgroundAgent.ResetTileToDefault();
+            }
+        }
+
+        private void InitialTileSetup()
+        {
+            if (App.ViewModel != null && App.ViewModel.Item != null)
+            {
+                LiveTile.UpdateLiveTile("Trivia Buff", App.ViewModel.Item.Title);
+            }
+        }
+
+        private void ShowReviewPane()
+        {
+            var rate = new ReviewThisAppTask();
+            rate.ShowAfterThreshold();
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

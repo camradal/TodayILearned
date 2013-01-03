@@ -12,12 +12,16 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TodayILearned.Core;
+using TodayILearned.Utilities;
 using Utilities;
 
 namespace TodayILearned
 {
     public partial class App : Application
     {
+        public static bool FirstLoad { get; set; }
+        public static bool IsMemoryLimited { get; set; }
+        
         private static MainViewModel viewModel = null;
 
         /// <summary>
@@ -81,6 +85,7 @@ namespace TodayILearned
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            FirstLoad = true;
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -93,6 +98,7 @@ namespace TodayILearned
                 App.ViewModel.LoadData();
                 App.ViewModel.LoadFavorites();
             }
+            IsMemoryLimited = LowMemoryHelper.IsLowMemDevice;
         }
 
         // Code to execute when the application is deactivated (sent to background)
