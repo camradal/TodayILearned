@@ -106,7 +106,10 @@ namespace TodayILearned
 
             root.DataContext = selectedItem;
 
-            OpenDetailsPage(selectedItem.Url);
+            App.ViewModel.Item = selectedItem;
+            MainPivot.SelectedIndex = 0;
+
+            //OpenDetailsPage(selectedItem.Url);
 
             // reset selected index to null (no selection)
             listBox.SelectedItem = null;
@@ -139,6 +142,15 @@ namespace TodayILearned
                 App.ViewModel.RemoveFavorite(model);
                 App.ViewModel.SaveFavorites();
             }
+        }
+
+        private void DetailsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (App.ViewModel == null) return;
+            if (App.ViewModel.Item == null) return;
+
+            string url = App.ViewModel.Item.Url;
+            OpenDetailsPage(url);
         }
 
         private void OpenDetailsPage(string url)
@@ -230,6 +242,23 @@ namespace TodayILearned
                 transitionIn.GetTransition(MainItem).Begin();
             };
             tran.Begin();
+        }
+
+        private void MainPivot_OnLoadedPivotItem(object sender, PivotItemEventArgs e)
+        {
+            if (App.ViewModel == null) return;
+            if (App.ViewModel.Item == null) return;
+            if (e.Item.Header.ToString() != "list") return;
+            if (AllListBox.ItemsSource == null) return;
+
+            try
+            {
+                Dispatcher.BeginInvoke(() => AllListBox.ScrollTo(App.ViewModel.Item));
+            }
+            catch (Exception)
+            {
+                // item not in the list
+            }
         }
 
         #region Ads

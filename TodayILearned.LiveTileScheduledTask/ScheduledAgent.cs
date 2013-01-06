@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
+using Microsoft.Phone.Info;
 using Microsoft.Phone.Scheduler;
 using TodayILearned.Core;
 
@@ -58,7 +60,15 @@ namespace TodayILearned.LiveTileScheduledTask
 
                     Deployment.Current.Dispatcher.BeginInvoke(() =>
                     {
-                        LiveTile.UpdateLiveTile(title, description);
+                        try
+                        {
+                            LiveTile.UpdateLiveTile(title, description);
+                            Debug.WriteLine("Current memory - updated: {0}", DeviceStatus.ApplicationCurrentMemoryUsage);
+                        }
+                        catch
+                        {
+                        }
+                        
                         NotifyComplete();
                     });
                 };
