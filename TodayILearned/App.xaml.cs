@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
+﻿using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TodayILearned.Core;
@@ -147,7 +139,17 @@ namespace TodayILearned
 
             // Create the frame but don't set it as RootVisual yet; this allows the splash
             // screen to remain active until the application is ready to render.
-            RootFrame = new PhoneApplicationFrame();
+            if (LowMemoryHelper.IsLowMemDevice)
+            {
+                RootFrame = new PhoneApplicationFrame();
+            }
+            else
+            {
+                RootFrame = new TransitionFrame()
+                {
+                    Background = new SolidColorBrush(Colors.Transparent)
+                };
+            }
             RootFrame.Navigated += CompleteInitializePhoneApplication;
 
             // Handle navigation failures
