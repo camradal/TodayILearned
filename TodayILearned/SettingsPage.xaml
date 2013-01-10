@@ -1,0 +1,57 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="TodayILearned.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:utilities="clr-namespace:TodayILearned.Utilities"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True"
+    Style="{StaticResource TransitionPageStyle}"
+    toolkit:TiltEffect.IsTiltEnabled="True">
+
+    <phone:PhoneApplicationPage.Resources>
+        <utilities:AppSettings x:Key="appSettings" />
+        <utilities:InverseConverter x:Key="inverseConverter" />
+        <utilities:SortOrderConverter x:Key="sortOrderConverter" />
+    </phone:PhoneApplicationPage.Resources>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="{Binding Source={StaticResource Strings}, Path=Resources.AppTitleCapitalized}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="{Binding Resources.PageTitleSettings, Source={StaticResource Strings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <StackPanel x:Name="SettingsPanel" Grid.Row="1" Margin="12,0,12,12">
+            <toolkit:ToggleSwitch x:Name="LiveTileToggle" Margin="0,0,0,-12"
+                                  Header="{Binding Source={StaticResource Strings}, Path=Resources.SettingLiveTile}"
+                                  IsEnabled="{Binding Source={StaticResource appSettings}, Path=IsLowMemDevice, Mode=OneWay, Converter={StaticResource inverseConverter}}"
+                                  IsChecked="{Binding Source={StaticResource appSettings}, Path=LiveTileEnabled, Mode=OneWay}" Click="LiveTileToggle_Click"/>
+
+            <toolkit:ListPicker x:Name="FontSizeListPicker" Margin="12,0,12,24"
+                                Header="{Binding Source={StaticResource Strings}, Path=Resources.SettingFontSize}"
+                                SelectedIndex="{Binding Path=DisplayFontSize, Mode=TwoWay}" SelectionChanged="FontSizeListPicker_SelectionChanged">
+                <toolkit:ListPickerItem Content="{Binding Source={StaticResource Strings}, Path=Resources.SettingFontSizeNormal}"/>
+                <toolkit:ListPickerItem Content="{Binding Source={StaticResource Strings}, Path=Resources.SettingFontSizeLarger}"/>
+            </toolkit:ListPicker>
+
+            <!--<TextBlock x:Name="SupportTheDevelopersTextBox" Text="Support the developers, disable the ads..." Margin="12,0" Style="{StaticResource PhoneTextSubtleStyle}"  TextWrapping="Wrap"/>
+            <Button x:Name="BuyAddFreeVersionButton" Content="buy ad-free version" Margin="0,0,0,12" Click="BuyAddFreeVersionButton_Click"/>-->
+
+        </StackPanel>
+    </Grid>
+
+</phone:PhoneApplicationPage>

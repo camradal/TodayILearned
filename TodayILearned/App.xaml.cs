@@ -13,6 +13,7 @@ namespace TodayILearned
     {
         public static bool FirstLoad { get; set; }
         public static bool IsMemoryLimited { get; set; }
+        public static bool FontSizeChanged { get; set; }
         
         private static MainViewModel viewModel = null;
 

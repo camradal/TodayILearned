@@ -36,8 +36,13 @@ namespace TodayILearned
             int numberOfStarts = AppSettings.NumberOfStarts;
             AppSettings.NumberOfStarts++;
 
-            if (!App.ViewModel.IsLoaded)
+            if (!App.ViewModel.IsLoaded || App.FontSizeChanged)
             {
+                if (App.FontSizeChanged)
+                {
+                    App.ViewModel.Items.Clear();
+                }
+
                 App.ViewModel.OnLoaded += () =>
                 {
                     if (!App.IsMemoryLimited && App.FirstLoad)
@@ -173,7 +178,7 @@ namespace TodayILearned
 
         private void ApplicationBarSettingsMenuItem_OnClick(object sender, EventArgs e)
         {
-            Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative)));
+            Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative)));
         }
 
         private void ApplicationBarAboutMenuItem_OnClick(object sender, EventArgs e)

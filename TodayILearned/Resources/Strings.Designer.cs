@@ -421,7 +421,7 @@ namespace TodayILearned.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Font size for descriptions.
+        ///   Looks up a localized string similar to Font size.
         /// </summary>
         public static string SettingFontSize {
             get {
