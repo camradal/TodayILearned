@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using Newtonsoft.Json.Linq;
 
 namespace TodayILearned.Core
@@ -49,6 +50,7 @@ namespace TodayILearned.Core
 
         private static string ProcessString(string value)
         {
+            value = HttpUtility.HtmlDecode(value);
             value = value.TrimStart(new[] { ' ', '-', '.', ':', ',', '[', ']' });
             if (value.StartsWith("TIL", StringComparison.OrdinalIgnoreCase))
             {
