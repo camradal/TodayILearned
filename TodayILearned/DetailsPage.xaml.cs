@@ -10,7 +10,6 @@ namespace TodayILearned
     public partial class DetailsPage
     {
         private volatile bool navigating;
-        private const string sourceUriFormat = @"http://en.wikipedia.org{0}";
         private Uri sourceUrl;
 
         public DetailsPage()
@@ -19,6 +18,8 @@ namespace TodayILearned
 
             webBrowser1.Navigated += webBrowser1_Navigated;
             webBrowser1.LoadCompleted += webBrowser1_LoadCompleted;
+
+            this.DataContext = App.ViewModel.Item;
 
             // ads
             AdBox.ErrorOccurred += AdBox_ErrorOccurred;
@@ -31,13 +32,12 @@ namespace TodayILearned
         {
             base.OnNavigatedTo(e);
 
-            string uri;
-            if (NavigationContext.QueryString.TryGetValue("uri", out uri))
-            {
-                string decodedUri = HttpUtility.HtmlDecode(uri);
-                sourceUrl = new Uri(decodedUri, UriKind.Absolute);
-                webBrowser1.Source = sourceUrl;
-            }
+            if (App.ViewModel == null) return;
+            if (App.ViewModel.Item == null) return;
+
+            string decodedUri = HttpUtility.HtmlDecode(App.ViewModel.Item.Url);
+            webBrowser1.Source = new Uri(decodedUri, UriKind.Absolute);
+
             //else if (isNewPage && State.ContainsKey("SourceUrl"))
             //{
             //    sourceUrl = new Uri(State["SourceUrl"].ToString());
@@ -109,5 +109,37 @@ namespace TodayILearned
         }
 
         #endregion
+
+        private void ApplicationBarIconButton_Click_Prev(object sender, EventArgs e)
+        {
+            if (App.ViewModel == null) return;
+            if (App.ViewModel.Items == null) return;
+            if (App.ViewModel.Item == null) return;
+
+            int index = App.ViewModel.Items.IndexOf(App.ViewModel.Item) - 1;
+            if (index >= 0 && index < App.ViewModel.Items.Count)
+            {
+                App.ViewModel.Item = App.ViewModel.Items[index];
+                this.DataContext = App.ViewModel.Item;
+                string decodedUri = HttpUtility.HtmlDecode(App.ViewModel.Item.Url);
+                webBrowser1.Source = new Uri(decodedUri, UriKind.Absolute);
+            }
+        }
+
+        private void ApplicationBarIconButton_Click_Next(object sender, EventArgs e)
+        {
+            if (App.ViewModel == null) return;
+            if (App.ViewModel.Items == null) return;
+            if (App.ViewModel.Item == null) return;
+
+            int index = App.ViewModel.Items.IndexOf(App.ViewModel.Item) + 1;
+            if (index >= 0 && index < App.ViewModel.Items.Count)
+            {
+                App.ViewModel.Item = App.ViewModel.Items[index];
+                this.DataContext = App.ViewModel.Item;
+                string decodedUri = HttpUtility.HtmlDecode(App.ViewModel.Item.Url);
+                webBrowser1.Source = new Uri(decodedUri, UriKind.Absolute);
+            }
+        }
     }
 }

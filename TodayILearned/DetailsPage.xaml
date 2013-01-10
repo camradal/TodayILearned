@@ -19,30 +19,32 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <phone:WebBrowser Grid.Row="0" x:Name="webBrowser1" IsScriptEnabled="True" Margin="0" />
+        <TextBlock Grid.Row="0" x:Name="TitleBlock" Text="{Binding Title}" Style="{StaticResource PhoneTextSmallStyle}" TextWrapping="Wrap" Margin="24,0,12,12"/>
+        <phone:WebBrowser Grid.Row="1" x:Name="webBrowser1" IsScriptEnabled="True" Margin="0" />
+        
         <!-- Ad Control -->
         <!--<Image Grid.Row="1" Source="/icons/ad.png" Width="480" Height="80"/>-->
-        <StackPanel x:Name="AdPanel" Grid.Row="1" Height="80">
+        <StackPanel x:Name="AdPanel" Grid.Row="2" Height="80" Visibility="Collapsed">
             <pubcenter:AdControl x:Name="AdBox" AdUnitId="111476" ApplicationId="d0714ba1-4505-4976-b2bc-86c28696c89f" Margin="0" Width="480" Height="80"/>
             <AdDuplex:AdControl x:Name="AdDuplexAdControl" AppId="29467" Margin="0" Width="480" Height="80" Visibility="Collapsed"/>
         </StackPanel>
     </Grid>
  
-    <!--Sample code showing usage of ApplicationBar-->
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
+    <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.share.rest.png" Text="share"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.favs.addto.rest.png" Text="favorite"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.back.rest.png" Text="previous" Click="ApplicationBarIconButton_Click_Prev"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.next.rest.png" Text="next" Click="ApplicationBarIconButton_Click_Next"/>
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+                <shell:ApplicationBarMenuItem Text="email..."/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>

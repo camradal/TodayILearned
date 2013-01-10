@@ -14,24 +14,27 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait"  Orientation="Portrait"
+    SupportedOrientations="PortraitOrLandscape"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
-    Style="{StaticResource TransitionPageStyle}"
-    toolkit:TiltEffect.IsTiltEnabled="True">
+    Style="{StaticResource TransitionPageStyle}">
     
     <phone:PhoneApplicationPage.Resources>
         <DataTemplate x:Key="ItemTemplate">
             <Grid Margin="0,0,6,17">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
-                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}"/>
-                    <TextBlock Text="{Binding Domain}" Style="{StaticResource PhoneTextSmallStyle}"/>
+                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0,0,1"/>
+                    <TextBlock Text="{Binding Domain}" Style="{StaticResource PhoneTextSmallStyle}" Margin="12,0,0,0"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
-                    <Image Source="{Binding Thumbnail}" Margin="3,6,15,0" Stretch="Uniform" VerticalAlignment="Top"/>
+                    <Image Margin="12,6,15,0" Stretch="Uniform" VerticalAlignment="Top">
+                        <Image.Source>
+                            <BitmapImage UriSource="{Binding Thumbnail}" CreateOptions="BackgroundCreation"/>
+                        </Image.Source>
+                    </Image>
                 </StackPanel>
                 <toolkit:ContextMenuService.ContextMenu>
                     <toolkit:ContextMenu Name="mainMenu">
@@ -53,26 +56,8 @@
         <controls:Pivot 
             x:Name="MainPivot"
             Grid.Row="0"
-            Title="{Binding
-            Source={StaticResource Strings}, Path=Resources.AppTitleCapitalized}"
-            LoadedPivotItem="MainPivot_OnLoadedPivotItem">
-            <controls:PivotItem Header="details">
-                <Grid Name="MainItem" Margin="0,0,6,17" VerticalAlignment="Stretch" Background="Transparent">
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="{Binding Item.Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
-                        <HyperlinkButton x:Name="DetailsButton" HorizontalAlignment="Left" Style="{StaticResource EmptyButtonStyle}" Margin="12,24,0,0" Click="DetailsButton_OnClick">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <Image Source="{Binding Item.Thumbnail}" Stretch="Uniform" VerticalAlignment="Top"/>
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Item.Domain}" Style="{StaticResource PhoneTextNormalStyle}" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="{StaticResource PhoneSubtleBrush}" TextWrapping="Wrap"/>
-                                    <TextBlock Text="go to source" Style="{StaticResource PhoneTextNormalStyle}" Foreground="{StaticResource PhoneAccentBrush}"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </HyperlinkButton>
-                    </StackPanel>
-                </Grid>
-            </controls:PivotItem>
-            <controls:PivotItem Header="list">
+            Title="{Binding Source={StaticResource Strings}, Path=Resources.AppTitleCapitalized}">
+            <controls:PivotItem Header="new">
                 <toolkit:LongListSelector
                     x:Name="AllListBox"
                     IsFlatList="True" 
@@ -97,20 +82,18 @@
         <!-- Ad Control -->
         <!--<Image Grid.Row="1" Source="/icons/ad.png" Width="480" Height="80"/>-->
         <StackPanel x:Name="AdPanel" Grid.Row="1" Height="80">
-            <pubcenter:AdControl x:Name="AdBox" AdUnitId="111476" ApplicationId="d0714ba1-4505-4976-b2bc-86c28696c89f" Margin="0" Width="480" Height="80"/>
+            <pubcenter:AdControl x:Name="AdBox" AdUnitId="111476" ApplicationId="d0714ba1-4505-4976-b2bc-86c28696c89f" Margin="0" Width="480" Height="80"  Style="{StaticResource BorderlessAdControlStyle}"/>
             <AdDuplex:AdControl x:Name="AdDuplexAdControl" AppId="29467" Margin="0" Width="480" Height="80" Visibility="Collapsed"/>
         </StackPanel>
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar.feature.email.rest.png" Text="e-mail"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar.share.rest.png" Text="share"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.pin.rest.png" Text="pin to start"/>
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.refresh.rest.png" Text="refresh"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar.favs.addto.rest.png" Text="favorite"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Rate this app" Click="ApplicationBarRateMenuItem_OnClick"/>
-                <shell:ApplicationBarMenuItem Text="Pin to start"/>
+                <shell:ApplicationBarMenuItem Text="Settings" Click="ApplicationBarSettingsMenuItem_OnClick"/>
                 <shell:ApplicationBarMenuItem Text="About" Click="ApplicationBarAboutMenuItem_OnClick"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

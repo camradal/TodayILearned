@@ -9,7 +9,6 @@ using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using TodayILearned.Core;
 using TodayILearned.Utilities;
-using Utilities;
 
 namespace TodayILearned
 {
@@ -23,7 +22,6 @@ namespace TodayILearned
             InitializeComponent();
             ShowReviewPane();
 
-            // Set the data context of the listbox control to the sample data
             DataContext = App.ViewModel;
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
             
@@ -40,10 +38,8 @@ namespace TodayILearned
 
             if (!App.ViewModel.IsLoaded)
             {
-                GlobalLoading.Instance.IsLoading = true;
                 App.ViewModel.OnLoaded += () =>
                 {
-                    GlobalLoading.Instance.IsLoading = false;
                     if (!App.IsMemoryLimited && App.FirstLoad)
                     {
                         SetUpLiveTile(numberOfStarts);
@@ -54,12 +50,13 @@ namespace TodayILearned
                         ((ApplicationBarMenuItem)ApplicationBar.MenuItems[2]).IsEnabled = false;
                     }
                 };
+                App.ViewModel.OnError += exception =>
+                {
+                    // TODO: do something on error
+                };
                 App.ViewModel.LoadData();
                 App.ViewModel.LoadFavorites();
             }
-
-            var listener = GestureService.GetGestureListener(MainItem);
-            listener.Flick += GestureListener_OnFlick;
         }
 
         private void SetUpLiveTile(int numberOfStarts)
@@ -109,7 +106,7 @@ namespace TodayILearned
             App.ViewModel.Item = selectedItem;
             MainPivot.SelectedIndex = 0;
 
-            //OpenDetailsPage(selectedItem.Url);
+            OpenDetailsPage(selectedItem.Url);
 
             // reset selected index to null (no selection)
             listBox.SelectedItem = null;
@@ -144,15 +141,6 @@ namespace TodayILearned
             }
         }
 
-        private void DetailsButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (App.ViewModel == null) return;
-            if (App.ViewModel.Item == null) return;
-
-            string url = App.ViewModel.Item.Url;
-            OpenDetailsPage(url);
-        }
-
         private void OpenDetailsPage(string url)
         {
             string encodedUri = HttpUtility.HtmlEncode(url);
@@ -183,6 +171,11 @@ namespace TodayILearned
             }
         }
 
+        private void ApplicationBarSettingsMenuItem_OnClick(object sender, EventArgs e)
+        {
+            Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative)));
+        }
+
         private void ApplicationBarAboutMenuItem_OnClick(object sender, EventArgs e)
         {
             Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative)));
@@ -204,60 +197,6 @@ namespace TodayILearned
             if (currentItem.Equals(App.ViewModel.Items.Last()))
             {
                 App.ViewModel.LoadData(App.ViewModel.LastItem);
-            }
-        }
-
-        private void GestureListener_OnFlick(object sender, FlickGestureEventArgs e)
-        {
-            if (App.ViewModel == null) return;
-            if (App.ViewModel.Item == null) return;
-            if (e.Direction != System.Windows.Controls.Orientation.Vertical) return;
-
-            int index = App.ViewModel.Items.IndexOf(App.ViewModel.Item);
-            int increment = e.VerticalVelocity > 0 ? -1 : 1;
-            index = index + increment;
-            index = Math.Max(index, 0);
-            index = Math.Min(index, App.ViewModel.Items.Count - 1);
-            
-            // TODO: load more items
-
-            SlideTransition transitionOut;
-            SlideTransition transitionIn;
-
-            if (increment > 0)
-            {
-                transitionOut = new SlideTransition { Mode = SlideTransitionMode.SlideUpFadeOut};
-                transitionIn = new SlideTransition { Mode = SlideTransitionMode.SlideUpFadeIn };
-            }
-            else
-            {
-                transitionOut = new SlideTransition { Mode = SlideTransitionMode.SlideDownFadeOut };
-                transitionIn = new SlideTransition { Mode = SlideTransitionMode.SlideDownFadeIn };
-            }
-
-            ITransition tran = transitionOut.GetTransition(MainItem);
-            tran.Completed += (o, args) =>
-            {
-                App.ViewModel.Item = App.ViewModel.Items[index];
-                transitionIn.GetTransition(MainItem).Begin();
-            };
-            tran.Begin();
-        }
-
-        private void MainPivot_OnLoadedPivotItem(object sender, PivotItemEventArgs e)
-        {
-            if (App.ViewModel == null) return;
-            if (App.ViewModel.Item == null) return;
-            if (e.Item.Header.ToString() != "list") return;
-            if (AllListBox.ItemsSource == null) return;
-
-            try
-            {
-                Dispatcher.BeginInvoke(() => AllListBox.ScrollTo(App.ViewModel.Item));
-            }
-            catch (Exception)
-            {
-                // item not in the list
             }
         }
 
