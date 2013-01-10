@@ -67,10 +67,16 @@ namespace TodayILearned.LiveTileScheduledTask
                         }
                         catch
                         {
+                            // TODO: log error
                         }
                         
                         NotifyComplete();
                     });
+                };
+                model.OnError += exception =>
+                {
+                    // TODO: log error
+                    NotifyComplete();
                 };
                 model.LoadData();
             }

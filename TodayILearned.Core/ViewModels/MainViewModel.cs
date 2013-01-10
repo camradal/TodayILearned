@@ -16,6 +16,7 @@ namespace TodayILearned.Core
         private ItemViewModel item;
 
         public Action OnLoaded;
+        public Action<Exception> OnError;
 
         public MainViewModel()
         {
@@ -74,9 +75,12 @@ namespace TodayILearned.Core
                 LastItem = result["data"]["after"].ToString();
                 this.IsLoaded = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                if (OnError != null)
+                {
+                    OnError(ex);
+                }
             }
             finally
             {
