@@ -185,6 +185,16 @@ namespace TodayILearned
             }
         }
 
+        private void ApplicationBarIconRefreshButton_OnClick(object sender, EventArgs e)
+        {
+            if (App.ViewModel.Items == null) return;
+            
+            var firstItem = App.ViewModel.Items.FirstOrDefault();
+            if (firstItem == null) return;
+
+            this.AllListBox.ScrollTo(firstItem);
+        }
+
         private void ApplicationBarRateMenuItem_OnClick(object sender, EventArgs e)
         {
             try
