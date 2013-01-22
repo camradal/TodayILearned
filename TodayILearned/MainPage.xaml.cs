@@ -163,6 +163,28 @@ namespace TodayILearned
             });
         }
 
+        #region Menu
+
+        private void ApplicationBarIconPinToStartButton_OnClick(object sender, EventArgs e)
+        {
+            bool agentStarted = backgroundAgent.StartIfEnabled();
+            if (agentStarted)
+            {
+                AppSettings.LiveTileEnabled = true;
+
+                ShellTile tile = ShellTile.ActiveTiles.FirstOrDefault(x => x.NavigationUri.ToString().Contains("DefaultTitle=new"));
+                if (tile != null)
+                {
+                    tile.Delete();
+                }
+
+                if (App.ViewModel != null && App.ViewModel.Item != null)
+                {
+                    LiveTile.CreateLiveTile("Trivia Buff", App.ViewModel.Item.Title);
+                }
+            }
+        }
+
         private void ApplicationBarRateMenuItem_OnClick(object sender, EventArgs e)
         {
             try
@@ -185,6 +207,8 @@ namespace TodayILearned
         {
             Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative)));
         }
+
+        #endregion
 
         private void NewListBox_Link(object sender, LinkUnlinkEventArgs e)
         {

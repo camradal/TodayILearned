@@ -92,7 +92,7 @@
  
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar.pin.rest.png" Text="pin to start"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.pin.rest.png" Text="pin to start" Click="ApplicationBarIconPinToStartButton_OnClick"/>
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.refresh.rest.png" Text="refresh"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Rate this app" Click="ApplicationBarRateMenuItem_OnClick"/>
