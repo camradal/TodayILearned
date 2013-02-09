@@ -180,7 +180,7 @@ namespace TodayILearned
 
                 if (App.ViewModel != null && App.ViewModel.Item != null)
                 {
-                    LiveTile.CreateLiveTile("Trivia Buff", App.ViewModel.Item.Title);
+                    LiveTileCreator.CreateLiveTile("Trivia Buff", App.ViewModel.Item.Title);
                 }
             }
         }
