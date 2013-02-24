@@ -33,7 +33,7 @@
                     <TextBlock Text="{Binding Domain}" Style="{StaticResource PhoneTextSmallStyle}" Margin="12,0,0,0"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
-                    <Image Margin="12,6,15,0" Stretch="Uniform" VerticalAlignment="Top">
+                    <Image Margin="6,6,15,0" Stretch="Uniform" VerticalAlignment="Top">
                         <Image.Source>
                             <BitmapImage UriSource="{Binding Thumbnail}" CreateOptions="BackgroundCreation"/>
                         </Image.Source>
@@ -92,8 +92,8 @@
  
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar.pin.rest.png" Text="pin to start" Click="ApplicationBarIconPinToStartButton_OnClick"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar.refresh.rest.png" Text="refresh" Click="ApplicationBarIconRefreshButton_OnClick"/>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.pin.rest.png" Text="pin to start" Click="ApplicationBarIconPinToStartButton_OnClick"/>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.refresh.rest.png" Text="refresh" Click="ApplicationBarIconRefreshButton_OnClick"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Rate this app" Click="ApplicationBarRateMenuItem_OnClick"/>
                 <shell:ApplicationBarMenuItem Text="Settings" Click="ApplicationBarSettingsMenuItem_OnClick"/>
