@@ -20,6 +20,8 @@ namespace TodayILearned
         public MainPage()
         {
             InitializeComponent();
+
+            AppSettings.NumberOfStarts++;
             ShowReviewPane();
 
             DataContext = App.ViewModel;
@@ -34,7 +36,6 @@ namespace TodayILearned
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             int numberOfStarts = AppSettings.NumberOfStarts;
-            AppSettings.NumberOfStarts++;
 
             if (!App.ViewModel.IsLoaded || App.FontSizeChanged)
             {
