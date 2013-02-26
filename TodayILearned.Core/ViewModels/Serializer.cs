@@ -51,7 +51,7 @@ namespace TodayILearned.Core
         private static string ProcessString(string value)
         {
             value = HttpUtility.HtmlDecode(value);
-            value = value.TrimStart(new[] { ' ', '-', '.', ':', ',', '[', ']' });
+            value = value.Trim(new[] { ' ', '-', '.', ':', ';', ',', '[', ']' });
             if (value.StartsWith("TIL", StringComparison.OrdinalIgnoreCase))
             {
                 value = value.Substring("TIL".Length);
@@ -59,7 +59,7 @@ namespace TodayILearned.Core
                 if (value.StartsWith("that", StringComparison.OrdinalIgnoreCase))
                 {
                     value = value.Substring("that".Length);
-                    value = value.TrimStart(new[] { ' ', '-', '.', ':', ',', '[', ']' });
+                    value = value.TrimStart(new[] { ' ', '-', '.', ':', ';', ',', '[', ']' });
                 }
             }
             value = char.ToUpper(value[0]) + value.Substring(1);
