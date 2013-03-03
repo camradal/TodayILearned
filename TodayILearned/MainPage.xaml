@@ -44,6 +44,31 @@
                         <toolkit:MenuItem Header="share..." Click="MenuItem_OnClick"/>
                         <toolkit:MenuItem Header="email..." Click="MenuItem_OnClick"/>
                         <toolkit:MenuItem Header="add to favorites" Click="MenuItem_OnClick"/>
+                    </toolkit:ContextMenu>
+                </toolkit:ContextMenuService.ContextMenu>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="FavoriteTemplate">
+            <Grid Margin="0,0,6,17">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Margin="12,0,0,1" Style="{Binding Source={StaticResource appSettings}, Path=DisplayFontSize, Converter={StaticResource fontSizeConverter}}"/>
+                    <TextBlock Text="{Binding Domain}" Style="{StaticResource PhoneTextSmallStyle}" Margin="12,0,0,0"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <Image Margin="6,6,15,0" Stretch="Uniform" VerticalAlignment="Top">
+                        <Image.Source>
+                            <BitmapImage UriSource="{Binding Thumbnail}" CreateOptions="BackgroundCreation"/>
+                        </Image.Source>
+                    </Image>
+                </StackPanel>
+                <toolkit:ContextMenuService.ContextMenu>
+                    <toolkit:ContextMenu Name="mainMenu">
+                        <toolkit:MenuItem Header="share..." Click="MenuItem_OnClick"/>
+                        <toolkit:MenuItem Header="email..." Click="MenuItem_OnClick"/>
                         <toolkit:MenuItem Header="remove from favorites" Click="MenuItem_OnClick"/>
                     </toolkit:ContextMenu>
                 </toolkit:ContextMenuService.ContextMenu>
@@ -77,7 +102,7 @@
                     IsFlatList="True" 
                     Margin="0,0,-12,0"
                     ItemsSource="{Binding Favorites}"
-                    ItemTemplate="{StaticResource ItemTemplate}"
+                    ItemTemplate="{StaticResource FavoriteTemplate}"
                     SelectionChanged="ListBox_SelectionChanged">
                 </toolkit:LongListSelector>
             </controls:PivotItem>

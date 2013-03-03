@@ -108,9 +108,7 @@ namespace TodayILearned
                 return;
 
             root.DataContext = selectedItem;
-
             App.ViewModel.Item = selectedItem;
-            MainPivot.SelectedIndex = 0;
 
             OpenDetailsPage(selectedItem.Url);
 
