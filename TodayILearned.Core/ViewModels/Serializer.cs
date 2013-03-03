@@ -51,11 +51,11 @@ namespace TodayILearned.Core
         private static string ProcessString(string value)
         {
             value = HttpUtility.HtmlDecode(value);
-            value = value.Trim(new[] { ' ', '-', '.', ':', ';', ',', '[', ']' });
+            value = value.Trim(new[] { ' ', '-', '.', ':', ';', ',', '[', ']', '/' });
             if (value.StartsWith("TIL", StringComparison.OrdinalIgnoreCase))
             {
                 value = value.Substring("TIL".Length);
-                value = value.TrimStart(new[] { ' ', '-', '.', ':', ',', '[', ']' });
+                value = value.TrimStart(new[] { ' ', '-', '.', ':', ',', '[', ']', '/' });
                 if (value.StartsWith("that", StringComparison.OrdinalIgnoreCase))
                 {
                     value = value.Substring("that".Length);
