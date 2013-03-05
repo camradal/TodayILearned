@@ -110,6 +110,8 @@ namespace TodayILearned
 
         #endregion
 
+        #region Handlers
+
         private void ApplicationBarIconButton_Click_Prev(object sender, EventArgs e)
         {
             if (App.ViewModel == null) return;
@@ -141,5 +143,30 @@ namespace TodayILearned
                 webBrowser1.Source = new Uri(decodedUri, UriKind.Absolute);
             }
         }
+
+        private void ApplicationBarIconButton_Click_Share(object sender, EventArgs e)
+        {
+            if (App.ViewModel == null) return;
+            if (App.ViewModel.Items == null) return;
+            if (App.ViewModel.Item == null) return;
+
+            ShareHelper.ShareViaSocial(App.ViewModel.Item);
+        }
+
+        private void ApplicationBarIconButton_Click_Favorite(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ApplicationBarMenuItem_OnClick_Email(object sender, EventArgs e)
+        {
+            if (App.ViewModel == null) return;
+            if (App.ViewModel.Items == null) return;
+            if (App.ViewModel.Item == null) return;
+
+            ShareHelper.ShareViaEmail(App.ViewModel.Item);
+        }
+
+        #endregion
     }
 }

@@ -44,12 +44,12 @@
  
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/icons/appbar.share.rest.png" Text="share"/>
-            <shell:ApplicationBarIconButton IconUri="/icons/appbar.favs.addto.rest.png" Text="favorite"/>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.share.rest.png" Text="share" Click="ApplicationBarIconButton_Click_Share"/>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.favs.addto.rest.png" Text="favorite" Click="ApplicationBarIconButton_Click_Favorite"/>
             <shell:ApplicationBarIconButton IconUri="/icons/appbar.back.rest.png" Text="previous" Click="ApplicationBarIconButton_Click_Prev"/>
             <shell:ApplicationBarIconButton IconUri="/icons/appbar.next.rest.png" Text="next" Click="ApplicationBarIconButton_Click_Next"/>
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="email..."/>
+                <shell:ApplicationBarMenuItem Text="email..." Click="ApplicationBarMenuItem_OnClick_Email"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

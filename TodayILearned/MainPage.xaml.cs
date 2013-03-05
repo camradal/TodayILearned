@@ -129,9 +129,11 @@ namespace TodayILearned
 
             if (selected == "share...")
             {
+                ShareHelper.ShareViaSocial(model);
             }
             else if (selected == "email...")
             {
+                ShareHelper.ShareViaEmail(model);
             }
             else if (selected == "add to favorites")
             {
