@@ -51,7 +51,7 @@ namespace TodayILearned.Core
         private static string ProcessString(string value)
         {
             value = HttpUtility.HtmlDecode(value);
-            value = value.Trim(new[] { ' ', '-', '.', ':', ';', ',', '[', ']', '/' });
+            value = value.Trim(new[] { ' ', '-', '.', ':', ';', ',', '[', ']', '/', '\n' });
             if (value.StartsWith("TIL", StringComparison.OrdinalIgnoreCase))
             {
                 value = value.Substring("TIL".Length);
