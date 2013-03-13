@@ -63,7 +63,7 @@ namespace TodayILearned.Core
                 Title = title,
                 BackTitle = "Trivia Buff",
                 BackgroundImage = new Uri("isostore:" + fileName),
-                BackBackgroundImage = new Uri("/icons/Application_Icon_173.png", UriKind.Relative)
+                BackBackgroundImage = new Uri("/icons/Application_Icon_336.png", UriKind.Relative)
             };
             return data;
         }
