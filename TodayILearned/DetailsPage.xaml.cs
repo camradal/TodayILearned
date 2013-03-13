@@ -10,7 +10,6 @@ namespace TodayILearned
     public partial class DetailsPage
     {
         private volatile bool navigating;
-        private Uri sourceUrl;
 
         public DetailsPage()
         {
@@ -20,6 +19,17 @@ namespace TodayILearned
             webBrowser1.LoadCompleted += webBrowser1_LoadCompleted;
 
             this.DataContext = App.ViewModel.Item;
+            if (this.DataContext == null)
+            {
+                App.ViewModel.OnLoaded += () =>
+                {
+                    webBrowser1.Source = new Uri(App.ViewModel.Item.Url, UriKind.Absolute);
+                };
+                App.ViewModel.OnError += exception =>
+                {
+                    // TODO: do something on error
+                };
+            }
 
             // ads
             AdBox.ErrorOccurred += AdBox_ErrorOccurred;
@@ -27,23 +37,6 @@ namespace TodayILearned
         }
 
         #region Navigation
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-
-            if (App.ViewModel == null) return;
-            if (App.ViewModel.Item == null) return;
-
-            string decodedUri = HttpUtility.HtmlDecode(App.ViewModel.Item.Url);
-            webBrowser1.Source = new Uri(decodedUri, UriKind.Absolute);
-
-            //else if (isNewPage && State.ContainsKey("SourceUrl"))
-            //{
-            //    sourceUrl = new Uri(State["SourceUrl"].ToString());
-            //    webBrowser1.Source = sourceUrl;
-            //}
-        }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
@@ -54,11 +47,6 @@ namespace TodayILearned
                 GlobalLoading.Instance.IsLoading = false;
                 GlobalLoading.Instance.LoadingText = null;
                 navigating = false;
-            }
-
-            if (e.NavigationMode != NavigationMode.Back)
-            {
-                //State["SourceUrl"] = sourceUrl;
             }
         }
 
