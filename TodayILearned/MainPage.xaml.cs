@@ -209,6 +209,21 @@ namespace TodayILearned
             }
         }
 
+        private void MoreAppsMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var task = new MarketplaceSearchTask();
+                task.ContentType = MarketplaceContentType.Applications;
+                task.SearchTerms = "Dapper Panda";
+                task.Show();
+            }
+            catch
+            {
+                // prevent exceptions from double-click
+            }
+        }
+
         private void ApplicationBarSettingsMenuItem_OnClick(object sender, EventArgs e)
         {
             Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative)));
