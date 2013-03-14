@@ -75,6 +75,7 @@
     <Compile Include="Converters\InverseConverter.cs" />
     <Compile Include="Converters\SortOrderConverter.cs" />
     <Compile Include="LiveTileCreator.cs" />
+    <Compile Include="MetroGridHelper.cs" />
     <Compile Include="SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
@@ -146,7 +147,6 @@
   <ItemGroup>
     <Content Include="icons\appbar.back.rest.png" />
     <Content Include="icons\appbar.favs.addto.rest.png" />
-    <Content Include="icons\appbar.feature.email.rest.png" />
     <Content Include="icons\appbar.next.rest.png" />
     <Content Include="icons\appbar.pin.rest.png" />
     <Content Include="icons\appbar.refresh.rest.png" />
