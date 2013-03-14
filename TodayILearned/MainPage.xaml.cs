@@ -20,12 +20,12 @@ namespace TodayILearned
         public MainPage()
         {
             InitializeComponent();
+            LoadData();
 
             AppSettings.NumberOfStarts++;
             ShowReviewPane();
 
             DataContext = App.ViewModel;
-            this.Loaded += new RoutedEventHandler(MainPage_Loaded);
             
             // ads
             AdBox.ErrorOccurred += AdBox_ErrorOccurred;
@@ -33,7 +33,7 @@ namespace TodayILearned
         }
 
         // Load data for the ViewModel Items
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        private void LoadData()
         {
             int numberOfStarts = AppSettings.NumberOfStarts;
 

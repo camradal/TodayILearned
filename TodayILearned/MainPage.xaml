@@ -22,18 +22,19 @@
     <phone:PhoneApplicationPage.Resources>
         <utilities:AppSettings x:Key="appSettings" />
         <utilities:FontSizeConverter x:Key="fontSizeConverter" />
+        <utilities:ColumnSpanConverter x:Key="columnSpanConverter" />
         <DataTemplate x:Key="ItemTemplate">
             <Grid Margin="0,0,6,17">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Margin="12,0,0,1" Style="{Binding Source={StaticResource appSettings}, Path=DisplayFontSize, Converter={StaticResource fontSizeConverter}}"/>
-                    <TextBlock Text="{Binding Domain}" Style="{StaticResource PhoneTextSmallStyle}" Margin="12,0,0,0"/>
+                <StackPanel Grid.Column="0" Grid.ColumnSpan="{Binding Thumbnail, Converter={StaticResource columnSpanConverter}}">
+                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Margin="12,0,12,1" Style="{Binding Source={StaticResource appSettings}, Path=DisplayFontSize, Converter={StaticResource fontSizeConverter}}"/>
+                    <TextBlock Text="{Binding Domain}" Style="{StaticResource PhoneTextSmallStyle}" Margin="12,0"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
-                    <Image Margin="6,6,15,0" Stretch="Uniform" VerticalAlignment="Top">
+                    <Image Margin="0,6,15,0" Stretch="Uniform" VerticalAlignment="Top">
                         <Image.Source>
                             <BitmapImage UriSource="{Binding Thumbnail}" CreateOptions="BackgroundCreation"/>
                         </Image.Source>
@@ -54,12 +55,12 @@
                     <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Margin="12,0,0,1" Style="{Binding Source={StaticResource appSettings}, Path=DisplayFontSize, Converter={StaticResource fontSizeConverter}}"/>
-                    <TextBlock Text="{Binding Domain}" Style="{StaticResource PhoneTextSmallStyle}" Margin="12,0,0,0"/>
+                <StackPanel Grid.Column="0" Grid.ColumnSpan="{Binding Thumbnail, Converter={StaticResource columnSpanConverter}}">
+                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Margin="12,0,12,1" Style="{Binding Source={StaticResource appSettings}, Path=DisplayFontSize, Converter={StaticResource fontSizeConverter}}"/>
+                    <TextBlock Text="{Binding Domain}" Style="{StaticResource PhoneTextSmallStyle}" Margin="12,0"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
-                    <Image Margin="6,6,15,0" Stretch="Uniform" VerticalAlignment="Top">
+                    <Image Margin="0,6,15,0" Stretch="Uniform" VerticalAlignment="Top">
                         <Image.Source>
                             <BitmapImage UriSource="{Binding Thumbnail}" CreateOptions="BackgroundCreation"/>
                         </Image.Source>

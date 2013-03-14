@@ -45,7 +45,7 @@ namespace TodayILearned
             if (navigating)
             {
                 GlobalLoading.Instance.IsLoading = false;
-                GlobalLoading.Instance.LoadingText = null;
+                //GlobalLoading.Instance.LoadingText = null;
                 navigating = false;
             }
         }
@@ -59,7 +59,7 @@ namespace TodayILearned
             if (!navigating)
             {
                 GlobalLoading.Instance.IsLoading = true;
-                GlobalLoading.Instance.LoadingText = Strings.Loading;
+                //GlobalLoading.Instance.LoadingText = Strings.Loading;
             }
             navigating = true;
         }
@@ -69,7 +69,7 @@ namespace TodayILearned
             if (navigating)
             {
                 GlobalLoading.Instance.IsLoading = false;
-                GlobalLoading.Instance.LoadingText = null;
+                //GlobalLoading.Instance.LoadingText = null;
             }
             navigating = false;
         }
