@@ -146,6 +146,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icons\ad.png" />
     <Content Include="icons\appbar.back.rest.png" />
     <Content Include="icons\appbar.favs.addto.rest.png" />
     <Content Include="icons\appbar.next.rest.png" />
