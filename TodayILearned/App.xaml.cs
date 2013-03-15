@@ -96,6 +96,7 @@ namespace TodayILearned
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
             FirstLoad = true;
+            IsMemoryLimited = LowMemoryHelper.IsLowMemDevice;
         }
 
         // Code to execute when the application is activated (brought to foreground)
