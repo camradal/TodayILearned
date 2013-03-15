@@ -21,14 +21,17 @@ namespace TodayILearned
             this.DataContext = App.ViewModel.Item;
             if (this.DataContext == null)
             {
-                App.ViewModel.OnLoaded += () =>
+                if (App.ViewModel.OnLoaded == null)
                 {
-                    webBrowser1.Source = new Uri(App.ViewModel.Item.Url, UriKind.Absolute);
-                };
-                App.ViewModel.OnError += exception =>
+                    App.ViewModel.OnLoaded += () =>
+                    {
+                        webBrowser1.Source = new Uri(App.ViewModel.Item.Url, UriKind.Absolute);
+                    };
+                }
+                if (App.ViewModel.OnError == null)
                 {
-                    // TODO: do something on error
-                };
+                    App.ViewModel.OnError += App.HandleError;
+                }
             }
 
             // ads

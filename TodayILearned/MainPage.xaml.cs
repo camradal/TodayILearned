@@ -53,13 +53,13 @@ namespace TodayILearned
 
                     if (App.IsMemoryLimited)
                     {
-                        ((ApplicationBarMenuItem)ApplicationBar.MenuItems[2]).IsEnabled = false;
+                        ((ApplicationBarIconButton)ApplicationBar.Buttons[0]).IsEnabled = false;
                     }
                 };
-                App.ViewModel.OnError += exception =>
+                if (App.ViewModel.OnError == null)
                 {
-                    // TODO: do something on error
-                };
+                    App.ViewModel.OnError += App.HandleError;
+                }
                 App.ViewModel.LoadData();
                 App.ViewModel.LoadFavorites();
             }

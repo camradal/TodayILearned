@@ -1,9 +1,12 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using BugSense;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TodayILearned.Core;
+using TodayILearned.Resources;
 using TodayILearned.Utilities;
 using Utilities;
 
@@ -45,7 +48,7 @@ namespace TodayILearned
         public App()
         {
             // Global handler for uncaught exceptions. 
-            UnhandledException += Application_UnhandledException;
+            BugSenseHandler.Instance.Init(this, "a971fc13");
 
             // Standard Silverlight initialization
             InitializeComponent();
@@ -73,6 +76,18 @@ namespace TodayILearned
                 // Caution:- Use this under debug mode only. Application that disables user idle detection will continue to run
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
+            }
+        }
+
+        public static void HandleError(Exception ex)
+        {
+            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+            {
+                BugSenseHandler.Instance.LogError(ex);
+            }
+            else
+            {
+                MessageBox.Show(Strings.ErrorInternetConnection);
             }
         }
 
@@ -115,16 +130,6 @@ namespace TodayILearned
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 // A navigation has failed; break into the debugger
-                System.Diagnostics.Debugger.Break();
-            }
-        }
-
-        // Code to execute on Unhandled Exceptions
-        private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
-        {
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                // An unhandled exception has occurred; break into the debugger
                 System.Diagnostics.Debugger.Break();
             }
         }
