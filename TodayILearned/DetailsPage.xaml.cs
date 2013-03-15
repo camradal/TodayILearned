@@ -146,7 +146,13 @@ namespace TodayILearned
 
         private void ApplicationBarIconButton_Click_Favorite(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (App.ViewModel == null) return;
+            
+            var model = App.ViewModel.Item;
+            if (model == null) return;
+
+            App.ViewModel.AddFavorite(model);
+            App.ViewModel.SaveFavorites();
         }
 
         private void ApplicationBarMenuItem_OnClick_Email(object sender, EventArgs e)
