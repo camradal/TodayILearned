@@ -114,7 +114,7 @@ namespace TodayILearned.Utilities
             {
                 StandardTileData tileData = new StandardTileData()
                 {
-                    Title = "On This Day...",
+                    Title = "Trivia Buff",
                     BackgroundImage = new Uri("/icons/Application_Icon_336.png", UriKind.Relative),
                     BackBackgroundImage = new Uri("NONESUCH.png", UriKind.Relative),
                     BackTitle = string.Empty,
