@@ -33,6 +33,16 @@ namespace TodayILearned
             AdBox.AdRefreshed += AdBox_AdRefreshed;
         }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (App.FontSizeChanged)
+            {
+                LoadData();
+            }
+        }
+
         // Load data for the ViewModel Items
         private void LoadData()
         {
