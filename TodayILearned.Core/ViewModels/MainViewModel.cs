@@ -86,6 +86,7 @@ namespace TodayILearned.Core
             {
                 IsLoading = false;
                 GlobalLoading.Instance.IsLoading = false;
+                GlobalLoading.Instance.LoadingText = null;
                 if (OnLoaded != null)
                 {
                     OnLoaded();

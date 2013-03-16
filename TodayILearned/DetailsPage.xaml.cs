@@ -151,6 +151,7 @@ namespace TodayILearned
             var model = App.ViewModel.Item;
             if (model == null) return;
 
+            GlobalLoading.Instance.SetTimedText("Added to favorites...");
             App.ViewModel.AddFavorite(model);
             App.ViewModel.SaveFavorites();
         }

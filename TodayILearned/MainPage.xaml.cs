@@ -9,6 +9,7 @@ using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using TodayILearned.Core;
 using TodayILearned.Utilities;
+using Utilities;
 
 namespace TodayILearned
 {
@@ -36,6 +37,11 @@ namespace TodayILearned
         private void LoadData()
         {
             int numberOfStarts = AppSettings.NumberOfStarts;
+
+            if (numberOfStarts == 0)
+            {
+                GlobalLoading.Instance.LoadingText = "Please wait while we set up...";
+            }
 
             if (!App.ViewModel.IsLoaded || App.FontSizeChanged)
             {
@@ -137,11 +143,13 @@ namespace TodayILearned
             }
             else if (selected == "add to favorites")
             {
+                GlobalLoading.Instance.SetTimedText("Added to favorites...");
                 App.ViewModel.AddFavorite(model);
                 App.ViewModel.SaveFavorites();
             }
             else if (selected == "remove from favorites")
             {
+                GlobalLoading.Instance.SetTimedText("Removed from favorites...");
                 App.ViewModel.RemoveFavorite(model);
                 App.ViewModel.SaveFavorites();
             }

@@ -1,6 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows.Navigation;
 //using AgFx;
+using System.Windows.Threading;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
@@ -53,6 +55,20 @@ namespace Utilities
                 text = value;
                 NotifyValueChanged();
             }
+        }
+
+        public void SetTimedText(string text)
+        {
+            IsLoading = true;
+            LoadingText = text;
+            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+            timer.Tick += (o, args) =>
+            {
+                IsLoading = false;
+                LoadingText = null;
+                timer.Stop();
+            };
+            timer.Start();
         }
 
         public static GlobalLoading Instance
