@@ -30,7 +30,15 @@ namespace TodayILearned
             {
                 // Delay creation of the view model until necessary
                 if (viewModel == null)
+                {
                     viewModel = new MainViewModel();
+                    viewModel.BeginLoading += () => GlobalLoading.Instance.IsLoading = true;
+                    viewModel.OnLoaded += () =>
+                    {
+                        GlobalLoading.Instance.LoadingText = null;
+                        GlobalLoading.Instance.IsLoading = false;
+                    };
+                }
 
                 return viewModel;
             }

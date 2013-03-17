@@ -7,7 +7,6 @@ using System.Linq;
 using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Utilities;
 
 namespace TodayILearned.Core
 {
@@ -15,6 +14,7 @@ namespace TodayILearned.Core
     {
         private ItemViewModel item;
 
+        public Action BeginLoading;
         public Action OnLoaded;
         public Action<Exception> OnError;
 
@@ -49,7 +49,10 @@ namespace TodayILearned.Core
         public void LoadData(string lastItem)
         {
             IsLoading = true;
-            GlobalLoading.Instance.IsLoading = true;
+            if (BeginLoading != null)
+            {
+                BeginLoading();
+            }
 
             string uriString = "http://www.reddit.com/r/todayilearned.json";
             if (!string.IsNullOrEmpty(lastItem))
@@ -85,8 +88,6 @@ namespace TodayILearned.Core
             finally
             {
                 IsLoading = false;
-                GlobalLoading.Instance.IsLoading = false;
-                GlobalLoading.Instance.LoadingText = null;
                 if (OnLoaded != null)
                 {
                     OnLoaded();
