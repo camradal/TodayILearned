@@ -12,6 +12,7 @@ namespace TodayILearned.Core
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        private volatile bool isLoading;
         private ItemViewModel item;
 
         public Action BeginLoading;
@@ -24,7 +25,12 @@ namespace TodayILearned.Core
             this.Favorites = new ObservableCollection<ItemViewModel>();
         }
 
-        public bool IsLoading { get; private set; }
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            private set { isLoading = value; }
+        }
+
         public bool IsLoaded { get; private set; }
         public string LastItem { get; private set; }
 
@@ -48,6 +54,9 @@ namespace TodayILearned.Core
 
         public void LoadData(string lastItem)
         {
+            if (isLoading)
+                return;
+
             IsLoading = true;
             if (BeginLoading != null)
             {
