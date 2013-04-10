@@ -60,7 +60,7 @@ namespace TodayILearned
                     App.ViewModel.Items.Clear();
                 }
 
-                App.ViewModel.OnLoaded += () =>
+                App.ViewModel.OnInitialized += () =>
                 {
                     if (!App.IsMemoryLimited && App.FirstLoad)
                     {
