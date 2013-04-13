@@ -18,6 +18,7 @@ namespace TodayILearned.Utilities
         private const string ContentLanguageKeyName = "ContentLanguage";
         private const string LiveTileDisabledKeyName = "LiveTileDisabled";
         private const string DisplayFontSizeKeyName = "DisplayFontSize";
+        private const string ShowTileBackKeyName = "ShowTileBack";
 
         private const int NumberOfStartsDefault = 0;
         private const bool FirstStartDefault = false;
@@ -25,6 +26,7 @@ namespace TodayILearned.Utilities
         private const string ContentLanguageDefault = "en";
         private const bool LiveTileDisabledDefault = false;
         private const int DisplayFontSizeDefault = 0;
+        private const bool ShowTileBackDefault = false;
 
         #endregion
 
@@ -134,6 +136,21 @@ namespace TodayILearned.Utilities
             set
             {
                 if (AddOrUpdateValue(DisplayFontSizeKeyName, value))
+                {
+                    Save();
+                }
+            }
+        }
+
+        public static bool ShowTileBack
+        {
+            get
+            {
+                return GetValueOrDefault<bool>(ShowTileBackKeyName, ShowTileBackDefault);
+            }
+            set
+            {
+                if (AddOrUpdateValue(ShowTileBackKeyName, value))
                 {
                     Save();
                 }

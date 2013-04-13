@@ -11,6 +11,7 @@
     xmlns:pubcenter="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI"
     xmlns:AdDuplex="clr-namespace:AdDuplex;assembly=AdDuplex.WindowsPhone"
     xmlns:utilities="clr-namespace:TodayILearned.Utilities"
+    xmlns:utilities2="clr-namespace:TodayILearned.Utilities;assembly=TodayILearned.Core"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696" 
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -20,7 +21,7 @@
     Style="{StaticResource TransitionPageStyle}">
     
     <phone:PhoneApplicationPage.Resources>
-        <utilities:AppSettings x:Key="appSettings" />
+        <utilities2:AppSettings x:Key="appSettings" />
         <utilities:FontSizeConverter x:Key="fontSizeConverter" />
         <utilities:ColumnSpanConverter x:Key="columnSpanConverter" />
         <DataTemplate x:Key="ItemTemplate">

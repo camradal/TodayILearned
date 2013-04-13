@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:utilities="clr-namespace:TodayILearned.Utilities"
+    xmlns:utilities2="clr-namespace:TodayILearned.Utilities;assembly=TodayILearned.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -17,7 +18,7 @@
     toolkit:TiltEffect.IsTiltEnabled="True">
 
     <phone:PhoneApplicationPage.Resources>
-        <utilities:AppSettings x:Key="appSettings" />
+        <utilities2:AppSettings x:Key="appSettings" />
         <utilities:InverseConverter x:Key="inverseConverter" />
         <utilities:SortOrderConverter x:Key="sortOrderConverter" />
     </phone:PhoneApplicationPage.Resources>
@@ -46,6 +47,14 @@
                                 SelectedIndex="{Binding Path=DisplayFontSize, Mode=TwoWay}" SelectionChanged="FontSizeListPicker_SelectionChanged">
                 <toolkit:ListPickerItem Content="{Binding Source={StaticResource Strings}, Path=Resources.SettingFontSizeNormal}"/>
                 <toolkit:ListPickerItem Content="{Binding Source={StaticResource Strings}, Path=Resources.SettingFontSizeLarger}"/>
+            </toolkit:ListPicker>
+            
+            <toolkit:ListPicker x:Name="TileBackListPicker" Margin="12,0,12,24"
+                                Header="{Binding Source={StaticResource Strings}, Path=Resources.SettingTileOption}"
+                                IsEnabled="{Binding Source={StaticResource appSettings}, Path=IsLowMemDevice, Mode=OneWay, Converter={StaticResource inverseConverter}}"
+                                SelectedIndex="{Binding Path=ShowBackTile, Mode=TwoWay}">
+                <toolkit:ListPickerItem Content="{Binding Source={StaticResource Strings}, Path=Resources.SettingTileDoNotFlip}"/>
+                <toolkit:ListPickerItem Content="{Binding Source={StaticResource Strings}, Path=Resources.SettingTileShowLogo}"/>
             </toolkit:ListPicker>
 
             <!--<TextBlock x:Name="SupportTheDevelopersTextBox" Text="Support the developers, disable the ads..." Margin="12,0" Style="{StaticResource PhoneTextSubtleStyle}"  TextWrapping="Wrap"/>
