@@ -268,6 +268,24 @@ namespace TodayILearned.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please buy an ad-free version to support the developers. Thank you for using Trivia Buff.
+        /// </summary>
+        public static string MessageBoxBuyThisAppSummary {
+            get {
+                return ResourceManager.GetString("MessageBoxBuyThisAppSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ad-free version is available.
+        /// </summary>
+        public static string MessageBoxBuyThisAppTitle {
+            get {
+                return ResourceManager.GetString("MessageBoxBuyThisAppTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please take a moment to rate or review this app. We&apos;d love to hear from you..
         /// </summary>
         public static string MessageBoxRateThisAppSummary {
@@ -345,6 +363,33 @@ namespace TodayILearned.Resources {
         public static string SettingLiveTile {
             get {
                 return ResourceManager.GetString("SettingLiveTile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to do not show.
+        /// </summary>
+        public static string SettingTileDoNotFlip {
+            get {
+                return ResourceManager.GetString("SettingTileDoNotFlip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back of the tile.
+        /// </summary>
+        public static string SettingTileOption {
+            get {
+                return ResourceManager.GetString("SettingTileOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to show logo.
+        /// </summary>
+        public static string SettingTileShowLogo {
+            get {
+                return ResourceManager.GetString("SettingTileShowLogo", resourceCulture);
             }
         }
         

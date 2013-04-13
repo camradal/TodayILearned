@@ -25,6 +25,7 @@ namespace TodayILearned
 
             AppSettings.NumberOfStarts++;
             ShowReviewPane();
+            ShowBuyThisAppPane();
 
             DataContext = App.ViewModel;
             
@@ -107,6 +108,12 @@ namespace TodayILearned
         {
             var rate = new ReviewThisAppTask();
             rate.ShowAfterThreshold();
+        }
+
+        private void ShowBuyThisAppPane()
+        {
+            var buy = new BuyThisAppTask();
+            buy.ShowAfterThreshold();
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

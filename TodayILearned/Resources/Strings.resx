@@ -186,6 +186,12 @@
   <data name="MenuItemSettings" xml:space="preserve">
     <value>settings</value>
   </data>
+  <data name="MessageBoxBuyThisAppSummary" xml:space="preserve">
+    <value>Please buy an ad-free version to support the developers. Thank you for using Trivia Buff</value>
+  </data>
+  <data name="MessageBoxBuyThisAppTitle" xml:space="preserve">
+    <value>Ad-free version is available</value>
+  </data>
   <data name="MessageBoxRateThisAppSummary" xml:space="preserve">
     <value>Please take a moment to rate or review this app. We'd love to hear from you.</value>
   </data>
@@ -212,6 +218,15 @@
   </data>
   <data name="SettingLiveTile" xml:space="preserve">
     <value>Live tile</value>
+  </data>
+  <data name="SettingTileDoNotFlip" xml:space="preserve">
+    <value>do not show</value>
+  </data>
+  <data name="SettingTileOption" xml:space="preserve">
+    <value>Back of the tile</value>
+  </data>
+  <data name="SettingTileShowLogo" xml:space="preserve">
+    <value>show logo</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version:</value>

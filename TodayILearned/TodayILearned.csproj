@@ -99,6 +99,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\BuyThisAppTask.cs" />
     <Compile Include="Utilities\GlobalLoading.cs" />
     <Compile Include="Utilities\LowMemHelper.cs" />
     <Compile Include="Utilities\ReviewThisAppTask.cs" />
