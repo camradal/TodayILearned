@@ -234,6 +234,18 @@ namespace TodayILearned
             }
         }
 
+        private void ApplicationBarDisableTheAdsMenuItem_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                var task = new MarketplaceDetailTask { ContentIdentifier = "9558e8d2-08b9-4464-9a40-5b27e25a3ced" };
+                task.Show();
+            }
+            catch
+            {
+            }
+        }
+
         private void MoreAppsMenuItem_Click(object sender, EventArgs e)
         {
             try
