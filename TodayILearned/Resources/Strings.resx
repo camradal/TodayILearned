@@ -150,6 +150,12 @@
   <data name="ErrorInternetConnection" xml:space="preserve">
     <value>Internet connection is not available</value>
   </data>
+  <data name="ErrorSiteNotAvailableMessage" xml:space="preserve">
+    <value>Please check you internet connectivity or try again later...</value>
+  </data>
+  <data name="ErrorSiteNotAvailableTitle" xml:space="preserve">
+    <value>Server is not available</value>
+  </data>
   <data name="Feedback" xml:space="preserve">
     <value>We would love to hear your comments about Trivia Buff. Send us your thoughts</value>
   </data>

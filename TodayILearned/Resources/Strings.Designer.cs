@@ -160,6 +160,24 @@ namespace TodayILearned.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please check you internet connectivity or try again later....
+        /// </summary>
+        public static string ErrorSiteNotAvailableMessage {
+            get {
+                return ResourceManager.GetString("ErrorSiteNotAvailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server is not available.
+        /// </summary>
+        public static string ErrorSiteNotAvailableTitle {
+            get {
+                return ResourceManager.GetString("ErrorSiteNotAvailableTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to We would love to hear your comments about Trivia Buff. Send us your thoughts.
         /// </summary>
         public static string Feedback {

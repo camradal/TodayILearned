@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Navigation;
@@ -91,7 +92,15 @@ namespace TodayILearned
         {
             if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
             {
-                BugSenseHandler.Instance.LogError(ex);
+                var webException = ex as WebException;
+                if (webException != null)
+                {
+                    MessageBox.Show(Strings.ErrorSiteNotAvailableMessage, Strings.ErrorSiteNotAvailableTitle, MessageBoxButton.OK);
+                }
+                else
+                {
+                    BugSenseHandler.Instance.LogError(ex);                    
+                }
             }
             else
             {
