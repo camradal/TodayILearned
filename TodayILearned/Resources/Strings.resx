@@ -150,6 +150,12 @@
   <data name="ErrorInternetConnection" xml:space="preserve">
     <value>Internet connection is not available</value>
   </data>
+  <data name="ErrorSiteNotAvailableMessage" xml:space="preserve">
+    <value>Please check you internet connectivity or try again later...</value>
+  </data>
+  <data name="ErrorSiteNotAvailableTitle" xml:space="preserve">
+    <value>Server is not available</value>
+  </data>
   <data name="Feedback" xml:space="preserve">
     <value>We would love to hear your comments about Trivia Buff. Send us your thoughts</value>
   </data>
@@ -212,6 +218,15 @@
   </data>
   <data name="SettingLiveTile" xml:space="preserve">
     <value>Live tile</value>
+  </data>
+  <data name="SettingTileDoNotFlip" xml:space="preserve">
+    <value>do not show</value>
+  </data>
+  <data name="SettingTileOption" xml:space="preserve">
+    <value>Back of the tile</value>
+  </data>
+  <data name="SettingTileShowLogo" xml:space="preserve">
+    <value>show logo</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version:</value>

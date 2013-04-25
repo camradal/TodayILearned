@@ -2,6 +2,7 @@
 using System.Windows;
 using Microsoft.Phone.Shell;
 using TodayILearned.Core;
+using TodayILearned.Utilities;
 
 namespace TodayILearned
 {
@@ -29,43 +30,54 @@ namespace TodayILearned
                 string fileNameMed = WriteTileToDisk(title, content, 336, 336, fontSize, new Thickness(19, 13, 13, 38));
                 string fileNameBig = WriteTileToDisk(title, content, 691, 336, fontSize, new Thickness(19, 13, 13, 38));
 
+                var backBackgroundImage = new Uri("", UriKind.Relative);
+                var wideBackBackgroundImage = new Uri("", UriKind.Relative);
+                string backTitle = "";
+
+                if (AppSettings.ShowTileBack)
+                {
+                    backBackgroundImage = new Uri("/icons/Application_Icon_336.png", UriKind.Relative);
+                    wideBackBackgroundImage = new Uri("/icons/Application_Icon_691.png", UriKind.Relative);
+                    backTitle = "Trivia Buff";
+                }
+
                 UpdateFlipTile(
                     title,
-                    "Trivia Buff",
+                    backTitle,
                     string.Empty,
                     string.Empty,
                     0,
                     new Uri("/icons/Application_Icon_336.png", UriKind.Relative),
                     new Uri("isostore:" + fileNameMed),
-                    new Uri("/icons/Application_Icon_336.png", UriKind.Relative),
+                    backBackgroundImage,
                     new Uri("isostore:" + fileNameBig),
-                    new Uri("/icons/Application_Icon_691.png", UriKind.Relative));
+                    wideBackBackgroundImage);
 
                 CreateFlipTile(
                     title,
-                    "Trivia Buff",
+                    backTitle,
                     string.Empty,
                     string.Empty,
                     0,
                     new Uri("/icons/Application_Icon_336.png", UriKind.Relative),
                     new Uri("isostore:" + fileNameMed),
-                    new Uri("/icons/Application_Icon_336.png", UriKind.Relative),
+                    backBackgroundImage,
                     new Uri("isostore:" + fileNameBig),
-                    new Uri("/icons/Application_Icon_691.png", UriKind.Relative));
+                    wideBackBackgroundImage);
             }
         }
 
         private static void CreateFlipTile(
-    string title,
-    string backTitle,
-    string backContent,
-    string wideBackContent,
-    int count,
-    Uri smallBackgroundImage,
-    Uri backgroundImage,
-    Uri backBackgroundImage,
-    Uri wideBackgroundImage,
-    Uri wideBackBackgroundImage)
+            string title,
+            string backTitle,
+            string backContent,
+            string wideBackContent,
+            int count,
+            Uri smallBackgroundImage,
+            Uri backgroundImage,
+            Uri backBackgroundImage,
+            Uri wideBackgroundImage,
+            Uri wideBackBackgroundImage)
         {
             if (!IsTargetedVersion)
                 return;

@@ -160,6 +160,24 @@ namespace TodayILearned.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please check you internet connectivity or try again later....
+        /// </summary>
+        public static string ErrorSiteNotAvailableMessage {
+            get {
+                return ResourceManager.GetString("ErrorSiteNotAvailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server is not available.
+        /// </summary>
+        public static string ErrorSiteNotAvailableTitle {
+            get {
+                return ResourceManager.GetString("ErrorSiteNotAvailableTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to We would love to hear your comments about Trivia Buff. Send us your thoughts.
         /// </summary>
         public static string Feedback {
@@ -345,6 +363,33 @@ namespace TodayILearned.Resources {
         public static string SettingLiveTile {
             get {
                 return ResourceManager.GetString("SettingLiveTile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to do not show.
+        /// </summary>
+        public static string SettingTileDoNotFlip {
+            get {
+                return ResourceManager.GetString("SettingTileDoNotFlip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back of the tile.
+        /// </summary>
+        public static string SettingTileOption {
+            get {
+                return ResourceManager.GetString("SettingTileOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to show logo.
+        /// </summary>
+        public static string SettingTileShowLogo {
+            get {
+                return ResourceManager.GetString("SettingTileShowLogo", resourceCulture);
             }
         }
         

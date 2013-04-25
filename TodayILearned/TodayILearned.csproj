@@ -85,7 +85,6 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ShareHelper.cs" />
-    <Compile Include="Utilities\AppSettings.cs" />
     <Compile Include="Utilities\BackgroundAgent.cs" />
     <Compile Include="DetailsPage.xaml.cs">
       <DependentUpon>DetailsPage.xaml</DependentUpon>
@@ -100,7 +99,6 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Utilities\GlobalLoading.cs" />
-    <Compile Include="Utilities\LowMemHelper.cs" />
     <Compile Include="Utilities\ReviewThisAppTask.cs" />
     <Compile Include="Utilities\StringProvider.cs" />
   </ItemGroup>

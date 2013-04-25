@@ -10,14 +10,14 @@ namespace TodayILearned
     {
         public int DisplayFontSize
         {
-            get
-            {
-                return AppSettings.DisplayFontSize;
-            }
-            set
-            {
-                AppSettings.DisplayFontSize = value;
-            }
+            get { return AppSettings.DisplayFontSize; }
+            set { AppSettings.DisplayFontSize = value; }
+        }
+
+        public bool ShowBackTile
+        {
+            get { return AppSettings.ShowTileBack; }
+            set { AppSettings.ShowTileBack = value; }
         }
 
         public SettingsPage()

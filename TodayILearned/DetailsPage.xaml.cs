@@ -2,6 +2,7 @@
 using System.Net;
 using System.Windows;
 using System.Windows.Navigation;
+using Microsoft.Phone.Tasks;
 using TodayILearned.Resources;
 using Utilities;
 
@@ -33,10 +34,6 @@ namespace TodayILearned
                     App.ViewModel.OnError += App.HandleError;
                 }
             }
-
-            // ads
-            AdBox.ErrorOccurred += AdBox_ErrorOccurred;
-            AdBox.AdRefreshed += AdBox_AdRefreshed;
         }
 
         #region Navigation
@@ -75,28 +72,6 @@ namespace TodayILearned
                 //GlobalLoading.Instance.LoadingText = null;
             }
             navigating = false;
-        }
-
-        #endregion
-
-        #region Ads
-
-        void AdBox_AdRefreshed(object sender, EventArgs e)
-        {
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
-            {
-                AdDuplexAdControl.Visibility = Visibility.Collapsed;
-                AdBox.Visibility = Visibility.Visible;
-            });
-        }
-
-        void AdBox_ErrorOccurred(object sender, Microsoft.Advertising.AdErrorEventArgs e)
-        {
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
-            {
-                AdBox.Visibility = Visibility.Collapsed;
-                AdDuplexAdControl.Visibility = Visibility.Visible;
-            });
         }
 
         #endregion
@@ -163,6 +138,22 @@ namespace TodayILearned
             if (App.ViewModel.Item == null) return;
 
             ShareHelper.ShareViaEmail(App.ViewModel.Item);
+        }
+
+        private void ApplicationBarMenuItem_OnClick_OpenInIE(object sender, EventArgs e)
+        {
+            if (App.ViewModel == null) return;
+            if (App.ViewModel.Items == null) return;
+            if (App.ViewModel.Item == null) return;
+
+            try
+            {
+                var webBrowserTask = new WebBrowserTask { Uri = new Uri(App.ViewModel.Item.Url, UriKind.Absolute) };
+                webBrowserTask.Show();
+            }
+            catch
+            {
+            }
         }
 
         #endregion

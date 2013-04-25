@@ -6,8 +6,6 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pubcenter="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI"  
-    xmlns:AdDuplex="clr-namespace:AdDuplex;assembly=AdDuplex.WindowsPhone"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -34,12 +32,6 @@
             TextTrimming="WordEllipsis"/>
         <phone:WebBrowser Grid.Row="1" x:Name="webBrowser1" IsScriptEnabled="True" Margin="0" Source="{Binding Url}" />
         
-        <!-- Ad Control -->
-        <!--<Image Grid.Row="1" Source="/icons/ad.png" Width="480" Height="80"/>-->
-        <StackPanel x:Name="AdPanel" Grid.Row="2" Height="80" Visibility="Collapsed">
-            <pubcenter:AdControl x:Name="AdBox" AdUnitId="111476" ApplicationId="d0714ba1-4505-4976-b2bc-86c28696c89f" Margin="0" Width="480" Height="80"/>
-            <AdDuplex:AdControl x:Name="AdDuplexAdControl" AppId="29467" Margin="0" Width="480" Height="80" Visibility="Collapsed"/>
-        </StackPanel>
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>
@@ -49,6 +41,7 @@
             <shell:ApplicationBarIconButton IconUri="/icons/appbar.back.rest.png" Text="previous" Click="ApplicationBarIconButton_Click_Prev"/>
             <shell:ApplicationBarIconButton IconUri="/icons/appbar.next.rest.png" Text="next" Click="ApplicationBarIconButton_Click_Next"/>
             <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="open in internet explorer..." Click="ApplicationBarMenuItem_OnClick_OpenInIE"/>
                 <shell:ApplicationBarMenuItem Text="email..." Click="ApplicationBarMenuItem_OnClick_Email"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

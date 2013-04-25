@@ -54,9 +54,13 @@ namespace TodayILearned.LiveTileScheduledTask
                 model.OnLoaded += () =>
                 {
                     if (model.Item == null) return;
+                    if (model.Items == null || model.Items.Count < 3) return;
+
+                    int randomIndex = new Random().Next(3);
+                    var item = model.Items[randomIndex];
 
                     string title = "Trivia Buff";
-                    string description = model.Item.Title;
+                    string description = item.Title;
 
                     Deployment.Current.Dispatcher.BeginInvoke(() =>
                     {

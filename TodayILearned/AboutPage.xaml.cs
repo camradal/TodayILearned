@@ -21,16 +21,26 @@ namespace TodayILearned
                 return new List<NewItem>()
                 {
                     new NewItem
-                        {
-                            Version = "",
-                            Description = "We read all emails, please drop us a line with any suggestions."
-                        },
+                    {
+                        Version = "",
+                        Description = "We read all emails, please drop us a line with any suggestions."
+                    },
                     new NewItem
-                        {
-                            Version = "1.0",
-                            Description =
-                                "- Initial release"
-                        }
+                    {
+                        Version = "1.1",
+                        Description =
+                            "- Option to show only the front of the live tile\n" +
+                            "- Open articles in Internet Explorer\n" +
+                            "- More facts on the live tile\n" +
+                            "- Fix reported bugs"
+
+                    },
+                    new NewItem
+                    {
+                        Version = "1.0",
+                        Description =
+                            "- Initial release"
+                    }
                 };
             }
         }
@@ -73,7 +83,7 @@ namespace TodayILearned
 
         private void ReadVersionFromManifest()
         {
-            versionText.Text = "1.0";
+            versionText.Text = "1.1";
         }
     }
 }
