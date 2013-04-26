@@ -26,7 +26,7 @@ namespace TodayILearned.Utilities
         private const string ContentLanguageDefault = "en";
         private const bool LiveTileDisabledDefault = false;
         private const int DisplayFontSizeDefault = 0;
-        private const bool ShowTileBackDefault = false;
+        private const bool ShowTileBackDefault = true;
 
         #endregion
 
