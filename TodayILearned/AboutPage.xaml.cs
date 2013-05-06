@@ -27,6 +27,13 @@ namespace TodayILearned
                     },
                     new NewItem
                     {
+                        Version = "1.2",
+                        Description =
+                            "- Fix duplicates appearing in favorites\n" +
+                            "- Fix reported bugs"
+                    },
+                    new NewItem
+                    {
                         Version = "1.1",
                         Description =
                             "- Option to show only the front of the live tile\n" +
