@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SharpGIS;
 
 namespace TodayILearned.Core
 {
@@ -72,7 +73,7 @@ namespace TodayILearned.Core
                 uriString += "?after=" + lastItem;
             }
             var uri = new Uri(uriString);
-            var client = new WebClient();
+            var client = new GZipWebClient();
             client.DownloadStringAsync(uri);
             client.DownloadStringCompleted += client_DownloadStringCompleted;
         }

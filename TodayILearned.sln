@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2010
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodayILearned", "TodayILearned\TodayILearned.csproj", "{EE444FC1-61E9-442A-8C52-D2CF6F5D618C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodayILearned.Core", "TodayILearned.Core\TodayILearned.Core.csproj", "{56F388D4-0B38-4E08-BAD4-0ECF5815F550}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodayILearned.LiveTileScheduledTask", "TodayILearned.LiveTileScheduledTask\TodayILearned.LiveTileScheduledTask.csproj", "{081035A5-15E9-41B1-B256-3AF6EE08037C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGIS.GZipWebClient", "SharpGIS.GZipWebClient\SharpGIS.GZipWebClient.csproj", "{D0B5895E-4CFB-4EB9-8C22-7622ACD8CAEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{081035A5-15E9-41B1-B256-3AF6EE08037C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{081035A5-15E9-41B1-B256-3AF6EE08037C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{081035A5-15E9-41B1-B256-3AF6EE08037C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0B5895E-4CFB-4EB9-8C22-7622ACD8CAEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0B5895E-4CFB-4EB9-8C22-7622ACD8CAEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0B5895E-4CFB-4EB9-8C22-7622ACD8CAEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0B5895E-4CFB-4EB9-8C22-7622ACD8CAEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
