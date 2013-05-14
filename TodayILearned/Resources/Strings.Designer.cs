@@ -349,6 +349,24 @@ namespace TodayILearned.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Browser selection.
+        /// </summary>
+        public static string SettingBrowserSelection {
+            get {
+                return ResourceManager.GetString("SettingBrowserSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to built-in browser.
+        /// </summary>
+        public static string SettingBuiltInBrowser {
+            get {
+                return ResourceManager.GetString("SettingBuiltInBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Font size.
         /// </summary>
         public static string SettingFontSize {
@@ -372,6 +390,15 @@ namespace TodayILearned.Resources {
         public static string SettingFontSizeNormal {
             get {
                 return ResourceManager.GetString("SettingFontSizeNormal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to internet explorer.
+        /// </summary>
+        public static string SettingInternetExplorer {
+            get {
+                return ResourceManager.GetString("SettingInternetExplorer", resourceCulture);
             }
         }
         

@@ -19,6 +19,7 @@ namespace TodayILearned.Utilities
         private const string LiveTileDisabledKeyName = "LiveTileDisabled";
         private const string DisplayFontSizeKeyName = "DisplayFontSize";
         private const string ShowTileBackKeyName = "ShowTileBack";
+        private const string BrowserSelectionKeyName = "BrowserSelection";
 
         private const int NumberOfStartsDefault = 0;
         private const bool FirstStartDefault = false;
@@ -27,6 +28,7 @@ namespace TodayILearned.Utilities
         private const bool LiveTileDisabledDefault = false;
         private const int DisplayFontSizeDefault = 0;
         private const bool ShowTileBackDefault = true;
+        private const bool BrowserSelectionDefault = false;
 
         #endregion
 
@@ -151,6 +153,21 @@ namespace TodayILearned.Utilities
             set
             {
                 if (AddOrUpdateValue(ShowTileBackKeyName, value))
+                {
+                    Save();
+                }
+            }
+        }
+
+        public static bool BrowserSelection
+        {
+            get
+            {
+                return GetValueOrDefault<bool>(BrowserSelectionKeyName, BrowserSelectionDefault);
+            }
+            set
+            {
+                if (AddOrUpdateValue(BrowserSelectionKeyName, value))
                 {
                     Save();
                 }

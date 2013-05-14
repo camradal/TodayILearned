@@ -133,7 +133,21 @@ namespace TodayILearned
             root.DataContext = selectedItem;
             App.ViewModel.Item = selectedItem;
 
-            OpenDetailsPage(selectedItem.Url);
+            if (AppSettings.BrowserSelection)
+            {
+                try
+                {
+                    var webBrowserTask = new WebBrowserTask { Uri = new Uri(App.ViewModel.Item.Url, UriKind.Absolute) };
+                    webBrowserTask.Show();
+                }
+                catch
+                {
+                }
+            }
+            else
+            {
+                OpenDetailsPage(selectedItem.Url);                
+            }
 
             // reset selected index to null (no selection)
             listBox.SelectedItem = null;

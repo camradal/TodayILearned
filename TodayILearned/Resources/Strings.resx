@@ -213,6 +213,12 @@
   <data name="Rate" xml:space="preserve">
     <value>Please rate and comment on this app in Marketplace</value>
   </data>
+  <data name="SettingBrowserSelection" xml:space="preserve">
+    <value>Browser selection</value>
+  </data>
+  <data name="SettingBuiltInBrowser" xml:space="preserve">
+    <value>built-in browser</value>
+  </data>
   <data name="SettingFontSize" xml:space="preserve">
     <value>Font size</value>
   </data>
@@ -221,6 +227,9 @@
   </data>
   <data name="SettingFontSizeNormal" xml:space="preserve">
     <value>normal</value>
+  </data>
+  <data name="SettingInternetExplorer" xml:space="preserve">
+    <value>internet explorer</value>
   </data>
   <data name="SettingLiveTile" xml:space="preserve">
     <value>Live tile</value>
