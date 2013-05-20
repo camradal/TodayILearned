@@ -29,8 +29,10 @@ namespace TodayILearned
                     {
                         Version = "1.2",
                         Description =
-                            "- Fix duplicates appearing in favorites\n" +
-                            "- Fix reported bugs"
+                            "- Sharing improvements: text, e-mail and social networks\n" +
+                            "- Option to always open articles in Internet Explorer\n" +
+                            "- Fix for duplicates in the favorites\n" +
+                            "- Improvement to load times (especially on slower networks)"
                     },
                     new NewItem
                     {

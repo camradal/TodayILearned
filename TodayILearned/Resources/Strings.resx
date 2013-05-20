@@ -210,6 +210,9 @@
   <data name="PageTitleSettings" xml:space="preserve">
     <value>settings</value>
   </data>
+  <data name="PageTitleShare" xml:space="preserve">
+    <value>SHARE</value>
+  </data>
   <data name="Rate" xml:space="preserve">
     <value>Please rate and comment on this app in Marketplace</value>
   </data>
@@ -242,6 +245,15 @@
   </data>
   <data name="SettingTileShowLogo" xml:space="preserve">
     <value>show logo</value>
+  </data>
+  <data name="ShareEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="ShareSocialNetwork" xml:space="preserve">
+    <value>Social networks</value>
+  </data>
+  <data name="ShareTextMessaging" xml:space="preserve">
+    <value>Text message</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version:</value>

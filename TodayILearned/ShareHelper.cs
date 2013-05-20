@@ -39,5 +39,21 @@ namespace TodayILearned
                 // fast-clicking can result in exception, so we just handle it
             }
         }
+
+        internal static void ShareViaSms(ItemViewModel model)
+        {
+            try
+            {
+                var task = new SmsComposeTask()
+                {
+                    Body = model.Title + "\n" + model.Url
+                };
+                task.Show();
+            }
+            catch (Exception)
+            {
+                // fast-clicking can result in exception, so we just handle it
+            }
+        }
     }
 }

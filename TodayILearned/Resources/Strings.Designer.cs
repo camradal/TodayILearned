@@ -340,6 +340,15 @@ namespace TodayILearned.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SHARE.
+        /// </summary>
+        public static string PageTitleShare {
+            get {
+                return ResourceManager.GetString("PageTitleShare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please rate and comment on this app in Marketplace.
         /// </summary>
         public static string Rate {
@@ -435,6 +444,33 @@ namespace TodayILearned.Resources {
         public static string SettingTileShowLogo {
             get {
                 return ResourceManager.GetString("SettingTileShowLogo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string ShareEmail {
+            get {
+                return ResourceManager.GetString("ShareEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Social networks.
+        /// </summary>
+        public static string ShareSocialNetwork {
+            get {
+                return ResourceManager.GetString("ShareSocialNetwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text message.
+        /// </summary>
+        public static string ShareTextMessaging {
+            get {
+                return ResourceManager.GetString("ShareTextMessaging", resourceCulture);
             }
         }
         

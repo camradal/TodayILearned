@@ -166,11 +166,18 @@ namespace TodayILearned
 
             if (selected == "share...")
             {
-                ShareHelper.ShareViaSocial(model);
-            }
-            else if (selected == "email...")
-            {
-                ShareHelper.ShareViaEmail(model);
+                var uri = new Uri("/SharePage.xaml", UriKind.Relative);
+                Dispatcher.BeginInvoke(() =>
+                {
+                    try
+                    {
+                        NavigationService.Navigate(uri);
+                    }
+                    catch (Exception)
+                    {
+                        // prevent double-click errors
+                    }
+                });
             }
             else if (selected == "add to favorites")
             {
