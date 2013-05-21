@@ -93,7 +93,7 @@ namespace TodayILearned
 
         private void ReadVersionFromManifest()
         {
-            versionText.Text = "1.1";
+            versionText.Text = "1.2";
         }
     }
 }
