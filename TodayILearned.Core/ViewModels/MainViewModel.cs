@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SharpGIS;
 
 namespace TodayILearned.Core
 {
@@ -72,7 +73,7 @@ namespace TodayILearned.Core
                 uriString += "?after=" + lastItem;
             }
             var uri = new Uri(uriString);
-            var client = new WebClient();
+            var client = new GZipWebClient();
             client.DownloadStringAsync(uri);
             client.DownloadStringCompleted += client_DownloadStringCompleted;
         }
@@ -82,9 +83,9 @@ namespace TodayILearned.Core
             try
             {
                 var result = JObject.Parse(e.Result);
-                foreach (ItemViewModel item in Serializer.GetItems(result))
+                foreach (ItemViewModel model in Serializer.GetItems(result))
                 {
-                    this.Items.Add(item);
+                    this.Items.Add(model);
                 }
                 Item = this.Items.FirstOrDefault();
                 LastItem = result["data"]["after"].ToString();
@@ -123,9 +124,9 @@ namespace TodayILearned.Core
                 if (reader.EndOfStream) return;
 
                 var result = JArray.Load(jsonReader);
-                foreach (var item in Serializer.GetItems(result))
+                foreach (var favorite in Serializer.GetItems(result))
                 {
-                    this.Favorites.Add(item);
+                    this.Favorites.Add(favorite);
                 }
             }
         }
@@ -141,15 +142,21 @@ namespace TodayILearned.Core
             }
         }
 
-        public void AddFavorite(ItemViewModel item)
+        public void AddFavorite(ItemViewModel model)
         {
-            this.Favorites.Add(item);
+            // do not insert dupes
+            if (Favorites.Any(favorite => favorite.Title == model.Title))
+            {
+                return;
+            }
+
+            this.Favorites.Add(model);
             NotifyPropertyChanged("Favorites");
         }
 
-        public void RemoveFavorite(ItemViewModel item)
+        public void RemoveFavorite(ItemViewModel model)
         {
-            this.Favorites.Remove(item);
+            this.Favorites.Remove(model);
             NotifyPropertyChanged("Favorites");
         }
 

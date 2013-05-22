@@ -20,6 +20,12 @@ namespace TodayILearned
             set { AppSettings.ShowTileBack = value; }
         }
 
+        public bool BrowserSelection
+        {
+            get { return AppSettings.BrowserSelection; }
+            set { AppSettings.BrowserSelection = value; }
+        }
+
         public SettingsPage()
         {
             InitializeComponent();

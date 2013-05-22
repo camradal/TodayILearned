@@ -27,6 +27,15 @@ namespace TodayILearned
                     },
                     new NewItem
                     {
+                        Version = "1.2",
+                        Description =
+                            "- Sharing improvements: text, e-mail and social networks\n" +
+                            "- Option to always open articles in Internet Explorer\n" +
+                            "- Fix for duplicates in the favorites\n" +
+                            "- Improvement to load times (especially on slower networks)"
+                    },
+                    new NewItem
+                    {
                         Version = "1.1",
                         Description =
                             "- Option to show only the front of the live tile\n" +
@@ -83,7 +92,7 @@ namespace TodayILearned
 
         private void ReadVersionFromManifest()
         {
-            versionText.Text = "1.1";
+            versionText.Text = "1.2";
         }
     }
 }

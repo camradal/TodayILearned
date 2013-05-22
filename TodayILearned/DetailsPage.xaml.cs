@@ -116,7 +116,18 @@ namespace TodayILearned
             if (App.ViewModel.Items == null) return;
             if (App.ViewModel.Item == null) return;
 
-            ShareHelper.ShareViaSocial(App.ViewModel.Item);
+            var uri = new Uri("/SharePage.xaml", UriKind.Relative);
+            Dispatcher.BeginInvoke(() =>
+            {
+                try
+                {
+                    NavigationService.Navigate(uri);
+                }
+                catch (Exception)
+                {
+                    // prevent double-click errors
+                }
+            });
         }
 
         private void ApplicationBarIconButton_Click_Favorite(object sender, EventArgs e)
@@ -129,15 +140,6 @@ namespace TodayILearned
             GlobalLoading.Instance.SetTimedText("Added to favorites...");
             App.ViewModel.AddFavorite(model);
             App.ViewModel.SaveFavorites();
-        }
-
-        private void ApplicationBarMenuItem_OnClick_Email(object sender, EventArgs e)
-        {
-            if (App.ViewModel == null) return;
-            if (App.ViewModel.Items == null) return;
-            if (App.ViewModel.Item == null) return;
-
-            ShareHelper.ShareViaEmail(App.ViewModel.Item);
         }
 
         private void ApplicationBarMenuItem_OnClick_OpenInIE(object sender, EventArgs e)

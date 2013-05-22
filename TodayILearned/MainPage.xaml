@@ -44,7 +44,6 @@
                 <toolkit:ContextMenuService.ContextMenu>
                     <toolkit:ContextMenu Name="mainMenu">
                         <toolkit:MenuItem Header="share..." Click="MenuItem_OnClick"/>
-                        <toolkit:MenuItem Header="email..." Click="MenuItem_OnClick"/>
                         <toolkit:MenuItem Header="add to favorites" Click="MenuItem_OnClick"/>
                     </toolkit:ContextMenu>
                 </toolkit:ContextMenuService.ContextMenu>
@@ -70,7 +69,6 @@
                 <toolkit:ContextMenuService.ContextMenu>
                     <toolkit:ContextMenu Name="mainMenu">
                         <toolkit:MenuItem Header="share..." Click="MenuItem_OnClick"/>
-                        <toolkit:MenuItem Header="email..." Click="MenuItem_OnClick"/>
                         <toolkit:MenuItem Header="remove from favorites" Click="MenuItem_OnClick"/>
                     </toolkit:ContextMenu>
                 </toolkit:ContextMenuService.ContextMenu>

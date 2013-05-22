@@ -42,7 +42,6 @@
             <shell:ApplicationBarIconButton IconUri="/icons/appbar.next.rest.png" Text="next" Click="ApplicationBarIconButton_Click_Next"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="open in internet explorer..." Click="ApplicationBarMenuItem_OnClick_OpenInIE"/>
-                <shell:ApplicationBarMenuItem Text="email..." Click="ApplicationBarMenuItem_OnClick_Email"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

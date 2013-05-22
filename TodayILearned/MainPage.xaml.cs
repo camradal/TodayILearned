@@ -122,7 +122,21 @@ namespace TodayILearned
             root.DataContext = selectedItem;
             App.ViewModel.Item = selectedItem;
 
-            OpenDetailsPage(selectedItem.Url);
+            if (AppSettings.BrowserSelection)
+            {
+                try
+                {
+                    var webBrowserTask = new WebBrowserTask { Uri = new Uri(App.ViewModel.Item.Url, UriKind.Absolute) };
+                    webBrowserTask.Show();
+                }
+                catch
+                {
+                }
+            }
+            else
+            {
+                OpenDetailsPage(selectedItem.Url);                
+            }
 
             // reset selected index to null (no selection)
             listBox.SelectedItem = null;
@@ -141,11 +155,18 @@ namespace TodayILearned
 
             if (selected == "share...")
             {
-                ShareHelper.ShareViaSocial(model);
-            }
-            else if (selected == "email...")
-            {
-                ShareHelper.ShareViaEmail(model);
+                var uri = new Uri("/SharePage.xaml", UriKind.Relative);
+                Dispatcher.BeginInvoke(() =>
+                {
+                    try
+                    {
+                        NavigationService.Navigate(uri);
+                    }
+                    catch (Exception)
+                    {
+                        // prevent double-click errors
+                    }
+                });
             }
             else if (selected == "add to favorites")
             {

@@ -1,17 +1,16 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Resources;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TodayILearned.Core")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("SharpGIS.GZipWebClient")]
+[assembly: AssemblyDescription("WebClient for Windows Phone 7/8 that adds support for GZIP compressed web requests.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TodayILearned.Core")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCompany("Morten Nielsen")]
+[assembly: AssemblyProduct("SharpGIS.GZipWebClient")]
+[assembly: AssemblyCopyright("Copyright © Microsoft 2011-2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,7 +20,7 @@ using System.Resources;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2861f7d6-9269-4434-a475-ea5a0b5c3ecb")]
+[assembly: Guid("53f24f6b-702f-4c65-a880-ccf173c0531c")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,6 +31,5 @@ using System.Resources;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.2.0.0")]
-[assembly: AssemblyFileVersion("1.2.0.0")]
-[assembly: NeutralResourcesLanguageAttribute("en-US")]
+[assembly: AssemblyVersion("1.4.0.0")]
+[assembly: AssemblyFileVersion("1.4.0.0")]
