@@ -207,6 +207,9 @@
   <data name="PageTitleAbout" xml:space="preserve">
     <value>about</value>
   </data>
+  <data name="PageTitleSearch" xml:space="preserve">
+    <value>SEARCH</value>
+  </data>
   <data name="PageTitleSettings" xml:space="preserve">
     <value>settings</value>
   </data>

@@ -81,6 +81,9 @@
     <Compile Include="Converters\SortOrderConverter.cs" />
     <Compile Include="LiveTileCreator.cs" />
     <Compile Include="MetroGridHelper.cs" />
+    <Compile Include="SearchPage.xaml.cs">
+      <DependentUpon>SearchPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
@@ -140,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="SearchPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -163,6 +170,7 @@
     <Content Include="icons\appbar.next.rest.png" />
     <Content Include="icons\appbar.pin.rest.png" />
     <Content Include="icons\appbar.refresh.rest.png" />
+    <Content Include="icons\appbar.search.png" />
     <Content Include="icons\appbar.share.rest.png" />
     <Content Include="icons\Application_Icon_159.png" />
     <Content Include="icons\Application_Icon_336.png" />

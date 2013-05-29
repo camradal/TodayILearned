@@ -242,6 +242,11 @@ namespace TodayILearned
             this.AllListBox.ScrollTo(firstItem);
         }
 
+        private void ApplicationBarIconSearchButton_OnClick(object sender, EventArgs e)
+        {
+            Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.Navigate(new Uri("/SearchPage.xaml", UriKind.Relative)));
+        }
+
         private void ApplicationBarRateMenuItem_OnClick(object sender, EventArgs e)
         {
             try

@@ -119,6 +119,7 @@
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton IconUri="/icons/appbar.pin.rest.png" Text="pin to start" Click="ApplicationBarIconPinToStartButton_OnClick"/>
             <shell:ApplicationBarIconButton IconUri="/icons/appbar.refresh.rest.png" Text="refresh" Click="ApplicationBarIconRefreshButton_OnClick"/>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.search.png" Text="search" Click="ApplicationBarIconSearchButton_OnClick"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="rate this app" Click="ApplicationBarRateMenuItem_OnClick"/>
                 <shell:ApplicationBarMenuItem Text="ad-free version" Click="ApplicationBarDisableTheAdsMenuItem_OnClick"/>
