@@ -70,6 +70,8 @@ namespace TodayILearned
 
             if (selected == "share...")
             {
+                App.ViewModel.Item = model;
+
                 var uri = new Uri("/SharePage.xaml", UriKind.Relative);
                 Dispatcher.BeginInvoke(() =>
                 {
