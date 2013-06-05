@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using TodayILearned.Utilities;
 using Utilities;
@@ -19,12 +15,7 @@ namespace TodayILearned
         {
             InitializeComponent();
             this.DataContext = App.ViewModel;
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-            SearchTextBox.Focus();
+            this.Loaded += (sender, args) => SearchTextBox.Focus();
         }
 
         // duplicate code from MainPage.xaml

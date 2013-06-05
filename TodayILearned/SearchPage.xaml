@@ -59,7 +59,12 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,12,28">
             <TextBlock x:Name="ApplicationTitle" Text="{Binding Source={StaticResource Strings}, Path=Resources.PageTitleSearch}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBox x:Name="SearchTextBox" VerticalAlignment="Top" TextInput="SearchTextBox_TextInput" LostFocus="SearchTextBox_OnLostFocus"/>
+            <TextBox
+                x:Name="SearchTextBox"
+                VerticalAlignment="Top"
+                InputScope="Search"
+                TextInput="SearchTextBox_TextInput"
+                LostFocus="SearchTextBox_OnLostFocus"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
