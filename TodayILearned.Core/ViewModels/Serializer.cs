@@ -29,7 +29,7 @@ namespace TodayILearned.Core
             return items;
         }
 
-        public static IEnumerable<ItemViewModel> GetItems(JObject json)
+        public static IList<ItemViewModel> GetItems(JObject json)
         {
             var items = new List<ItemViewModel>();
             JToken tokens = json["data"]["children"];

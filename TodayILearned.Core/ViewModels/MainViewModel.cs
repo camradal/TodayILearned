@@ -92,7 +92,9 @@ namespace TodayILearned.Core
             try
             {
                 var result = JObject.Parse(e.Result);
-                foreach (ItemViewModel model in Serializer.GetItems(result))
+                var newItems = Serializer.GetItems(result);
+                var uniqueItems = newItems.Except(this.Items);
+                foreach (ItemViewModel model in uniqueItems)
                 {
                     this.Items.Add(model);
                 }

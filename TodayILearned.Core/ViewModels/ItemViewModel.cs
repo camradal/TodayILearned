@@ -1,19 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 
 namespace TodayILearned
 {
-    public class ItemViewModel : INotifyPropertyChanged
+    public class ItemViewModel : INotifyPropertyChanged, IEquatable<ItemViewModel>
     {
         private string _title;
         private string _description;
@@ -110,5 +100,29 @@ namespace TodayILearned
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        #region IEquitable implementation
+        
+        public bool Equals(ItemViewModel other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return string.Equals(_title, other._title);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((ItemViewModel)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return _title.GetHashCode();
+        }
+
+        #endregion
     }
 }
