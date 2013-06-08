@@ -15,7 +15,13 @@ namespace TodayILearned
         {
             InitializeComponent();
             this.DataContext = App.ViewModel;
-            this.Loaded += (sender, args) => SearchTextBox.Focus();
+            this.Loaded += (sender, args) =>
+            {
+                if (string.IsNullOrWhiteSpace(SearchTextBox.Text))
+                {
+                    SearchTextBox.Focus();
+                }
+            };
         }
 
         // duplicate code from MainPage.xaml
@@ -35,6 +41,7 @@ namespace TodayILearned
 
             root.DataContext = selectedItem;
             App.ViewModel.Item = selectedItem;
+            App.ViewModel.NavigationCollection = App.ViewModel.SearchItems;
 
             if (AppSettings.BrowserSelection)
             {

@@ -29,6 +29,7 @@ namespace TodayILearned.Core
             this.Items = new ObservableCollection<ItemViewModel>();
             this.Favorites = new ObservableCollection<ItemViewModel>();
             this.SearchItems = new ObservableCollection<ItemViewModel>();
+            this.NavigationCollection = this.Items;
         }
 
         public bool IsLoading
@@ -48,7 +49,8 @@ namespace TodayILearned.Core
 
         public ObservableCollection<ItemViewModel> Items { get; private set; }
         public ObservableCollection<ItemViewModel> Favorites { get; private set; }
-        public ObservableCollection<ItemViewModel> SearchItems { get; private set; } 
+        public ObservableCollection<ItemViewModel> SearchItems { get; private set; }
+        public ObservableCollection<ItemViewModel> NavigationCollection { get; set; } 
 
         public ItemViewModel Item
         {

@@ -133,6 +133,12 @@ namespace TodayILearned
             root.DataContext = selectedItem;
             App.ViewModel.Item = selectedItem;
 
+            var item = (PivotItem)this.MainPivot.SelectedItem;
+            if ((string)item.Header == "new")
+                App.ViewModel.NavigationCollection = App.ViewModel.Items;
+            else
+                App.ViewModel.NavigationCollection = App.ViewModel.Favorites;
+
             if (AppSettings.BrowserSelection)
             {
                 try
