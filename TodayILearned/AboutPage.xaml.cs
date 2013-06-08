@@ -27,6 +27,14 @@ namespace TodayILearned
                     },
                     new NewItem
                     {
+                        Version = "1.3",
+                        Description =
+                            "- Search functionality\n" +
+                            "- Fix sharing using context menu\n" +
+                            "- Fix duplicate facts displayed on the main screen\n" +
+                            "- Fix navigation arrows on details screen"
+                    },new NewItem
+                    {
                         Version = "1.2",
                         Description =
                             "- Sharing improvements: text, e-mail and social networks\n" +
@@ -93,7 +101,7 @@ namespace TodayILearned
 
         private void ReadVersionFromManifest()
         {
-            versionText.Text = "1.2";
+            versionText.Text = "1.3";
         }
     }
 }
