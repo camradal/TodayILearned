@@ -61,6 +61,11 @@ namespace TodayILearned.Core
                     value = value.Substring("that".Length);
                     value = value.TrimStart(new[] { ' ', '-', '.', ':', ';', ',', '[', ']' });
                 }
+                if (value.StartsWith("of ", StringComparison.OrdinalIgnoreCase))
+                {
+                    value = value.Substring("of ".Length);
+                    value = value.TrimStart(new[] { ' ', '-', '.', ':', ';', ',', '[', ']' });
+                }
             }
             value = char.ToUpper(value[0]) + value.Substring(1);
             return value;
