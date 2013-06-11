@@ -30,6 +30,7 @@ namespace TodayILearned
                         Version = "1.3",
                         Description =
                             "- Search functionality\n" +
+                            "- Orientation lock option\n" +
                             "- Fix sharing using context menu\n" +
                             "- Fix duplicate facts displayed on the main screen\n" +
                             "- Fix navigation arrows on details screen"

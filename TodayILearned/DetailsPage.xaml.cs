@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Net;
-using System.Windows;
 using System.Windows.Navigation;
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
-using TodayILearned.Resources;
+using TodayILearned.Utilities;
 using Utilities;
 
 namespace TodayILearned
@@ -36,7 +37,22 @@ namespace TodayILearned
             }
         }
 
+        private void SetOrientation(bool locked)
+        {
+            this.SupportedOrientations = locked ? SupportedPageOrientation.Portrait : SupportedPageOrientation.PortraitOrLandscape;
+            string text = locked ? "unlock orientation" : "lock orientation";
+            ((ApplicationBarMenuItem)ApplicationBar.MenuItems[0]).Text = text;
+        }
+
         #region Navigation
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            bool locked = AppSettings.OrientationLock;
+            SetOrientation(locked);
+        }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
@@ -140,6 +156,13 @@ namespace TodayILearned
             GlobalLoading.Instance.SetTimedText("Added to favorites...");
             App.ViewModel.AddFavorite(model);
             App.ViewModel.SaveFavorites();
+        }
+
+        private void ApplicationBarOrientationMenuItem_OnClick(object sender, EventArgs e)
+        {
+            bool locked = !AppSettings.OrientationLock;
+            AppSettings.OrientationLock = locked;
+            SetOrientation(locked);
         }
 
         private void ApplicationBarMenuItem_OnClick_OpenInIE(object sender, EventArgs e)

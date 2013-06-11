@@ -121,9 +121,9 @@
             <shell:ApplicationBarIconButton IconUri="/icons/appbar.refresh.rest.png" Text="refresh" Click="ApplicationBarIconRefreshButton_OnClick"/>
             <shell:ApplicationBarIconButton IconUri="/icons/appbar.search.png" Text="search" Click="ApplicationBarIconSearchButton_OnClick"/>
             <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="lock orientation" Click="ApplicationBarOrientationMenuItem_OnClick"/>
                 <shell:ApplicationBarMenuItem Text="rate this app" Click="ApplicationBarRateMenuItem_OnClick"/>
-                <shell:ApplicationBarMenuItem Text="ad-free version" Click="ApplicationBarDisableTheAdsMenuItem_OnClick"/>
-                <shell:ApplicationBarMenuItem x:Name="MoreAppsMenuItem" Text="more apps" Click="MoreAppsMenuItem_Click" />
+                <shell:ApplicationBarMenuItem Text="more apps" Click="MoreAppsMenuItem_Click" />
                 <shell:ApplicationBarMenuItem Text="Settings" Click="ApplicationBarSettingsMenuItem_OnClick"/>
                 <shell:ApplicationBarMenuItem Text="About" Click="ApplicationBarAboutMenuItem_OnClick"/>
             </shell:ApplicationBar.MenuItems>

@@ -38,6 +38,9 @@ namespace TodayILearned
         {
             base.OnNavigatedTo(e);
 
+            bool locked = AppSettings.OrientationLock;
+            SetOrientation(locked);
+
             if (App.FontSizeChanged)
             {
                 LoadData();
@@ -114,6 +117,13 @@ namespace TodayILearned
         {
             var buy = new BuyThisAppTask();
             buy.ShowAfterThreshold();
+        }
+
+        private void SetOrientation(bool locked)
+        {
+            this.SupportedOrientations = locked ? SupportedPageOrientation.Portrait : SupportedPageOrientation.PortraitOrLandscape;
+            string text = locked ? "unlock orientation" : "lock orientation";
+            ((ApplicationBarMenuItem)ApplicationBar.MenuItems[0]).Text = text;
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -255,6 +265,13 @@ namespace TodayILearned
             Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.Navigate(new Uri("/SearchPage.xaml", UriKind.Relative)));
         }
 
+        private void ApplicationBarOrientationMenuItem_OnClick(object sender, EventArgs e)
+        {
+            bool locked = !AppSettings.OrientationLock;
+            AppSettings.OrientationLock = locked;
+            SetOrientation(locked);
+        }
+
         private void ApplicationBarRateMenuItem_OnClick(object sender, EventArgs e)
         {
             try
@@ -265,18 +282,6 @@ namespace TodayILearned
             catch
             {
                 // prevent exceptions from double-click
-            }
-        }
-
-        private void ApplicationBarDisableTheAdsMenuItem_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                var task = new MarketplaceDetailTask { ContentIdentifier = "9558e8d2-08b9-4464-9a40-5b27e25a3ced" };
-                task.Show();
-            }
-            catch
-            {
             }
         }
 
