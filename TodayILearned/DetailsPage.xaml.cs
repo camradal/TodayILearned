@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Net;
-using System.Windows;
 using System.Windows.Navigation;
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
-using TodayILearned.Resources;
+using TodayILearned.Utilities;
 using Utilities;
 
 namespace TodayILearned
@@ -36,7 +37,22 @@ namespace TodayILearned
             }
         }
 
+        private void SetOrientation(bool locked)
+        {
+            this.SupportedOrientations = locked ? SupportedPageOrientation.Portrait : SupportedPageOrientation.PortraitOrLandscape;
+            string text = locked ? "unlock orientation" : "lock orientation";
+            ((ApplicationBarMenuItem)ApplicationBar.MenuItems[0]).Text = text;
+        }
+
         #region Navigation
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            bool locked = AppSettings.OrientationLock;
+            SetOrientation(locked);
+        }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
@@ -81,13 +97,13 @@ namespace TodayILearned
         private void ApplicationBarIconButton_Click_Prev(object sender, EventArgs e)
         {
             if (App.ViewModel == null) return;
-            if (App.ViewModel.Items == null) return;
+            if (App.ViewModel.NavigationCollection == null) return;
             if (App.ViewModel.Item == null) return;
 
-            int index = App.ViewModel.Items.IndexOf(App.ViewModel.Item) - 1;
-            if (index >= 0 && index < App.ViewModel.Items.Count)
+            int index = App.ViewModel.NavigationCollection.IndexOf(App.ViewModel.Item) - 1;
+            if (index >= 0 && index < App.ViewModel.NavigationCollection.Count)
             {
-                App.ViewModel.Item = App.ViewModel.Items[index];
+                App.ViewModel.Item = App.ViewModel.NavigationCollection[index];
                 this.DataContext = App.ViewModel.Item;
                 string decodedUri = HttpUtility.HtmlDecode(App.ViewModel.Item.Url);
                 webBrowser1.Source = new Uri(decodedUri, UriKind.Absolute);
@@ -97,13 +113,13 @@ namespace TodayILearned
         private void ApplicationBarIconButton_Click_Next(object sender, EventArgs e)
         {
             if (App.ViewModel == null) return;
-            if (App.ViewModel.Items == null) return;
+            if (App.ViewModel.NavigationCollection == null) return;
             if (App.ViewModel.Item == null) return;
 
-            int index = App.ViewModel.Items.IndexOf(App.ViewModel.Item) + 1;
-            if (index >= 0 && index < App.ViewModel.Items.Count)
+            int index = App.ViewModel.NavigationCollection.IndexOf(App.ViewModel.Item) + 1;
+            if (index >= 0 && index < App.ViewModel.NavigationCollection.Count)
             {
-                App.ViewModel.Item = App.ViewModel.Items[index];
+                App.ViewModel.Item = App.ViewModel.NavigationCollection[index];
                 this.DataContext = App.ViewModel.Item;
                 string decodedUri = HttpUtility.HtmlDecode(App.ViewModel.Item.Url);
                 webBrowser1.Source = new Uri(decodedUri, UriKind.Absolute);
@@ -140,6 +156,13 @@ namespace TodayILearned
             GlobalLoading.Instance.SetTimedText("Added to favorites...");
             App.ViewModel.AddFavorite(model);
             App.ViewModel.SaveFavorites();
+        }
+
+        private void ApplicationBarOrientationMenuItem_OnClick(object sender, EventArgs e)
+        {
+            bool locked = !AppSettings.OrientationLock;
+            AppSettings.OrientationLock = locked;
+            SetOrientation(locked);
         }
 
         private void ApplicationBarMenuItem_OnClick_OpenInIE(object sender, EventArgs e)

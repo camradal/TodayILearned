@@ -15,6 +15,7 @@ namespace TodayILearned.Core
     {
         private volatile bool isInitialized;
         private volatile bool isLoading;
+        private volatile bool isSearching;
 
         private ItemViewModel item;
 
@@ -27,6 +28,8 @@ namespace TodayILearned.Core
         {
             this.Items = new ObservableCollection<ItemViewModel>();
             this.Favorites = new ObservableCollection<ItemViewModel>();
+            this.SearchItems = new ObservableCollection<ItemViewModel>();
+            this.NavigationCollection = this.Items;
         }
 
         public bool IsLoading
@@ -35,11 +38,19 @@ namespace TodayILearned.Core
             private set { isLoading = value; }
         }
 
+        public bool IsSearching
+        {
+            get { return isSearching; }
+            private set { isSearching = value; }
+        }
+
         public bool IsLoaded { get; private set; }
         public string LastItem { get; private set; }
 
         public ObservableCollection<ItemViewModel> Items { get; private set; }
         public ObservableCollection<ItemViewModel> Favorites { get; private set; }
+        public ObservableCollection<ItemViewModel> SearchItems { get; private set; }
+        public ObservableCollection<ItemViewModel> NavigationCollection { get; set; } 
 
         public ItemViewModel Item
         {
@@ -58,7 +69,7 @@ namespace TodayILearned.Core
 
         public void LoadData(string lastItem)
         {
-            if (isLoading)
+            if (IsLoading)
                 return;
 
             IsLoading = true;
@@ -74,8 +85,8 @@ namespace TodayILearned.Core
             }
             var uri = new Uri(uriString);
             var client = new GZipWebClient();
-            client.DownloadStringAsync(uri);
             client.DownloadStringCompleted += client_DownloadStringCompleted;
+            client.DownloadStringAsync(uri);
         }
 
         private void client_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -83,7 +94,9 @@ namespace TodayILearned.Core
             try
             {
                 var result = JObject.Parse(e.Result);
-                foreach (ItemViewModel model in Serializer.GetItems(result))
+                var newItems = Serializer.GetItems(result);
+                var uniqueItems = newItems.Except(this.Items);
+                foreach (ItemViewModel model in uniqueItems)
                 {
                     this.Items.Add(model);
                 }
@@ -111,6 +124,59 @@ namespace TodayILearned.Core
                     isInitialized = true;
                     OnInitialized();
                 }
+            }
+        }
+
+        public void Search(string term)
+        {
+            Search(term, "");
+        }
+
+        public void Search(string term, string lastItem)
+        {
+            if (IsSearching)
+                return;
+
+            IsSearching = true;
+            if (BeginLoading != null)
+            {
+                BeginLoading();
+            }
+
+            string uriString = "http://www.reddit.com/r/todayilearned/search.json?sort=relevance&restrict_sr=on&t=all&q=" + term;
+            if (!string.IsNullOrEmpty(lastItem))
+            {
+                uriString += "&after=" + lastItem;
+            }
+            else
+            {
+                this.SearchItems.Clear();                
+            }
+
+            var uri = new Uri(uriString);
+            var client = new GZipWebClient();
+            client.DownloadStringCompleted += client_DownloadSearchStringCompleted;
+            client.DownloadStringAsync(uri);
+        }
+
+        private void client_DownloadSearchStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            try
+            {
+                var result = JObject.Parse(e.Result);
+                foreach (ItemViewModel model in Serializer.GetItems(result))
+                {
+                    this.SearchItems.Add(model);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (OnError != null) OnError(ex);
+            }
+            finally
+            {
+                IsSearching = false;
+                if (OnLoaded != null) OnLoaded();
             }
         }
 

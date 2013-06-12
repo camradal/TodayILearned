@@ -58,13 +58,11 @@ namespace TodayILearned
         {
             try
             {
-                MarketplaceDetailTask task = new MarketplaceDetailTask();
-                task.ContentIdentifier = "60070dfd-ac08-4018-b6cf-9ccda9806158";
+                var task = new MarketplaceDetailTask { ContentIdentifier = "9558e8d2-08b9-4464-9a40-5b27e25a3ced" };
                 task.Show();
             }
             catch
             {
-                // double clicking might cause an error
             }
         }
 

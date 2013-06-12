@@ -313,6 +313,15 @@ namespace TodayILearned.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SEARCH.
+        /// </summary>
+        public static string PageTitleSearch {
+            get {
+                return ResourceManager.GetString("PageTitleSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to settings.
         /// </summary>
         public static string PageTitleSettings {

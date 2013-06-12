@@ -20,6 +20,7 @@ namespace TodayILearned.Utilities
         private const string DisplayFontSizeKeyName = "DisplayFontSize";
         private const string ShowTileBackKeyName = "ShowTileBack";
         private const string BrowserSelectionKeyName = "BrowserSelection";
+        private const string OrientationLockKeyName = "OrientationLock";
 
         private const int NumberOfStartsDefault = 0;
         private const bool FirstStartDefault = false;
@@ -27,8 +28,9 @@ namespace TodayILearned.Utilities
         private const string ContentLanguageDefault = "en";
         private const bool LiveTileDisabledDefault = false;
         private const int DisplayFontSizeDefault = 0;
-        private const bool ShowTileBackDefault = true;
+        private const bool ShowTileBackDefault = false;
         private const bool BrowserSelectionDefault = false;
+        private const bool OrientationLockDefault = false;
 
         #endregion
 
@@ -168,6 +170,21 @@ namespace TodayILearned.Utilities
             set
             {
                 if (AddOrUpdateValue(BrowserSelectionKeyName, value))
+                {
+                    Save();
+                }
+            }
+        }
+
+        public static bool OrientationLock
+        {
+            get
+            {
+                return GetValueOrDefault<bool>(OrientationLockKeyName, OrientationLockDefault);
+            }
+            set
+            {
+                if (AddOrUpdateValue(OrientationLockKeyName, value))
                 {
                     Save();
                 }

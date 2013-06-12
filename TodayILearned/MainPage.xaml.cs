@@ -33,6 +33,9 @@ namespace TodayILearned
         {
             base.OnNavigatedTo(e);
 
+            bool locked = AppSettings.OrientationLock;
+            SetOrientation(locked);
+
             if (App.FontSizeChanged)
             {
                 LoadData();
@@ -105,6 +108,13 @@ namespace TodayILearned
             rate.ShowAfterThreshold();
         }
 
+        private void SetOrientation(bool locked)
+        {
+            this.SupportedOrientations = locked ? SupportedPageOrientation.Portrait : SupportedPageOrientation.PortraitOrLandscape;
+            string text = locked ? "unlock orientation" : "lock orientation";
+            ((ApplicationBarMenuItem)ApplicationBar.MenuItems[0]).Text = text;
+        }
+
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var listBox = (LongListSelector)sender;
@@ -121,6 +131,12 @@ namespace TodayILearned
 
             root.DataContext = selectedItem;
             App.ViewModel.Item = selectedItem;
+
+            var item = (PivotItem)this.MainPivot.SelectedItem;
+            if ((string)item.Header == "new")
+                App.ViewModel.NavigationCollection = App.ViewModel.Items;
+            else
+                App.ViewModel.NavigationCollection = App.ViewModel.Favorites;
 
             if (AppSettings.BrowserSelection)
             {
@@ -155,6 +171,8 @@ namespace TodayILearned
 
             if (selected == "share...")
             {
+                App.ViewModel.Item = model;
+
                 var uri = new Uri("/SharePage.xaml", UriKind.Relative);
                 Dispatcher.BeginInvoke(() =>
                 {
@@ -229,6 +247,18 @@ namespace TodayILearned
             if (firstItem == null) return;
 
             this.AllListBox.ScrollTo(firstItem);
+        }
+
+        private void ApplicationBarIconSearchButton_OnClick(object sender, EventArgs e)
+        {
+            Deployment.Current.Dispatcher.BeginInvoke(() => NavigationService.Navigate(new Uri("/SearchPage.xaml", UriKind.Relative)));
+        }
+
+        private void ApplicationBarOrientationMenuItem_OnClick(object sender, EventArgs e)
+        {
+            bool locked = !AppSettings.OrientationLock;
+            AppSettings.OrientationLock = locked;
+            SetOrientation(locked);
         }
 
         private void ApplicationBarRateMenuItem_OnClick(object sender, EventArgs e)

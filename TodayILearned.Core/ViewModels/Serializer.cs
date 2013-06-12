@@ -29,7 +29,7 @@ namespace TodayILearned.Core
             return items;
         }
 
-        public static IEnumerable<ItemViewModel> GetItems(JObject json)
+        public static IList<ItemViewModel> GetItems(JObject json)
         {
             var items = new List<ItemViewModel>();
             JToken tokens = json["data"]["children"];
@@ -59,6 +59,11 @@ namespace TodayILearned.Core
                 if (value.StartsWith("that", StringComparison.OrdinalIgnoreCase))
                 {
                     value = value.Substring("that".Length);
+                    value = value.TrimStart(new[] { ' ', '-', '.', ':', ';', ',', '[', ']' });
+                }
+                if (value.StartsWith("of ", StringComparison.OrdinalIgnoreCase))
+                {
+                    value = value.Substring("of ".Length);
                     value = value.TrimStart(new[] { ' ', '-', '.', ':', ';', ',', '[', ']' });
                 }
             }
