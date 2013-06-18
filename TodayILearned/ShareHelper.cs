@@ -1,4 +1,5 @@
 using System;
+using System.Windows;
 using Microsoft.Phone.Tasks;
 
 namespace TodayILearned
@@ -53,6 +54,15 @@ namespace TodayILearned
             catch (Exception)
             {
                 // fast-clicking can result in exception, so we just handle it
+            }
+        }
+
+        internal static void ShareViaClipBoard(ItemViewModel model)
+        {
+            string text = model.Title + "\n" + model.Url;
+            if (MessageBox.Show(text, "Copy to Clipboard?", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                Clipboard.SetText(text);
             }
         }
     }
