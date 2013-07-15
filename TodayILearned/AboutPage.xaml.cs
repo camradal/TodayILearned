@@ -27,6 +27,14 @@ namespace TodayILearned
                     },
                     new NewItem
                     {
+                        Version = "1.4",
+                        Description =
+                            "- Share via clipboard\n" +
+                            "- Important fix for settings getting reset\n" +
+                            "- Bug fixes"
+                    },
+                    new NewItem
+                    {
                         Version = "1.3",
                         Description =
                             "- Search functionality\n" +
@@ -34,7 +42,8 @@ namespace TodayILearned
                             "- Fix sharing using context menu\n" +
                             "- Fix duplicate facts displayed on the main screen\n" +
                             "- Fix navigation arrows on details screen"
-                    },new NewItem
+                    },
+                    new NewItem
                     {
                         Version = "1.2",
                         Description =
@@ -101,7 +110,7 @@ namespace TodayILearned
 
         private void ReadVersionFromManifest()
         {
-            versionText.Text = "1.3";
+            versionText.Text = "1.4";
         }
     }
 }

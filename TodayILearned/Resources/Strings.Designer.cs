@@ -439,6 +439,15 @@ namespace TodayILearned.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clipboard.
+        /// </summary>
+        public static string ShareClipboard {
+            get {
+                return ResourceManager.GetString("ShareClipboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string ShareEmail {
