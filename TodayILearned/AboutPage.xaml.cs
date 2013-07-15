@@ -30,6 +30,7 @@ namespace TodayILearned
                         Version = "1.4",
                         Description =
                             "- Share via clipboard\n" +
+                            "- Important fix for settings getting reset\n" +
                             "- Bug fixes"
                     },
                     new NewItem
@@ -110,7 +111,7 @@ namespace TodayILearned
 
         private void ReadVersionFromManifest()
         {
-            versionText.Text = "1.3";
+            versionText.Text = "1.4";
         }
     }
 }
