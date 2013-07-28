@@ -12,7 +12,6 @@ namespace TodayILearned.Utilities
         #region Variables
 
         private const string mutextName = "TodayILearnedMutex";
-        private static readonly IsolatedStorageSettings settings;
 
         private const string NumberOfStartsKeyName = "NumberOfStarts";
         private const string FirstStartKeyName = "FirstStart";
@@ -105,18 +104,6 @@ namespace TodayILearned.Utilities
 
         #endregion
 
-        #region Constructor
-
-        static AppSettings()
-        {
-            if (!System.ComponentModel.DesignerProperties.IsInDesignTool)
-            {
-                settings = IsolatedStorageSettings.ApplicationSettings;
-            }
-        }
-
-        #endregion
-
         #region Helper Methods
 
         /// <summary>
@@ -130,6 +117,7 @@ namespace TodayILearned.Utilities
                 mutex.WaitOne();
                 bool valueChanged = false;
 
+                var settings = IsolatedStorageSettings.ApplicationSettings;
                 if (settings.Contains(key))
                 {
                     if (settings[key] != value)
@@ -167,6 +155,7 @@ namespace TodayILearned.Utilities
                 mutex.WaitOne();
                 T value;
 
+                var settings = IsolatedStorageSettings.ApplicationSettings;
                 if (settings.Contains(key))
                 {
                     value = (T)settings[key];
