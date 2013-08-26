@@ -111,7 +111,7 @@ namespace TodayILearned.Utilities
         /// </summary>
         private static bool AddOrUpdateValue(string key, Object value)
         {
-            var mutex = new Mutex(false, mutextName);
+            var mutex = new Mutex(true, mutextName);
             try
             {
                 mutex.WaitOne();
@@ -149,7 +149,7 @@ namespace TodayILearned.Utilities
         /// </summary>
         private static T GetValueOrDefault<T>(string key, T defaultValue)
         {
-            var mutex = new Mutex(false, mutextName);
+            var mutex = new Mutex(true, mutextName);
             try
             {
                 mutex.WaitOne();
