@@ -57,7 +57,7 @@ namespace TodayILearned
         public App()
         {
             // Global handler for uncaught exceptions. 
-            BugSenseHandler.Instance.Init(this, "a971fc13");
+            BugSenseHandler.Instance.InitAndStartSession(this, "a971fc13");
 
             // Standard Silverlight initialization
             InitializeComponent();
@@ -99,7 +99,7 @@ namespace TodayILearned
                 }
                 else
                 {
-                    BugSenseHandler.Instance.LogError(ex);                    
+                    BugSenseHandler.Instance.SendException(ex);                    
                 }
             }
             else
