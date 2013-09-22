@@ -1,17 +1,12 @@
-﻿using System;
-
-using Android.App;
-using Android.Content;
-using Android.Runtime;
+﻿using Android.App;
+using Android.OS;
 using Android.Support.V4.App;
 using Android.Support.V4.View;
-using Android.Views;
-using Android.Widget;
-using Android.OS;
+
 
 using FragmentTransaction = Android.App.FragmentTransaction;
 
-namespace TodayILearned.Android
+namespace TodayILearned.AndroidApp
 {
     [Activity(Label = "Trivia Buff", MainLauncher = true, Icon = "@drawable/icon")]
     public class HomeActivity : FragmentActivity, ActionBar.ITabListener, ViewPager.IOnPageChangeListener

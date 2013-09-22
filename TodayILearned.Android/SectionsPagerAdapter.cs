@@ -1,6 +1,7 @@
 ﻿using Android.Support.V4.App;
 
-namespace TodayILearned.Android
+
+namespace TodayILearned.AndroidApp
 {
     class SectionsPagerAdapter : FragmentPagerAdapter
     {
