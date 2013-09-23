@@ -65,10 +65,12 @@ namespace TodayILearned.AndroidApp
         private readonly RotateAnimation _rotateAnimation = null;
         private View _pendingItemView = null;
         private List<ItemViewModel> _newItems;
+        private string _dataUrl;
 
-        public EndlessTriviaItemAdapter(IListAdapter wrapped, string after) : base(wrapped)
+        public EndlessTriviaItemAdapter(IListAdapter wrapped, string after, string dataUrl) : base(wrapped)
         {
             _after = after;
+            _dataUrl = dataUrl;
 
             _rotateAnimation = new RotateAnimation(0f, 360f, Dimension.RelativeToSelf, 0.5f, Dimension.RelativeToSelf, 0.5f);
 
@@ -80,7 +82,7 @@ namespace TodayILearned.AndroidApp
 
         protected override async Task<bool> LoadData()
         {
-            var triviaTask = new WebClient().DownloadStringTaskAsync(string.Format("http://reddit.com/r/todayilearned.json?after={0}", _after));
+            var triviaTask = new WebClient().DownloadStringTaskAsync(string.Format(_dataUrl, _after));
 
             var result = JObject.Parse(await triviaTask);
             _newItems = Serializer.GetItems(result).ToList();

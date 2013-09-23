@@ -29,7 +29,7 @@ namespace TodayILearned.AndroidApp
             var lastItem = result["data"]["after"].ToString();
 
             _triviaItemAdapter = new TriviaItemAdapter(Activity, items.ToList());
-            ListAdapter = new EndlessTriviaItemAdapter(_triviaItemAdapter, lastItem);
+            ListAdapter = new EndlessTriviaItemAdapter(_triviaItemAdapter, lastItem, "http://reddit.com/r/todayilearned.json?after={0}");
             ListView.FastScrollEnabled = true;
         }
 
