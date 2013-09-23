@@ -6,6 +6,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using TodayILearned.Core;
@@ -36,8 +37,8 @@ namespace TodayILearned.AndroidApp
             var item = _triviaItemAdapter.GetItem(position);
             
             var intent = new Intent(Activity, typeof (TriviaDetailsActivity));
-            intent.PutExtra("url", item.Url);
-            intent.PutExtra("title", item.Title);
+            string json = JsonConvert.SerializeObject(item);
+            intent.PutExtra("json", json);
             
             StartActivity(intent);
         }

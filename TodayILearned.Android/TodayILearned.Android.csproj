@@ -97,6 +97,9 @@
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\Drawable\ic_popup_sync_1.png" />
+    <AndroidResource Include="Resources\Menu\DetailsMenu.xml" />
+    <AndroidResource Include="Resources\Drawable\ic_action_share.png" />
+    <AndroidResource Include="Resources\Drawable\ic_action_important.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
