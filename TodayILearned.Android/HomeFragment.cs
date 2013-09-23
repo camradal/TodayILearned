@@ -1,7 +1,10 @@
 ﻿using System.Linq;
 using System.Net;
 
+using Android.Content;
 using Android.OS;
+using Android.Views;
+using Android.Widget;
 
 using Newtonsoft.Json.Linq;
 
@@ -13,6 +16,8 @@ namespace TodayILearned.AndroidApp
 {
     internal class HomeFragment : ListFragment
     {
+        private TriviaItemAdapter _triviaItemAdapter;
+
         public override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -22,7 +27,19 @@ namespace TodayILearned.AndroidApp
             var items = Serializer.GetItems(result);
             var lastItem = result["data"]["after"].ToString();
 
-            ListAdapter = new EndlessTriviaItemAdapter(new TriviaItemAdapter(Activity, items.ToList()), lastItem);
+            _triviaItemAdapter = new TriviaItemAdapter(Activity, items.ToList());
+            ListAdapter = new EndlessTriviaItemAdapter(_triviaItemAdapter, lastItem);
+        }
+
+        public override void OnListItemClick(ListView l, View v, int position, long id)
+        {
+            var item = _triviaItemAdapter.GetItem(position);
+            
+            var intent = new Intent(Activity, typeof (TriviaDetailsActivity));
+            intent.PutExtra("url", item.Url);
+            intent.PutExtra("title", item.Title);
+            
+            StartActivity(intent);
         }
     }
 }

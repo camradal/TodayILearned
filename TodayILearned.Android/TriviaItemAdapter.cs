@@ -43,6 +43,7 @@ namespace TodayILearned.AndroidApp
 
         public override void AddAll(ICollection collection)
         {
+            base.AddAll(collection);
             items.AddRange(collection.Cast<ItemViewModel>());
         }
 
