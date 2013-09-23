@@ -54,7 +54,8 @@ namespace TodayILearned.AndroidApp
 
             view.FindViewById<TextView>(Resource.Id.Text1).Text = item.Title;
             view.FindViewById<TextView>(Resource.Id.Text2).Text = item.Domain;
-            view.FindViewById<ImageView>(Resource.Id.Image).SetUrlDrawable(item.Thumbnail, null, UrlImageViewHelper.UrlImageViewHelper.CACHE_DURATION_INFINITE);
+            view.FindViewById<ImageView>(Resource.Id.Image).SetUrlDrawable(item.Thumbnail, Resource.Drawable.ic_launcher,
+                                                            UrlImageViewHelper.UrlImageViewHelper.CACHE_DURATION_INFINITE);
             return view;
         }
     }

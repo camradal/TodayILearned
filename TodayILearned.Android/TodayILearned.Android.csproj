@@ -104,6 +104,7 @@
     <AndroidResource Include="Resources\Xml\searchable.xml" />
     <AndroidResource Include="Resources\Menu\MainMenu.xml" />
     <AndroidResource Include="Resources\Drawable\ic_action_search.png" />
+    <AndroidResource Include="Resources\Drawable\ic_launcher.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

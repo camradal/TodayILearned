@@ -10,7 +10,7 @@ using FragmentTransaction = Android.App.FragmentTransaction;
 
 namespace TodayILearned.AndroidApp
 {
-    [Activity(Label = "Trivia Buff", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Trivia Buff", MainLauncher = true, Icon = "@drawable/ic_launcher")]
     public class HomeActivity : FragmentActivity, ActionBar.ITabListener, ViewPager.IOnPageChangeListener
     {
         ViewPager pager;

@@ -20,7 +20,7 @@ using TodayILearned.Core;
 
 namespace TodayILearned.AndroidApp
 {
-    [Activity(Label = "Search")]
+    [Activity(Label = "Search", Icon = "@drawable/ic_launcher")]
     [IntentFilter(new[] { Intent.ActionSearch })]
     [MetaData("android.app.searchable", Resource = "@xml/searchable")]
     public class SearchActivity : ListActivity
