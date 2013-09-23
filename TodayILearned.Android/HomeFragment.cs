@@ -30,6 +30,7 @@ namespace TodayILearned.AndroidApp
 
             _triviaItemAdapter = new TriviaItemAdapter(Activity, items.ToList());
             ListAdapter = new EndlessTriviaItemAdapter(_triviaItemAdapter, lastItem);
+            ListView.FastScrollEnabled = true;
         }
 
         public override void OnListItemClick(ListView l, View v, int position, long id)
