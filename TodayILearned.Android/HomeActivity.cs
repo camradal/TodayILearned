@@ -1,8 +1,10 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Support.V4.App;
 using Android.Support.V4.View;
-
+using Android.Views;
+using Android.Widget;
 
 using FragmentTransaction = Android.App.FragmentTransaction;
 
@@ -42,10 +44,26 @@ namespace TodayILearned.AndroidApp
             }
         }
 
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.MainMenu, menu);
+
+            var searchManager = (SearchManager)GetSystemService(SearchService);
+            IMenuItem item = menu.FindItem(Resource.Id.action_search);
+            var searchView = (SearchView)item.ActionView;
+
+            var name = new ComponentName(this, "todayilearned.androidapp.SearchActivity");
+            var info = searchManager.GetSearchableInfo(name);
+            searchView.SetSearchableInfo(info);
+            searchView.SetIconifiedByDefault(false);
+
+            return base.OnCreateOptionsMenu(menu);
+        }
+
 
         public void OnTabReselected(ActionBar.Tab tab, FragmentTransaction ft)
         {
-            
+
         }
 
         public void OnTabSelected(ActionBar.Tab tab, FragmentTransaction ft)
@@ -58,18 +76,18 @@ namespace TodayILearned.AndroidApp
 
         public void OnTabUnselected(ActionBar.Tab tab, FragmentTransaction ft)
         {
-            
+
         }
 
 
         public void OnPageScrollStateChanged(int state)
         {
-            
+
         }
 
         public void OnPageScrolled(int position, float positionOffset, int positionOffsetPixels)
         {
-            
+
         }
 
         public void OnPageSelected(int position)

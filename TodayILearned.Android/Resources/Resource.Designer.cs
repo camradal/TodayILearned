@@ -48,13 +48,16 @@ namespace TodayILearned.AndroidApp
 			public const int ic_action_important = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int ic_action_share = 2130837505;
+			public const int ic_action_search = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int ic_popup_sync_1 = 2130837506;
+			public const int ic_action_share = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int Icon = 2130837507;
+			public const int ic_popup_sync_1 = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int Icon = 2130837508;
 			
 			static Drawable()
 			{
@@ -69,38 +72,41 @@ namespace TodayILearned.AndroidApp
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060004
-			public const int Image = 2131099652;
+			// aapt resource value: 0x7f070004
+			public const int Image = 2131165188;
 			
-			// aapt resource value: 0x7f060003
-			public const int Text = 2131099651;
+			// aapt resource value: 0x7f070003
+			public const int Text = 2131165187;
 			
-			// aapt resource value: 0x7f060005
-			public const int Text1 = 2131099653;
+			// aapt resource value: 0x7f070005
+			public const int Text1 = 2131165189;
 			
-			// aapt resource value: 0x7f060006
-			public const int Text2 = 2131099654;
+			// aapt resource value: 0x7f070006
+			public const int Text2 = 2131165190;
 			
-			// aapt resource value: 0x7f060008
-			public const int addFavourites = 2131099656;
+			// aapt resource value: 0x7f07000b
+			public const int action_search = 2131165195;
 			
-			// aapt resource value: 0x7f060000
-			public const int pager = 2131099648;
+			// aapt resource value: 0x7f070008
+			public const int addFavourites = 2131165192;
 			
-			// aapt resource value: 0x7f060009
-			public const int removeFavourites = 2131099657;
+			// aapt resource value: 0x7f070000
+			public const int pager = 2131165184;
 			
-			// aapt resource value: 0x7f06000a
-			public const int share = 2131099658;
+			// aapt resource value: 0x7f070009
+			public const int removeFavourites = 2131165193;
 			
-			// aapt resource value: 0x7f060007
-			public const int throbber = 2131099655;
+			// aapt resource value: 0x7f07000a
+			public const int share = 2131165194;
 			
-			// aapt resource value: 0x7f060001
-			public const int titleTextView = 2131099649;
+			// aapt resource value: 0x7f070007
+			public const int throbber = 2131165191;
 			
-			// aapt resource value: 0x7f060002
-			public const int webView = 2131099650;
+			// aapt resource value: 0x7f070001
+			public const int titleTextView = 2131165185;
+			
+			// aapt resource value: 0x7f070002
+			public const int webView = 2131165186;
 			
 			static Id()
 			{
@@ -137,8 +143,11 @@ namespace TodayILearned.AndroidApp
 		public partial class Menu
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int DetailsMenu = 2131034112;
+			// aapt resource value: 0x7f060000
+			public const int DetailsMenu = 2131099648;
+			
+			// aapt resource value: 0x7f060001
+			public const int MainMenu = 2131099649;
 			
 			static Menu()
 			{
@@ -153,11 +162,17 @@ namespace TodayILearned.AndroidApp
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int ApplicationName = 2130968577;
+			// aapt resource value: 0x7f050001
+			public const int ApplicationName = 2131034113;
 			
-			// aapt resource value: 0x7f040000
-			public const int Hello = 2130968576;
+			// aapt resource value: 0x7f050000
+			public const int Hello = 2131034112;
+			
+			// aapt resource value: 0x7f050002
+			public const int Label = 2131034114;
+			
+			// aapt resource value: 0x7f050003
+			public const int hint = 2131034115;
 			
 			static String()
 			{
@@ -165,6 +180,22 @@ namespace TodayILearned.AndroidApp
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Xml
+		{
+			
+			// aapt resource value: 0x7f040000
+			public const int searchable = 2130968576;
+			
+			static Xml()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Xml()
 			{
 			}
 		}
