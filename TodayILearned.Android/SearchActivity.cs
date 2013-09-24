@@ -32,19 +32,42 @@ namespace TodayILearned.AndroidApp
         {
             base.OnCreate(bundle);
 
+            RequestWindowFeature(WindowFeatures.IndeterminateProgress);
+
             if (Intent.Action == Intent.ActionSearch)
             {
-                var query = Intent.GetStringExtra(SearchManager.Query);
-                var triviaTask = new WebClient().DownloadStringTaskAsync(SearchUrl + query);
+                if (Utils.IsNetworkConnected(this))
+                {
+                    try
+                    {
+                        SetProgressBarIndeterminateVisibility(true);
+                        var query = Intent.GetStringExtra(SearchManager.Query);
+                        var triviaTask = new WebClient().DownloadStringTaskAsync(SearchUrl + query);
 
-                var result = JObject.Parse(await triviaTask);
-                var items = Serializer.GetItems(result);
-                var lastItem = result["data"]["after"].ToString();
+                        var result = JObject.Parse(await triviaTask);
+                        var items = Serializer.GetItems(result);
+                        var lastItem = result["data"]["after"].ToString();
 
-                _triviaItemAdapter = new TriviaItemAdapter(this, items.ToList());
-                ListAdapter = new EndlessTriviaItemAdapter(_triviaItemAdapter, lastItem, SearchUrl + query+"&after={0}");
-                ListView.FastScrollEnabled = true;
+                        _triviaItemAdapter = new TriviaItemAdapter(this, items.ToList());
+                        ListAdapter = new EndlessTriviaItemAdapter(_triviaItemAdapter, lastItem, SearchUrl + query + "&after={0}");
+                    }
+                    catch (Exception e)
+                    {
+                        Toast.MakeText(this, e.Message, ToastLength.Short).Show();
+                    }
+                }
+                else
+                {
+                    Toast.MakeText(this, "No network connection", ToastLength.Short).Show();
+                }
+                SetProgressBarIndeterminateVisibility(false);
             }
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+            ListView.FastScrollEnabled = true;
         }
 
         protected override void OnListItemClick(ListView l, View v, int position, long id)
@@ -57,6 +80,5 @@ namespace TodayILearned.AndroidApp
 
             StartActivity(intent);
         }
-
     }
 }

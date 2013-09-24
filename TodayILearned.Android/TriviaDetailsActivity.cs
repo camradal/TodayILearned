@@ -18,7 +18,7 @@ using File = Java.IO.File;
 
 namespace TodayILearned.AndroidApp
 {
-    [Activity(Label = "")]
+    [Activity(Label = "Trivia details", Icon = "@drawable/ic_launcher")]
     public class TriviaDetailsActivity : Activity
     {
         private ItemViewModel _trivia;
