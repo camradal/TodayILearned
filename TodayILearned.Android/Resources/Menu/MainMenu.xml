@@ -6,4 +6,10 @@
         android:icon="@drawable/ic_action_search"
         android:showAsAction="always"
         android:actionViewClass="android.widget.SearchView" />
+  <item android:id="@+id/action_buy"
+        android:title="Remove Ads"
+        android:showAsAction="ifRoom|withText"/>
+  <item android:id="@+id/action_settings"
+        android:title="Settings"
+        android:showAsAction="never"/>
 </menu>

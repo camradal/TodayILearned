@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Preferences;
 using Android.Support.V4.App;
 using Android.Support.V4.View;
 using Android.Views;
@@ -13,7 +14,7 @@ namespace TodayILearned.AndroidApp
     [Activity(Label = "Trivia Buff", MainLauncher = true, Icon = "@drawable/ic_launcher")]
     public class HomeActivity : FragmentActivity, ActionBar.ITabListener, ViewPager.IOnPageChangeListener
     {
-        ViewPager pager;
+        ViewPager _pager;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -21,10 +22,11 @@ namespace TodayILearned.AndroidApp
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
+            PreferenceManager.SetDefaultValues(this, Resource.Xml.preferences, false);
 
-            pager = FindViewById<ViewPager>(Resource.Id.pager);
-            pager.Adapter = new SectionsPagerAdapter(SupportFragmentManager);
-            pager.SetOnPageChangeListener(this);
+            _pager = FindViewById<ViewPager>(Resource.Id.pager);
+            _pager.Adapter = new SectionsPagerAdapter(SupportFragmentManager);
+            _pager.SetOnPageChangeListener(this);
 
             ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
             ActionBar.AddTab(ActionBar.NewTab().SetText("New").SetTabListener(this).SetTag("New"));
@@ -44,6 +46,7 @@ namespace TodayILearned.AndroidApp
             }
         }
 
+
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.MainMenu, menu);
@@ -60,6 +63,15 @@ namespace TodayILearned.AndroidApp
             return base.OnCreateOptionsMenu(menu);
         }
 
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            if (item.ItemId == Resource.Id.action_settings)
+            {
+                StartActivity(typeof(SettingsActivity));
+            }
+
+            return base.OnOptionsItemSelected(item);
+        }
 
         public void OnTabReselected(ActionBar.Tab tab, FragmentTransaction ft)
         {
@@ -68,9 +80,9 @@ namespace TodayILearned.AndroidApp
 
         public void OnTabSelected(ActionBar.Tab tab, FragmentTransaction ft)
         {
-            if (pager != null)
+            if (_pager != null)
             {
-                pager.CurrentItem = tab.Position;
+                _pager.CurrentItem = tab.Position;
             }
         }
 

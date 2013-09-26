@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 
 using Android.App;
+using Android.Preferences;
 using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
@@ -30,7 +31,7 @@ namespace TodayILearned.AndroidApp
             this.context = context;
             this.items = items;
         }
-        
+
         public override long GetItemId(int position)
         {
             return position;
@@ -52,8 +53,26 @@ namespace TodayILearned.AndroidApp
             var item = items[position];
             View view = convertView ?? context.LayoutInflater.Inflate(Resource.Layout.TriviaItem, null);
 
-            view.FindViewById<TextView>(Resource.Id.Text1).Text = item.Title;
-            view.FindViewById<TextView>(Resource.Id.Text2).Text = item.Domain;
+            var preferences = PreferenceManager.GetDefaultSharedPreferences(context);
+            var size = preferences.GetString("pref_size", "0");
+
+            var titleView = view.FindViewById<TextView>(Resource.Id.Text1);
+            var domainView = view.FindViewById<TextView>(Resource.Id.Text2);
+
+            if (size == "0")
+            {
+                titleView.SetTextAppearance(context, Android.Resource.Style.TextAppearanceSmall);
+                domainView.SetTextAppearance(context, Android.Resource.Style.TextAppearanceSmall);
+            }
+            else
+            {
+                titleView.SetTextAppearance(context, Android.Resource.Style.TextAppearanceMedium);
+                domainView.SetTextAppearance(context, Android.Resource.Style.TextAppearanceMedium);
+            }
+
+            titleView.Text = item.Title;
+            domainView.Text = item.Domain;
+
             view.FindViewById<ImageView>(Resource.Id.Image).SetUrlDrawable(item.Thumbnail, Resource.Drawable.ic_launcher,
                                                             UrlImageViewHelper.UrlImageViewHelper.CACHE_DURATION_INFINITE);
             return view;
@@ -68,7 +87,8 @@ namespace TodayILearned.AndroidApp
         private List<ItemViewModel> _newItems;
         private string _dataUrl;
 
-        public EndlessTriviaItemAdapter(IListAdapter wrapped, string after, string dataUrl) : base(wrapped)
+        public EndlessTriviaItemAdapter(IListAdapter wrapped, string after, string dataUrl)
+            : base(wrapped)
         {
             _after = after;
             _dataUrl = dataUrl;

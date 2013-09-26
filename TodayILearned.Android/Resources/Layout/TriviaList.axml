@@ -5,7 +5,8 @@
     android:layout_height="fill_parent">
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ad">
         <LinearLayout
             android:id="@+id/progress_container_id"
             android:layout_width="match_parent"
