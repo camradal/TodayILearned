@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
 
 using Android.Content;
 using Android.Net;
 using Android.OS;
+using Android.Provider;
 using Android.Views;
 using Android.Widget;
+
+using Com.Google.Ads;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -21,6 +27,11 @@ namespace TodayILearned.AndroidApp
     {
         private TriviaItemAdapter _triviaItemAdapter;
         private bool _error;
+        private AdView _adView;
+
+        private const int InternalEmptyID = 0x00ff0001;
+        private const int InternalProgressContainerID = 0x00ff0002;
+        private const int InternalListContainerID = 0x00ff0003;
 
         public override async void OnCreate(Bundle savedInstanceState)
         {
@@ -30,7 +41,7 @@ namespace TodayILearned.AndroidApp
                 try
                 {
                     var triviaTask = new WebClient().DownloadStringTaskAsync("http://reddit.com/r/todayilearned.json");
-
+                    await Task.Delay(5000);
                     var result = JObject.Parse(await triviaTask);
                     var items = Serializer.GetItems(result);
                     var lastItem = result["data"]["after"].ToString();
@@ -51,6 +62,36 @@ namespace TodayILearned.AndroidApp
             }
         }
 
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            var view = inflater.Inflate(Resource.Layout.TriviaList, container, false);
+
+
+            //http://stackoverflow.com/a/12145683/239438
+            view.FindViewById(Resource.Id.empty_id).Id = InternalEmptyID;
+            view.FindViewById(Resource.Id.progress_container_id).Id = InternalProgressContainerID;
+            view.FindViewById(Resource.Id.list_container_id).Id = InternalListContainerID;
+
+            return view;
+        }
+
+        public override void OnViewCreated(View view, Bundle savedInstanceState)
+        {
+            base.OnViewCreated(view, savedInstanceState);
+            _adView = view.FindViewById<AdView>(Resource.Id.ad);
+
+            var adRequest = new AdRequest();
+
+#if DEBUG
+            adRequest.SetTesting(true);
+            adRequest.AddTestDevice(GetDeviceId());
+            adRequest.AddTestDevice(AdRequest.TestEmulator);
+#endif
+
+            // Start loading the ad in the background.
+            _adView.LoadAd(adRequest);
+        }
+
         public override void OnStart()
         {
             base.OnStart();
@@ -63,6 +104,14 @@ namespace TodayILearned.AndroidApp
             ListView.FastScrollEnabled = true;
         }
 
+        public override void OnDestroy()
+        {
+            // Destroy the AdView.
+            _adView.Destroy();
+
+            base.OnDestroy();
+        }
+
         public override void OnListItemClick(ListView l, View v, int position, long id)
         {
             var item = _triviaItemAdapter.GetItem(position);
@@ -72,6 +121,29 @@ namespace TodayILearned.AndroidApp
             intent.PutExtra("json", json);
 
             StartActivity(intent);
+        }
+
+        public string GetDeviceId()
+        {
+            String id = Settings.Secure.GetString(Activity.ContentResolver, Settings.Secure.AndroidId);
+
+            return CalculateMD5Hash(id);
+        }
+
+        public string CalculateMD5Hash(string input)
+        {
+            // step 1, calculate MD5 hash from input
+            var md5 = MD5.Create();
+            var inputBytes = Encoding.ASCII.GetBytes(input);
+            var hash = md5.ComputeHash(inputBytes);
+
+            // step 2, convert byte array to hex string
+            var sb = new StringBuilder();
+            foreach (byte t in hash)
+            {
+                sb.Append(t.ToString("X2"));
+            }
+            return sb.ToString();
         }
     }
 
