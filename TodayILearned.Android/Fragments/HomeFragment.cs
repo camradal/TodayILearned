@@ -145,6 +145,11 @@ namespace TodayILearned.AndroidApp
             }
             return sb.ToString();
         }
+
+        public void HideAd()
+        {
+            _adView.Visibility = ViewStates.Gone;
+        }
     }
 
     class Utils

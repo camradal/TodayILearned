@@ -1,4 +1,7 @@
-﻿using Android.App;
+﻿using System;
+using System.Linq;
+
+using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Preferences;
@@ -7,6 +10,10 @@ using Android.Support.V4.View;
 using Android.Views;
 using Android.Widget;
 
+using Xamarin.InAppBilling;
+using Xamarin.InAppBilling.Model;
+using Xamarin.InAppBilling.Utilities;
+
 using FragmentTransaction = Android.App.FragmentTransaction;
 
 namespace TodayILearned.AndroidApp
@@ -14,7 +21,21 @@ namespace TodayILearned.AndroidApp
     [Activity(Label = "Trivia Buff", MainLauncher = true, Icon = "@drawable/ic_launcher")]
     public class HomeActivity : FragmentActivity, ActionBar.ITabListener, ViewPager.IOnPageChangeListener
     {
+        /// <summary>
+        /// Replace with public key from android developer console.
+        /// </summary>
+        private const string PublicKey = "";
+
+        /// <summary>
+        /// Replace with the produck sku for removing ads from developer console.
+        /// </summary>
+        private const string RemoveAdsSku = "";
+
         ViewPager _pager;
+        private InAppBillingServiceConnection _serviceConnection;
+        private IInAppBillingHelper _billingHelper;
+
+        #region Lifecycle
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -31,6 +52,22 @@ namespace TodayILearned.AndroidApp
             ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
             ActionBar.AddTab(ActionBar.NewTab().SetText("New").SetTabListener(this).SetTag("New"));
             ActionBar.AddTab(ActionBar.NewTab().SetText("Favourites").SetTabListener(this).SetTag("Favourites"));
+
+
+            _serviceConnection = new InAppBillingServiceConnection(this, PublicKey);
+            _serviceConnection.OnConnected += HandleOnConnected;
+
+            _serviceConnection.Connect();
+        }
+
+        protected override void OnDestroy()
+        {
+            if (_serviceConnection != null)
+            {
+                _serviceConnection.Disconnected();
+            }
+
+            base.OnDestroy();
         }
 
         protected override void OnSaveInstanceState(Bundle outState)
@@ -46,6 +83,9 @@ namespace TodayILearned.AndroidApp
             }
         }
 
+        #endregion
+
+        #region Menu
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
@@ -70,8 +110,53 @@ namespace TodayILearned.AndroidApp
                 StartActivity(typeof(SettingsActivity));
             }
 
+            if (item.ItemId == Resource.Id.action_buy)
+            {
+                if (_billingHelper != null)
+                {
+                    _billingHelper.LaunchPurchaseFlow(RemoveAdsSku, ItemType.InApp, "");
+                }
+                else
+                {
+                    Toast.MakeText(this, "In app purchase not available", ToastLength.Long).Show();
+                }
+                ToggleAdIfNeeded();
+            }
+
             return base.OnOptionsItemSelected(item);
         }
+
+        #endregion
+
+        private void HandleOnConnected(object sender, EventArgs e)
+        {
+            _billingHelper = _serviceConnection.BillingHelper;
+
+            ToggleAdIfNeeded();
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            _billingHelper.HandleActivityResult(requestCode, resultCode, data);
+
+            ToggleAdIfNeeded();
+        }
+
+        private void ToggleAdIfNeeded()
+        {
+            if (_billingHelper != null)
+            {
+                var purchases = _billingHelper.GetPurchases(ItemType.InApp);
+                if (purchases.Any())
+                {
+                    var fragmentByTag = SupportFragmentManager.FindFragmentByTag("android:switcher:" + Resource.Id.pager + ":0");
+                    var fragment = (HomeFragment)fragmentByTag;
+                    fragment.HideAd();
+                }
+            }
+        }
+
+        #region TabListener
 
         public void OnTabReselected(ActionBar.Tab tab, FragmentTransaction ft)
         {
@@ -91,6 +176,9 @@ namespace TodayILearned.AndroidApp
 
         }
 
+        #endregion
+
+        #region ViewPager
 
         public void OnPageScrollStateChanged(int state)
         {
@@ -106,5 +194,8 @@ namespace TodayILearned.AndroidApp
         {
             ActionBar.SetSelectedNavigationItem(position);
         }
+
+        #endregion
+
     }
 }
