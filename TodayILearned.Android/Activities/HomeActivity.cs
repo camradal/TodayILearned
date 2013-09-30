@@ -24,12 +24,12 @@ namespace TodayILearned.AndroidApp
         /// <summary>
         /// Replace with public key from android developer console.
         /// </summary>
-        private const string PublicKey = "";
+        private const string PublicKey = @"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAi6xiVgzz7KOAmbzuNaLXpJQ/6AAXWAmORx7KYiXTt6HqgFwAM2S0zCoWLc9fgvI+nJfeCWSelcLsNgJ0kZkfD0Ckl3bp6/AmMwXv5RpRZNc9FQ+6jnq+z+TmVV+ZoreOA4NnoFFAZi4RZCMjJk99KOgCnz3gD3KOl40J5CYyggWyqSMFEJsbQgQcPS/lFoM/HdB7vQX+OAWPXUnSRzwRtDD3MuBY03Ioi3GH+SJqi7WiibAp02xL/tjHak4/DyJbRBhsx9tzzl7S9SPmyeLxCCawkEWlGJCNH9fiSTPfVuefZmAL9JgTv9Q83kH6wpBkIupy85oGI0LWulC0DEqRpwIDAQAB";
 
         /// <summary>
         /// Replace with the produck sku for removing ads from developer console.
         /// </summary>
-        private const string RemoveAdsSku = "";
+        private const string RemoveAdsSku = "removeads";
 
         ViewPager _pager;
         private InAppBillingServiceConnection _serviceConnection;
@@ -56,6 +56,14 @@ namespace TodayILearned.AndroidApp
 
             _serviceConnection = new InAppBillingServiceConnection(this, PublicKey);
             _serviceConnection.OnConnected += HandleOnConnected;
+            _serviceConnection.OnMessage += (sender, message) =>
+            {
+                if (message.Level > 0)
+                {
+                    Toast.MakeText(this, string.Format("{0} Level {1}", message.Text, message.Level), ToastLength.Long)
+                                .Show();
+                }
+            };
 
             _serviceConnection.Connect();
         }
@@ -98,7 +106,7 @@ namespace TodayILearned.AndroidApp
             var name = new ComponentName(this, "todayilearned.androidapp.SearchActivity");
             var info = searchManager.GetSearchableInfo(name);
             searchView.SetSearchableInfo(info);
-            searchView.SetIconifiedByDefault(false);
+            searchView.SetIconifiedByDefault(true);
 
             return base.OnCreateOptionsMenu(menu);
         }
@@ -132,14 +140,26 @@ namespace TodayILearned.AndroidApp
         {
             _billingHelper = _serviceConnection.BillingHelper;
 
+            if (_billingHelper != null)
+            {
+                Toast.MakeText(this, "Connected to in app billing service", ToastLength.Short).Show();
+            }
+            else
+            {
+                Toast.MakeText(this, "Connected to in app billing service but helper is null", ToastLength.Short).Show();
+            }
+
             ToggleAdIfNeeded();
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
-            _billingHelper.HandleActivityResult(requestCode, resultCode, data);
+            if (_billingHelper != null)
+            {
+                _billingHelper.HandleActivityResult(requestCode, resultCode, data);
 
-            ToggleAdIfNeeded();
+                ToggleAdIfNeeded();
+            }
         }
 
         private void ToggleAdIfNeeded()

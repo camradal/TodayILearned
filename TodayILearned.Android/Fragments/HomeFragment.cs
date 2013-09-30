@@ -28,6 +28,7 @@ namespace TodayILearned.AndroidApp
         private TriviaItemAdapter _triviaItemAdapter;
         private bool _error;
         private AdView _adView;
+        private string _message;
 
         private const int InternalEmptyID = 0x00ff0001;
         private const int InternalProgressContainerID = 0x00ff0002;
@@ -36,12 +37,13 @@ namespace TodayILearned.AndroidApp
         public override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            RetainInstance = true;
             if (Utils.IsNetworkConnected(Activity))
             {
                 try
                 {
                     var triviaTask = new WebClient().DownloadStringTaskAsync("http://reddit.com/r/todayilearned.json");
-                    await Task.Delay(5000);
+                    
                     var result = JObject.Parse(await triviaTask);
                     var items = Serializer.GetItems(result);
                     var lastItem = result["data"]["after"].ToString();
@@ -52,13 +54,13 @@ namespace TodayILearned.AndroidApp
                 catch (Exception e)
                 {
                     _error = true;
-                    Toast.MakeText(Activity, e.Message, ToastLength.Short).Show();
+                    _message = e.Message;
                 }
             }
             else
             {
                 _error = true;
-                Toast.MakeText(Activity, "No network connection", ToastLength.Short).Show();
+                _message = "No network connection";
             }
         }
 
@@ -99,6 +101,7 @@ namespace TodayILearned.AndroidApp
             if (_error)
             {
                 SetListShown(true);
+                Toast.MakeText(Activity, _message, ToastLength.Short).Show();
             }
 
             ListView.FastScrollEnabled = true;

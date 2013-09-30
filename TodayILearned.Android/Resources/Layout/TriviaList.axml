@@ -39,7 +39,7 @@
         android:id="@+id/ad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        ads:adUnitId="ca-app-pub-2989550502397649/6645935818"
+        ads:adUnitId="ca-app-pub-5809993124040479/4822559543"
         ads:adSize="BANNER"
         android:layout_alignParentBottom="true" />
 </RelativeLayout>
