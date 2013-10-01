@@ -31,7 +31,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -45,7 +44,6 @@
     <AndroidLinkMode>Full</AndroidLinkMode>
     <AndroidLinkSkip />
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
-    <BundleAssemblies>False</BundleAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AdMob">
@@ -54,10 +52,6 @@
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Android.Support.v4" />
     <Reference Include="mscorlib" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Components\json.net-4.5.11\lib\android\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -65,8 +59,8 @@
     <Reference Include="UrlImageViewHelper">
       <HintPath>lib\UrlImageViewHelper.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.InAppBilling">
-      <HintPath>lib\Xamarin.InAppBilling.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Components\json.net-4.5.11\lib\android\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -129,8 +123,9 @@
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">
-      <Visible>False</Visible>
+      <InstallationInProgress>False</InstallationInProgress>
       <Version>4.5.11</Version>
+      <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
@@ -141,4 +136,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <ProjectReference Include="..\Xamarin.InAppBilling\Xamarin.InAppBilling.csproj">
+      <Project>{E540E876-CCC3-4F41-880F-8ACD7221058D}</Project>
+      <Name>Xamarin.InAppBilling</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

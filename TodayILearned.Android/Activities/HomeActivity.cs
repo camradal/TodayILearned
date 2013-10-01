@@ -53,18 +53,8 @@ namespace TodayILearned.AndroidApp
             ActionBar.AddTab(ActionBar.NewTab().SetText("New").SetTabListener(this).SetTag("New"));
             ActionBar.AddTab(ActionBar.NewTab().SetText("Favourites").SetTabListener(this).SetTag("Favourites"));
 
-
             _serviceConnection = new InAppBillingServiceConnection(this, PublicKey);
             _serviceConnection.OnConnected += HandleOnConnected;
-            _serviceConnection.OnMessage += (sender, message) =>
-            {
-                if (message.Level > 0)
-                {
-                    Toast.MakeText(this, string.Format("{0} Level {1}", message.Text, message.Level), ToastLength.Long)
-                                .Show();
-                }
-            };
-
             _serviceConnection.Connect();
         }
 
