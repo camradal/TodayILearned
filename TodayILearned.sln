@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodayILearned.LiveTileSched
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGIS.GZipWebClient", "SharpGIS.GZipWebClient\SharpGIS.GZipWebClient.csproj", "{D0B5895E-4CFB-4EB9-8C22-7622ACD8CAEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodayILearned.Android", "TodayILearned.Android\TodayILearned.Android.csproj", "{C907F29F-ACB0-446E-BEA6-03AF3CF04245}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,12 +33,6 @@ Global
 		{D0B5895E-4CFB-4EB9-8C22-7622ACD8CAEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0B5895E-4CFB-4EB9-8C22-7622ACD8CAEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0B5895E-4CFB-4EB9-8C22-7622ACD8CAEB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C907F29F-ACB0-446E-BEA6-03AF3CF04245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C907F29F-ACB0-446E-BEA6-03AF3CF04245}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C907F29F-ACB0-446E-BEA6-03AF3CF04245}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{C907F29F-ACB0-446E-BEA6-03AF3CF04245}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C907F29F-ACB0-446E-BEA6-03AF3CF04245}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C907F29F-ACB0-446E-BEA6-03AF3CF04245}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
