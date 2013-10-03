@@ -103,8 +103,6 @@ namespace TodayILearned.AndroidApp
                 SetListShown(true);
                 Toast.MakeText(Activity, _message, ToastLength.Short).Show();
             }
-
-            ListView.FastScrollEnabled = true;
         }
 
         public override void OnDestroy()

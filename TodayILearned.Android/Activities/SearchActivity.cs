@@ -67,7 +67,6 @@ namespace TodayILearned.AndroidApp
         protected override void OnStart()
         {
             base.OnStart();
-            ListView.FastScrollEnabled = true;
         }
 
         protected override void OnListItemClick(ListView l, View v, int position, long id)
