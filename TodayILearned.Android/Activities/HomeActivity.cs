@@ -51,7 +51,7 @@ namespace TodayILearned.AndroidApp
 
             ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
             ActionBar.AddTab(ActionBar.NewTab().SetText("New").SetTabListener(this).SetTag("New"));
-            ActionBar.AddTab(ActionBar.NewTab().SetText("Favourites").SetTabListener(this).SetTag("Favourites"));
+            ActionBar.AddTab(ActionBar.NewTab().SetText("Favorites").SetTabListener(this).SetTag("Favorites"));
 
             _serviceConnection = new InAppBillingServiceConnection(this, PublicKey);
             _serviceConnection.OnConnected += HandleOnConnected;

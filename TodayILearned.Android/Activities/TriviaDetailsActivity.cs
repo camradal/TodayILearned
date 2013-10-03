@@ -86,7 +86,7 @@ namespace TodayILearned.AndroidApp
                 }
 
                 InvalidateOptionsMenu();
-                Toast.MakeText(this, "Added to favourites", ToastLength.Short).Show();
+                Toast.MakeText(this, "Added to favorites", ToastLength.Short).Show();
             }
 
             if (item.ItemId == Resource.Id.removeFavourites)
@@ -95,7 +95,7 @@ namespace TodayILearned.AndroidApp
                 file.Delete();
 
                 InvalidateOptionsMenu();
-                Toast.MakeText(this, "Removed from favourites", ToastLength.Short).Show();
+                Toast.MakeText(this, "Removed from favorites", ToastLength.Short).Show();
             }
 
             return base.OnOptionsItemSelected(item);

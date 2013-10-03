@@ -4,13 +4,13 @@
       android:id="@+id/addFavourites"
       android:showAsAction="always"
       android:icon="@drawable/ic_action_important"
-      android:title="Add to favourites">
+      android:title="Add to favorites">
   </item>
   <item
       android:id="@+id/removeFavourites"
       android:showAsAction="always"
       android:icon="@drawable/ic_action_important"
-      android:title="Remove from favourites"
+      android:title="Remove from favorites"
       android:visible="false">
   </item>
   <item

@@ -7,7 +7,7 @@
         android:showAsAction="always|collapseActionView"
         android:actionViewClass="android.widget.SearchView" />
   <item android:id="@+id/action_buy"
-        android:title="Remove Ads"
+        android:title="Remove ads"
         android:showAsAction="never"/>
   <item android:id="@+id/action_settings"
         android:title="Settings"
