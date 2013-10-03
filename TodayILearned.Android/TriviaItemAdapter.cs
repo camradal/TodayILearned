@@ -73,7 +73,8 @@ namespace TodayILearned.AndroidApp
             titleView.Text = item.Title;
             domainView.Text = item.Domain;
 
-            view.FindViewById<ImageView>(Resource.Id.Image).SetUrlDrawable(item.Thumbnail, Resource.Drawable.ic_launcher,
+            // TODO: replace with a nice looking placeholder
+            view.FindViewById<ImageView>(Resource.Id.Image).SetUrlDrawable(item.Thumbnail, null,
                                                             UrlImageViewHelper.UrlImageViewHelper.CACHE_DURATION_INFINITE);
             return view;
         }
