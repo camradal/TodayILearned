@@ -67,19 +67,16 @@ namespace TodayILearned.AndroidApp
 			public const int ic_action_important = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int ic_action_search = 2130837505;
+			public const int ic_action_refresh = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int ic_action_share = 2130837506;
+			public const int ic_action_search = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int ic_launcher = 2130837507;
+			public const int ic_action_share = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int ic_popup_sync_1 = 2130837508;
-			
-			// aapt resource value: 0x7f020005
-			public const int Icon = 2130837509;
+			public const int ic_launcher = 2130837508;
 			
 			static Drawable()
 			{
