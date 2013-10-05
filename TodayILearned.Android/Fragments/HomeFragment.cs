@@ -91,7 +91,10 @@ namespace TodayILearned.AndroidApp
 #endif
 
             // Start loading the ad in the background.
-            _adView.LoadAd(adRequest);
+            if (((HomeActivity)Activity).AdsEnabled())
+            {
+                _adView.LoadAd(adRequest); 
+            }
         }
 
         public override void OnStart()
