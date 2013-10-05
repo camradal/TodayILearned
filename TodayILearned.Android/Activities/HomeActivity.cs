@@ -108,6 +108,9 @@ namespace TodayILearned.AndroidApp
             searchView.SetSearchableInfo(info);
             searchView.SetIconifiedByDefault(true);
 
+            var buyMenu = menu.FindItem(Resource.Id.action_buy);
+            buyMenu.SetVisible(AdsEnabled());
+
             return base.OnCreateOptionsMenu(menu);
         }
 
@@ -150,6 +153,7 @@ namespace TodayILearned.AndroidApp
             }
 
             ToggleAdIfNeeded();
+            InvalidateOptionsMenu();
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
@@ -164,17 +168,12 @@ namespace TodayILearned.AndroidApp
 
         private void ToggleAdIfNeeded()
         {
-            if (_billingHelper != null)
+            var homeFragment =
+                SupportFragmentManager.FindFragmentByTag("android:switcher:" + Resource.Id.pager + ":0") as HomeFragment;
+
+            if (homeFragment != null && !AdsEnabled())
             {
-                var purchases = _billingHelper.GetPurchases(ItemType.InApp);
-                if (purchases.Any())
-                {
-                    var homeFragment = SupportFragmentManager.FindFragmentByTag("android:switcher:" + Resource.Id.pager + ":0") as HomeFragment;
-                    if (homeFragment != null)
-                    {
-                        homeFragment.HideAd();
-                    }
-                }
+                homeFragment.HideAd();
             }
         }
 
