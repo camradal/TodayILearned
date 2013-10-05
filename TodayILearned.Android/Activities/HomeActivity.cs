@@ -169,9 +169,11 @@ namespace TodayILearned.AndroidApp
                 var purchases = _billingHelper.GetPurchases(ItemType.InApp);
                 if (purchases.Any())
                 {
-                    var fragmentByTag = SupportFragmentManager.FindFragmentByTag("android:switcher:" + Resource.Id.pager + ":0");
-                    var fragment = (HomeFragment)fragmentByTag;
-                    fragment.HideAd();
+                    var homeFragment = SupportFragmentManager.FindFragmentByTag("android:switcher:" + Resource.Id.pager + ":0") as HomeFragment;
+                    if (homeFragment != null)
+                    {
+                        homeFragment.HideAd();
+                    }
                 }
             }
         }
@@ -217,5 +219,15 @@ namespace TodayILearned.AndroidApp
 
         #endregion
 
+        public bool AdsEnabled()
+        {
+            if (_billingHelper == null)
+            {
+                return true;
+            }
+
+            var purchases = _billingHelper.GetPurchases(ItemType.InApp);
+            return purchases.Count <= 0;
+        }
     }
 }
