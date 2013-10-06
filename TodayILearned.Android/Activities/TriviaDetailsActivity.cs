@@ -67,9 +67,12 @@ namespace TodayILearned.AndroidApp
 
         private Intent CreateIntent()
         {
+            string message = _trivia.Title + "\n\n" + _trivia.Url + "\n\nShared via Trivia Buff";
+
             var urlIntent = new Intent(Intent.ActionSend);
             urlIntent.SetType("text/plain");
-            urlIntent.PutExtra(Intent.ExtraText, _trivia.Url);
+            urlIntent.PutExtra(Intent.ExtraSubject, _trivia.Title);
+            urlIntent.PutExtra(Intent.ExtraText, message);
             return urlIntent;
         }
 
