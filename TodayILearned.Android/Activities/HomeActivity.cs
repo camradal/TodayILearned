@@ -133,6 +133,7 @@ namespace TodayILearned.AndroidApp
         {
             _billingHelper = _serviceConnection.BillingHelper;
 
+            #if DEBUG
             if (_billingHelper != null)
             {
                 Toast.MakeText(this, "Connected to in app billing service", ToastLength.Short).Show();
@@ -141,6 +142,7 @@ namespace TodayILearned.AndroidApp
             {
                 Toast.MakeText(this, "Connected to in app billing service but helper is null", ToastLength.Short).Show();
             }
+            #endif
 
             ToggleAdIfNeeded();
             InvalidateOptionsMenu();
