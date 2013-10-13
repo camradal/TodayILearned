@@ -1,3 +1,0 @@
-key store password 	- dappertrivia
-key password 		- trivia
-key alias		- main
