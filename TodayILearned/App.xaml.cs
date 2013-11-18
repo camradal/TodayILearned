@@ -105,6 +105,7 @@ namespace TodayILearned
             else
             {
                 MessageBox.Show(Strings.ErrorInternetConnection);
+                App.ViewModel.LoadOffline();
             }
         }
 
