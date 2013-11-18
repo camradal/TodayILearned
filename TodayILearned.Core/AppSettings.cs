@@ -19,7 +19,6 @@ namespace TodayILearned.Utilities
         private const string ContentLanguageKeyName = "ContentLanguage";
         private const string LiveTileDisabledKeyName = "LiveTileDisabled";
         private const string DisplayFontSizeKeyName = "DisplayFontSize";
-        private const string ShowTileBackKeyName = "ShowTileBack";
         private const string BrowserSelectionKeyName = "BrowserSelection";
         private const string OrientationLockKeyName = "OrientationLock";
         private const string ReverseSortKeyName = "ReverseSort";
@@ -30,7 +29,6 @@ namespace TodayILearned.Utilities
         private const string ContentLanguageDefault = "en";
         private const bool LiveTileDisabledDefault = false;
         private const int DisplayFontSizeDefault = 0;
-        private const bool ShowTileBackDefault = false;
         private const bool BrowserSelectionDefault = false;
         private const bool OrientationLockDefault = false;
         private const bool ReverseSortDefault = false;
@@ -84,12 +82,6 @@ namespace TodayILearned.Utilities
         {
             get { return GetValueOrDefault<int>(DisplayFontSizeKeyName, DisplayFontSizeDefault); }
             set { AddOrUpdateValue(DisplayFontSizeKeyName, value); }
-        }
-
-        public static bool ShowTileBack
-        {
-            get { return GetValueOrDefault<bool>(ShowTileBackKeyName, ShowTileBackDefault); }
-            set { AddOrUpdateValue(ShowTileBackKeyName, value); }
         }
 
         public static bool BrowserSelection

@@ -45,13 +45,6 @@ namespace TodayILearned.Core
                 var wideBackBackgroundImage = new Uri("", UriKind.Relative);
                 string backTitle = "";
 
-                if (AppSettings.ShowTileBack)
-                {
-                    backBackgroundImage = new Uri("/icons/Application_Icon_336.png", UriKind.Relative);
-                    wideBackBackgroundImage = new Uri("/icons/Application_Icon_691.png", UriKind.Relative);
-                    backTitle = "Trivia Buff";
-                }
-
                 UpdateFlipTile(
                     title,
                     backTitle,
@@ -71,12 +64,8 @@ namespace TodayILearned.Core
             string fontSize = Application.Current.Resources["PhoneFontSizeSmall"].ToString();
             string fileName = WriteTileToDisk(title, content, 173, 173, fontSize, new Thickness(12, 6, 6, 32));
             Uri backBackgroundImage = new Uri("", UriKind.Relative);
-            string backTitle = "";
-            if (AppSettings.ShowTileBack)
-            {
-                backBackgroundImage = new Uri("/icons/Application_Icon_336.png", UriKind.Relative);
-                backTitle = "Trivia Buff";
-            }
+            const string backTitle = "";
+
             var data = new StandardTileData()
             {
                 Title = title,
