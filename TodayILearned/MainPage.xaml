@@ -110,7 +110,7 @@
         <!-- Ad Control -->
         <!--<Image Grid.Row="1" Source="/icons/ad.png" Width="480" Height="80"/>-->
         <StackPanel x:Name="AdPanel" Grid.Row="1" Height="80">
-            <pubcenter:AdControl x:Name="AdBox" AdUnitId="111476" ApplicationId="d0714ba1-4505-4976-b2bc-86c28696c89f" Margin="0" Width="480" Height="80"  Style="{StaticResource BorderlessAdControlStyle}"/>
+            <pubcenter:AdControl x:Name="AdBox" AdUnitId="111476" ApplicationId="d0714ba1-4505-4976-b2bc-86c28696c89f" Margin="0" Width="480" Height="80"/>
             <AdDuplex:AdControl x:Name="AdDuplexAdControl" AppId="29467" Margin="0" Width="480" Height="80" Visibility="Collapsed"/>
         </StackPanel>
     </Grid>
