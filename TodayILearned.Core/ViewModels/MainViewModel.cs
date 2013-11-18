@@ -70,6 +70,12 @@ namespace TodayILearned.Core
             LoadData("");
         }
 
+        public void ReloadData()
+        {
+            this.Items.Clear();
+            LoadData();
+        }
+
         public void LoadData(string lastItem)
         {
             if (IsLoading)
