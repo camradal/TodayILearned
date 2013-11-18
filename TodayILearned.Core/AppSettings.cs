@@ -22,6 +22,7 @@ namespace TodayILearned.Utilities
         private const string ShowTileBackKeyName = "ShowTileBack";
         private const string BrowserSelectionKeyName = "BrowserSelection";
         private const string OrientationLockKeyName = "OrientationLock";
+        private const string ReverseSortKeyName = "ReverseSort";
 
         private const int NumberOfStartsDefault = 0;
         private const bool FirstStartDefault = false;
@@ -32,6 +33,7 @@ namespace TodayILearned.Utilities
         private const bool ShowTileBackDefault = false;
         private const bool BrowserSelectionDefault = false;
         private const bool OrientationLockDefault = false;
+        private const bool ReverseSortDefault = false;
 
         #endregion
 
@@ -100,6 +102,12 @@ namespace TodayILearned.Utilities
         {
             get { return GetValueOrDefault<bool>(OrientationLockKeyName, OrientationLockDefault); }
             set { AddOrUpdateValue(OrientationLockKeyName, value); }
+        }
+        
+        public static bool ReverseSort
+        {
+            get { return GetValueOrDefault<bool>(ReverseSortKeyName, ReverseSortDefault); }
+            set { AddOrUpdateValue(ReverseSortKeyName, value); }
         }
 
         #endregion

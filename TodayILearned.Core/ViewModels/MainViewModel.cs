@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -8,6 +9,7 @@ using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SharpGIS;
+using TodayILearned.Utilities;
 
 namespace TodayILearned.Core
 {
@@ -182,6 +184,8 @@ namespace TodayILearned.Core
 
         public void LoadFavorites()
         {
+            this.Favorites.Clear();
+
             using (var store = IsolatedStorageFile.GetUserStoreForApplication())
             using (var stream = new IsolatedStorageFileStream("favorites.json", FileMode.OpenOrCreate, FileAccess.Read, store))
             using (var reader = new StreamReader(stream))
@@ -190,7 +194,14 @@ namespace TodayILearned.Core
                 if (reader.EndOfStream) return;
 
                 var result = JArray.Load(jsonReader);
-                foreach (var favorite in Serializer.GetItems(result))
+                var itemViewModels = Serializer.GetItems(result);
+
+                if (AppSettings.ReverseSort)
+                {
+                    itemViewModels = itemViewModels.Reverse();
+                }
+
+                foreach (var favorite in itemViewModels)
                 {
                     this.Favorites.Add(favorite);
                 }

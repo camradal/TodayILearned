@@ -352,5 +352,39 @@ namespace TodayILearned
         }
 
         #endregion
+
+        #region Reverse Sort
+
+        private void ApplicationBarReverseSortButton_OnClick(object sender, EventArgs e)
+        {
+            bool previousValue = AppSettings.ReverseSort;
+            AppSettings.ReverseSort = !previousValue;
+
+            App.ViewModel.LoadFavorites();
+        }
+
+        private void MainPivot_OnLoadingPivotItem(object sender, PivotItemEventArgs e)
+        {
+            string pivotName = e.Item.Header.ToString();
+            if (pivotName == "favorites")
+            {
+                var button = new ApplicationBarIconButton
+                {
+                    IconUri = new Uri("/icons/appbar.sort.png", UriKind.Relative),
+                    Text = "reverse sort"
+                };
+                button.Click += ApplicationBarReverseSortButton_OnClick;
+                this.ApplicationBar.Buttons.Add(button);
+            }
+            else
+            {
+                if (this.ApplicationBar.Buttons.Count > 3)
+                {
+                    this.ApplicationBar.Buttons.RemoveAt(3);
+                }
+            }
+        }
+
+        #endregion
     }
 }
