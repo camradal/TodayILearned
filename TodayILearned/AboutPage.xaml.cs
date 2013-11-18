@@ -27,6 +27,17 @@ namespace TodayILearned
                     },
                     new NewItem
                     {
+                        Version = "1.5",
+                        Description =
+                            "- Offline mode\n" +
+                            "- Favorites sort (newest/oldest)\n" +
+                            "- Report inaccurate facts from the app\n" +
+                            "- Improve grammar parsing\n" +
+                            "- Improve items refresh\n" +
+                            "- Visual style update"
+                    },
+                    new NewItem
+                    {
                         Version = "1.4",
                         Description =
                             "- Share via clipboard\n" +
@@ -111,7 +122,7 @@ namespace TodayILearned
 
         private void ReadVersionFromManifest()
         {
-            versionText.Text = "1.4";
+            versionText.Text = "1.5";
         }
     }
 }
