@@ -66,6 +66,8 @@ namespace TodayILearned
 
                 App.ViewModel.OnInitialized += () =>
                 {
+                    AdPanel.Opacity = 1;
+                    
                     if (!App.IsMemoryLimited && App.FirstLoad)
                     {
                         SetUpLiveTile(numberOfStarts);
