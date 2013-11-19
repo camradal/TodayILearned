@@ -104,7 +104,8 @@ namespace TodayILearned.Core
             {
                 bool incrementalLoad = this.Items.Any();
 
-                var result = JObject.Parse(e.Result);
+                var json = e.Result;
+                var result = JObject.Parse(json);
                 var newItems = Serializer.GetItems(result);
                 var uniqueItems = newItems.Except(this.Items).ToList();
                 foreach (ItemViewModel model in uniqueItems)
@@ -117,7 +118,7 @@ namespace TodayILearned.Core
 
                 if (!incrementalLoad)
                 {
-                    SaveOffline(uniqueItems);
+                    SaveOffline(json);
                 }
             }
             catch (Exception ex)
@@ -242,7 +243,7 @@ namespace TodayILearned.Core
             {
                 if (reader.EndOfStream) return;
 
-                var result = JArray.Load(jsonReader);
+                var result = JObject.Load(jsonReader);
                 var itemViewModels = Serializer.GetItems(result);
 
                 foreach (var model in itemViewModels)
@@ -252,18 +253,14 @@ namespace TodayILearned.Core
             }
         }
 
-        public void SaveOffline(IEnumerable<ItemViewModel> uniqueItems)
+        public void SaveOffline(string json)
         {
-            ThreadPool.QueueUserWorkItem(state =>
+            using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+            using (var stream = new IsolatedStorageFileStream("offline.json", FileMode.Create, FileAccess.Write, store))
+            using (var writer = new StreamWriter(stream))
             {
-                using (var store = IsolatedStorageFile.GetUserStoreForApplication())
-                using (var stream = new IsolatedStorageFileStream("offline.json", FileMode.Create, FileAccess.Write, store))
-                using (var writer = new StreamWriter(stream))
-                {
-                    string serialized = JsonConvert.SerializeObject(uniqueItems);
-                    writer.Write(serialized);
-                }
-            });
+                writer.Write(json);
+            }
         }
 
         public void AddFavorite(ItemViewModel model)

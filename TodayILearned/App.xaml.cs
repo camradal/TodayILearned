@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Media;
@@ -104,8 +105,11 @@ namespace TodayILearned
             }
             else
             {
-                MessageBox.Show(Strings.ErrorInternetConnection);
-                App.ViewModel.LoadOffline();
+                if (!App.ViewModel.Items.Any())
+                {
+                    MessageBox.Show(Strings.ErrorInternetConnection);
+                    App.ViewModel.LoadOffline();
+                }
             }
         }
 
