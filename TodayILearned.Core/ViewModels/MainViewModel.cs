@@ -6,7 +6,6 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Net;
-using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SharpGIS;
@@ -26,6 +25,7 @@ namespace TodayILearned.Core
         public Action OnLoaded;
         public Action OnInitialized;
         public Action<Exception> OnError;
+        private List<ItemViewModel> storageFavorites = new List<ItemViewModel>();
 
         public MainViewModel()
         {
@@ -209,16 +209,21 @@ namespace TodayILearned.Core
                 if (reader.EndOfStream) return;
 
                 var result = JArray.Load(jsonReader);
-                var itemViewModels = Serializer.GetItems(result);
+                storageFavorites = Serializer.GetItems(result).ToList();
 
                 if (AppSettings.ReverseSort)
                 {
-                    itemViewModels = itemViewModels.Reverse();
+                    for (int i = storageFavorites.Count - 1; i >= 0; i--)
+                    {
+                        this.Favorites.Add(storageFavorites[i]);
+                    }
                 }
-
-                foreach (var favorite in itemViewModels)
+                else
                 {
-                    this.Favorites.Add(favorite);
+                    foreach (var favorite in storageFavorites)
+                    {
+                        this.Favorites.Add(favorite);
+                    }    
                 }
             }
         }
@@ -229,7 +234,7 @@ namespace TodayILearned.Core
             using (var stream = new IsolatedStorageFileStream("favorites.json", FileMode.Create, FileAccess.Write, store))
             using (var writer = new StreamWriter(stream))
             {
-                string serialized = JsonConvert.SerializeObject(this.Favorites);
+                string serialized = JsonConvert.SerializeObject(this.storageFavorites);
                 writer.Write(serialized);
             }
         }
@@ -271,13 +276,25 @@ namespace TodayILearned.Core
                 return;
             }
 
-            this.Favorites.Add(model);
+            storageFavorites.Add(model);
+
+            if (AppSettings.ReverseSort)
+            {
+                Favorites.Insert(0, model);
+            }
+            else
+            {
+                Favorites.Add(model);
+            }
+
             NotifyPropertyChanged("Favorites");
         }
 
         public void RemoveFavorite(ItemViewModel model)
         {
-            this.Favorites.Remove(model);
+            storageFavorites.Remove(model);
+            Favorites.Remove(model);
+
             NotifyPropertyChanged("Favorites");
         }
 
