@@ -254,7 +254,7 @@ namespace TodayILearned
 
         private void ApplicationBarIconRefreshButton_OnClick(object sender, EventArgs e)
         {
-            App.ViewModel.LoadData();
+            App.ViewModel.ReloadData();
         }
 
         private void ApplicationBarIconSearchButton_OnClick(object sender, EventArgs e)
