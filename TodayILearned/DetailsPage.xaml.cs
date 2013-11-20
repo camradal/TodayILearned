@@ -182,5 +182,27 @@ namespace TodayILearned
         }
 
         #endregion
+
+        private void ApplicationBarMenuItem_OnClick_Report(object sender, EventArgs e)
+        {
+            if (App.ViewModel == null) return;
+            if (App.ViewModel.Items == null) return;
+            if (App.ViewModel.Item == null) return;
+
+            try
+            {
+                var task = new EmailComposeTask
+                {
+                    To = "dapper.panda@gmail.com",
+                    Subject = "Trivia Buff Inaccurate Fact",
+                    Body = App.ViewModel.Item.Title + "\n\n" + App.ViewModel.Item.Url
+                };
+                task.Show();
+            }
+            catch (Exception)
+            {
+                // fast-clicking can result in exception, so we just handle it
+            }
+        }
     }
 }

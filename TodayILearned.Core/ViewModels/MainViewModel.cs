@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SharpGIS;
+using TodayILearned.Utilities;
 
 namespace TodayILearned.Core
 {
@@ -67,6 +70,12 @@ namespace TodayILearned.Core
             LoadData("");
         }
 
+        public void ReloadData()
+        {
+            this.Items.Clear();
+            LoadData();
+        }
+
         public void LoadData(string lastItem)
         {
             if (IsLoading)
@@ -93,9 +102,12 @@ namespace TodayILearned.Core
         {
             try
             {
-                var result = JObject.Parse(e.Result);
+                bool incrementalLoad = this.Items.Any();
+
+                var json = e.Result;
+                var result = JObject.Parse(json);
                 var newItems = Serializer.GetItems(result);
-                var uniqueItems = newItems.Except(this.Items);
+                var uniqueItems = newItems.Except(this.Items).ToList();
                 foreach (ItemViewModel model in uniqueItems)
                 {
                     this.Items.Add(model);
@@ -103,6 +115,11 @@ namespace TodayILearned.Core
                 Item = this.Items.FirstOrDefault();
                 LastItem = result["data"]["after"].ToString();
                 this.IsLoaded = true;
+
+                if (!incrementalLoad)
+                {
+                    SaveOffline(json);
+                }
             }
             catch (Exception ex)
             {
@@ -182,6 +199,8 @@ namespace TodayILearned.Core
 
         public void LoadFavorites()
         {
+            this.Favorites.Clear();
+
             using (var store = IsolatedStorageFile.GetUserStoreForApplication())
             using (var stream = new IsolatedStorageFileStream("favorites.json", FileMode.OpenOrCreate, FileAccess.Read, store))
             using (var reader = new StreamReader(stream))
@@ -190,7 +209,14 @@ namespace TodayILearned.Core
                 if (reader.EndOfStream) return;
 
                 var result = JArray.Load(jsonReader);
-                foreach (var favorite in Serializer.GetItems(result))
+                var itemViewModels = Serializer.GetItems(result);
+
+                if (AppSettings.ReverseSort)
+                {
+                    itemViewModels = itemViewModels.Reverse();
+                }
+
+                foreach (var favorite in itemViewModels)
                 {
                     this.Favorites.Add(favorite);
                 }
@@ -205,6 +231,35 @@ namespace TodayILearned.Core
             {
                 string serialized = JsonConvert.SerializeObject(this.Favorites);
                 writer.Write(serialized);
+            }
+        }
+
+        public void LoadOffline()
+        {
+            using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+            using (var stream = new IsolatedStorageFileStream("offline.json", FileMode.OpenOrCreate, FileAccess.Read, store))
+            using (var reader = new StreamReader(stream))
+            using (var jsonReader = new JsonTextReader(reader))
+            {
+                if (reader.EndOfStream) return;
+
+                var result = JObject.Load(jsonReader);
+                var itemViewModels = Serializer.GetItems(result);
+
+                foreach (var model in itemViewModels)
+                {
+                    this.Items.Add(model);
+                }
+            }
+        }
+
+        public void SaveOffline(string json)
+        {
+            using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+            using (var stream = new IsolatedStorageFileStream("offline.json", FileMode.Create, FileAccess.Write, store))
+            using (var writer = new StreamWriter(stream))
+            {
+                writer.Write(json);
             }
         }
 

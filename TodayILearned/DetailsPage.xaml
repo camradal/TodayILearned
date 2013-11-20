@@ -43,6 +43,7 @@
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="lock orientation" Click="ApplicationBarOrientationMenuItem_OnClick"/>
                 <shell:ApplicationBarMenuItem Text="open in internet explorer..." Click="ApplicationBarMenuItem_OnClick_OpenInIE"/>
+                <shell:ApplicationBarMenuItem Text="report inaccuracy..." Click="ApplicationBarMenuItem_OnClick_Report"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

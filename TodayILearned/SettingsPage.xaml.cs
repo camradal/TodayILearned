@@ -14,12 +14,6 @@ namespace TodayILearned
             set { AppSettings.DisplayFontSize = value; }
         }
 
-        public bool ShowBackTile
-        {
-            get { return AppSettings.ShowTileBack; }
-            set { AppSettings.ShowTileBack = value; }
-        }
-
         public bool BrowserSelection
         {
             get { return AppSettings.BrowserSelection; }

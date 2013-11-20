@@ -241,12 +241,7 @@ namespace TodayILearned
 
         private void ApplicationBarIconRefreshButton_OnClick(object sender, EventArgs e)
         {
-            if (App.ViewModel.Items == null) return;
-            
-            var firstItem = App.ViewModel.Items.FirstOrDefault();
-            if (firstItem == null) return;
-
-            this.AllListBox.ScrollTo(firstItem);
+            App.ViewModel.ReloadData();
         }
 
         private void ApplicationBarIconSearchButton_OnClick(object sender, EventArgs e)
@@ -319,5 +314,39 @@ namespace TodayILearned
                 App.ViewModel.LoadData(App.ViewModel.LastItem);
             }
         }
+
+        #region Reverse Sort
+
+        private void ApplicationBarReverseSortButton_OnClick(object sender, EventArgs e)
+        {
+            bool previousValue = AppSettings.ReverseSort;
+            AppSettings.ReverseSort = !previousValue;
+
+            App.ViewModel.LoadFavorites();
+        }
+
+        private void MainPivot_OnLoadingPivotItem(object sender, PivotItemEventArgs e)
+        {
+            string pivotName = e.Item.Header.ToString();
+            if (pivotName == "favorites")
+            {
+                var button = new ApplicationBarIconButton
+                {
+                    IconUri = new Uri("/icons/appbar.sort.png", UriKind.Relative),
+                    Text = "reverse sort"
+                };
+                button.Click += ApplicationBarReverseSortButton_OnClick;
+                this.ApplicationBar.Buttons.Add(button);
+            }
+            else
+            {
+                if (this.ApplicationBar.Buttons.Count > 3)
+                {
+                    this.ApplicationBar.Buttons.RemoveAt(3);
+                }
+            }
+        }
+
+        #endregion
     }
 }

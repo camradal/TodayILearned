@@ -32,14 +32,7 @@ namespace TodayILearned
 
                 var backBackgroundImage = new Uri("", UriKind.Relative);
                 var wideBackBackgroundImage = new Uri("", UriKind.Relative);
-                string backTitle = "";
-
-                if (AppSettings.ShowTileBack)
-                {
-                    backBackgroundImage = new Uri("/icons/Application_Icon_336.png", UriKind.Relative);
-                    wideBackBackgroundImage = new Uri("/icons/Application_Icon_691.png", UriKind.Relative);
-                    backTitle = "Trivia Buff";
-                }
+                const string backTitle = "";
 
                 UpdateFlipTile(
                     title,

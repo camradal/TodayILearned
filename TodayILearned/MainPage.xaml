@@ -84,6 +84,7 @@
         <controls:Pivot 
             x:Name="MainPivot"
             Grid.Row="0"
+            LoadingPivotItem="MainPivot_OnLoadingPivotItem"
             Title="{Binding Source={StaticResource Strings}, Path=Resources.AppTitleCapitalized}">
             <controls:PivotItem Header="new">
                 <toolkit:LongListSelector

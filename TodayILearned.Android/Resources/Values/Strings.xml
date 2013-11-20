@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="Hello">Hello World, Click Me!</string>
+  <string name="ApplicationName">TodayILearned.Android</string>
+  <string name="Label">Trivia Buff</string>
+  <string name="hint">Search for ...</string>
+  <string name="pref_sizeTitle">Text size</string>
+  <string name="pref_sizeDialog">Select Text size</string>
+  <string name="small">Small</string>
+  <string name="medium">Medium</string>
+</resources>

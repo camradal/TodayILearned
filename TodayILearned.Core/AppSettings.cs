@@ -12,7 +12,6 @@ namespace TodayILearned.Utilities
         #region Variables
 
         private const string mutextName = "TodayILearnedMutex";
-        private static readonly IsolatedStorageSettings settings;
 
         private const string NumberOfStartsKeyName = "NumberOfStarts";
         private const string FirstStartKeyName = "FirstStart";
@@ -20,9 +19,9 @@ namespace TodayILearned.Utilities
         private const string ContentLanguageKeyName = "ContentLanguage";
         private const string LiveTileDisabledKeyName = "LiveTileDisabled";
         private const string DisplayFontSizeKeyName = "DisplayFontSize";
-        private const string ShowTileBackKeyName = "ShowTileBack";
         private const string BrowserSelectionKeyName = "BrowserSelection";
         private const string OrientationLockKeyName = "OrientationLock";
+        private const string ReverseSortKeyName = "ReverseSort";
 
         private const int NumberOfStartsDefault = 0;
         private const bool FirstStartDefault = false;
@@ -30,9 +29,9 @@ namespace TodayILearned.Utilities
         private const string ContentLanguageDefault = "en";
         private const bool LiveTileDisabledDefault = false;
         private const int DisplayFontSizeDefault = 0;
-        private const bool ShowTileBackDefault = false;
         private const bool BrowserSelectionDefault = false;
         private const bool OrientationLockDefault = false;
+        private const bool ReverseSortDefault = false;
 
         #endregion
 
@@ -85,12 +84,6 @@ namespace TodayILearned.Utilities
             set { AddOrUpdateValue(DisplayFontSizeKeyName, value); }
         }
 
-        public static bool ShowTileBack
-        {
-            get { return GetValueOrDefault<bool>(ShowTileBackKeyName, ShowTileBackDefault); }
-            set { AddOrUpdateValue(ShowTileBackKeyName, value); }
-        }
-
         public static bool BrowserSelection
         {
             get { return GetValueOrDefault<bool>(BrowserSelectionKeyName, BrowserSelectionDefault); }
@@ -102,17 +95,11 @@ namespace TodayILearned.Utilities
             get { return GetValueOrDefault<bool>(OrientationLockKeyName, OrientationLockDefault); }
             set { AddOrUpdateValue(OrientationLockKeyName, value); }
         }
-
-        #endregion
-
-        #region Constructor
-
-        static AppSettings()
+        
+        public static bool ReverseSort
         {
-            if (!System.ComponentModel.DesignerProperties.IsInDesignTool)
-            {
-                settings = IsolatedStorageSettings.ApplicationSettings;
-            }
+            get { return GetValueOrDefault<bool>(ReverseSortKeyName, ReverseSortDefault); }
+            set { AddOrUpdateValue(ReverseSortKeyName, value); }
         }
 
         #endregion
@@ -124,12 +111,13 @@ namespace TodayILearned.Utilities
         /// </summary>
         private static bool AddOrUpdateValue(string key, Object value)
         {
-            var mutex = new Mutex(false, mutextName);
+            var mutex = new Mutex(true, mutextName);
             try
             {
                 mutex.WaitOne();
                 bool valueChanged = false;
 
+                var settings = IsolatedStorageSettings.ApplicationSettings;
                 if (settings.Contains(key))
                 {
                     if (settings[key] != value)
@@ -161,12 +149,13 @@ namespace TodayILearned.Utilities
         /// </summary>
         private static T GetValueOrDefault<T>(string key, T defaultValue)
         {
-            var mutex = new Mutex(false, mutextName);
+            var mutex = new Mutex(true, mutextName);
             try
             {
                 mutex.WaitOne();
                 T value;
 
+                var settings = IsolatedStorageSettings.ApplicationSettings;
                 if (settings.Contains(key))
                 {
                     value = (T)settings[key];

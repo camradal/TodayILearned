@@ -164,3 +164,7 @@ pip-log.txt
 
 #packages
 packages/
+UpgradeLog.htm
+
+# xamarin
+*.userprefs
