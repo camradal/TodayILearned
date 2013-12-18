@@ -51,7 +51,7 @@ namespace TodayILearned.Core
         private static string ProcessString(string value)
         {
             value = HttpUtility.HtmlDecode(value);
-            value = value.Trim(new[] { ' ', '-', '.', ':', ';', ',', '/', '\n' });
+            value = value.Trim(new[] { ' ', '-', '.', ':', ';', ',', '/', '\n', '[' });
             if (value.StartsWith("TIL", StringComparison.OrdinalIgnoreCase))
             {
                 value = value.Substring("TIL".Length);
@@ -76,8 +76,8 @@ namespace TodayILearned.Core
 
         private static string Trim(string value)
         {
-            value = value.TrimStart(new[] {' ', '-', '.', ':', ',', '/'});
-            if (value.StartsWith("that", StringComparison.OrdinalIgnoreCase))
+            value = value.TrimStart(new[] {' ', '-', '.', ':', ',', '/', ']'});
+            if (value.StartsWith("that", StringComparison.OrdinalIgnoreCase) && !value.StartsWith("that's", StringComparison.OrdinalIgnoreCase))
             {
                 value = value.Substring("that".Length);
                 value = value.TrimStart(new[] {' ', '-', '.', ':', ';', ','});
