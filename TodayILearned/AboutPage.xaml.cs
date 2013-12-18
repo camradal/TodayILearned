@@ -27,6 +27,12 @@ namespace TodayILearned
                     },
                     new NewItem
                     {
+                        Version = "1.5.1",
+                        Description =
+                            "- Bug fixes"
+                    },
+                    new NewItem
+                    {
                         Version = "1.5",
                         Description =
                             "- Offline mode\n" +
@@ -121,7 +127,7 @@ namespace TodayILearned
 
         private void ReadVersionFromManifest()
         {
-            versionText.Text = "1.5";
+            versionText.Text = "1.5.1";
         }
     }
 }
