@@ -110,6 +110,7 @@
     <Compile Include="Utilities\GlobalLoading.cs" />
     <Compile Include="Utilities\ReviewThisAppTask.cs" />
     <Compile Include="Utilities\StringProvider.cs" />
+    <Compile Include="Converters\WikiUrlConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

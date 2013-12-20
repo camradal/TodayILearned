@@ -29,7 +29,8 @@ namespace TodayILearned
                     {
                         Version = "1.5.1",
                         Description =
-                            "- Bug fixes"
+                            "- Bug fixes\n" +
+                            "- Performance improvements"
                     },
                     new NewItem
                     {
