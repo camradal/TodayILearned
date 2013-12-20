@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utilities="clr-namespace:TodayILearned.Utilities"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -14,7 +15,11 @@
     shell:SystemTray.IsVisible="True"
     Style="{StaticResource TransitionPageStyle}">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
+    <phone:PhoneApplicationPage.Resources>
+        <utilities:WikiUrlConverter x:Key="wikiUrlConverter" />
+    </phone:PhoneApplicationPage.Resources>
+
+        <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="83"/>
@@ -30,7 +35,7 @@
             VerticalAlignment="Center"
             TextWrapping="Wrap"
             TextTrimming="WordEllipsis"/>
-        <phone:WebBrowser Grid.Row="1" x:Name="webBrowser1" IsScriptEnabled="True" Margin="0" Source="{Binding Url}" />
+        <phone:WebBrowser Grid.Row="1" x:Name="webBrowser1" IsScriptEnabled="True" Margin="0" Source="{Binding Url, Converter={StaticResource wikiUrlConverter}}" />
         
     </Grid>
  
