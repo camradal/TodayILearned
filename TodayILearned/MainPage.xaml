@@ -87,25 +87,23 @@
             LoadingPivotItem="MainPivot_OnLoadingPivotItem"
             Title="{Binding Source={StaticResource Strings}, Path=Resources.AppTitleCapitalized}">
             <controls:PivotItem Header="new">
-                <toolkit:LongListSelector
+                <phone:LongListSelector
                     x:Name="AllListBox"
-                    IsFlatList="True" 
                     Margin="0,0,-12,0"
                     ItemsSource="{Binding Items}"
                     ItemTemplate="{StaticResource ItemTemplate}"
-                    Link="NewListBox_Link"
+                    ItemRealized="AllListBox_OnItemRealized"
                     SelectionChanged="ListBox_SelectionChanged">
-                </toolkit:LongListSelector>
+                </phone:LongListSelector>
             </controls:PivotItem>
             <controls:PivotItem Header="favorites">
-                <toolkit:LongListSelector
+                <phone:LongListSelector
                     x:Name="FavoritesListBox"
-                    IsFlatList="True" 
                     Margin="0,0,-12,0"
                     ItemsSource="{Binding Favorites}"
                     ItemTemplate="{StaticResource FavoriteTemplate}"
                     SelectionChanged="ListBox_SelectionChanged">
-                </toolkit:LongListSelector>
+                </phone:LongListSelector>
             </controls:PivotItem>
         </controls:Pivot>
         <!-- Ad Control -->
