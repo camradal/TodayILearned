@@ -213,6 +213,15 @@ namespace TodayILearned
             }
         }
 
+        private void contextMenu_Unloaded(object sender, RoutedEventArgs e)
+        {
+            var menu = sender as ContextMenu;
+            if (menu != null)
+            {
+                menu.ClearValue(FrameworkElement.DataContextProperty);
+            }
+        }
+
         private void OpenDetailsPage(string url)
         {
             string encodedUri = HttpUtility.HtmlEncode(url);

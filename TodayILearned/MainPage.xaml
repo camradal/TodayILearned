@@ -42,7 +42,7 @@
                     </Image>
                 </StackPanel>
                 <toolkit:ContextMenuService.ContextMenu>
-                    <toolkit:ContextMenu Name="mainMenu">
+                    <toolkit:ContextMenu Name="mainMenu" Unloaded="contextMenu_Unloaded">
                         <toolkit:MenuItem Header="share..." Click="MenuItem_OnClick"/>
                         <toolkit:MenuItem Header="add to favorites" Click="MenuItem_OnClick"/>
                     </toolkit:ContextMenu>
@@ -67,7 +67,7 @@
                     </Image>
                 </StackPanel>
                 <toolkit:ContextMenuService.ContextMenu>
-                    <toolkit:ContextMenu Name="mainMenu">
+                    <toolkit:ContextMenu Name="mainMenu" Unloaded="contextMenu_Unloaded">
                         <toolkit:MenuItem Header="share..." Click="MenuItem_OnClick"/>
                         <toolkit:MenuItem Header="remove from favorites" Click="MenuItem_OnClick"/>
                     </toolkit:ContextMenu>
