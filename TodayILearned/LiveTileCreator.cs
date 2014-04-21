@@ -75,29 +75,21 @@ namespace TodayILearned
             if (!IsTargetedVersion)
                 return;
 
-            Type flipTileDataType = Type.GetType("Microsoft.Phone.Shell.FlipTileData, Microsoft.Phone");
-            if (flipTileDataType == null)
-                return;
+            var flipTileData = new FlipTileData
+            {
+                Title = title,
+                Count = count,
+                BackTitle = backTitle,
+                BackContent = backContent,
+                SmallBackgroundImage = smallBackgroundImage,
+                BackgroundImage = backgroundImage,
+                BackBackgroundImage = backBackgroundImage,
+                WideBackgroundImage = wideBackgroundImage,
+                WideBackBackgroundImage = wideBackBackgroundImage,
+                WideBackContent = wideBackContent
+            };
 
-            Type shellTileType = Type.GetType("Microsoft.Phone.Shell.ShellTile, Microsoft.Phone");
-            if (shellTileType == null)
-                return;
-
-            var UpdateTileData = flipTileDataType.GetConstructor(new Type[] { }).Invoke(null);
-            SetProperty(UpdateTileData, "Title", title);
-            SetProperty(UpdateTileData, "Count", count);
-            SetProperty(UpdateTileData, "BackTitle", backTitle);
-            SetProperty(UpdateTileData, "BackContent", backContent);
-            SetProperty(UpdateTileData, "SmallBackgroundImage", smallBackgroundImage);
-            SetProperty(UpdateTileData, "BackgroundImage", backgroundImage);
-            SetProperty(UpdateTileData, "BackBackgroundImage", backBackgroundImage);
-            SetProperty(UpdateTileData, "WideBackgroundImage", wideBackgroundImage);
-            SetProperty(UpdateTileData, "WideBackBackgroundImage", wideBackBackgroundImage);
-            SetProperty(UpdateTileData, "WideBackContent", wideBackContent);
-
-            var types = new[] { typeof(Uri), typeof(ShellTileData), typeof(bool) };
-            var parameters = new[] { new Uri("/MainPage.xaml?DefaultTitle=new", UriKind.Relative), UpdateTileData, true };
-            shellTileType.GetMethod("Create", types).Invoke(null, parameters);
+            ShellTile.Create(new Uri("/MainPage.xaml?DefaultTitle=new", UriKind.Relative), flipTileData, true);
         }
     }
 }
