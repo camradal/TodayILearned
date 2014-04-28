@@ -2,6 +2,7 @@
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 using TodayILearned.Utilities;
@@ -115,6 +116,15 @@ namespace TodayILearned
         private void SearchTextBox_OnLostFocus(object sender, RoutedEventArgs e)
         {
             Search();
+        }
+
+        private void SearchTextBox_OnKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                this.Focus();
+                Search();
+            }
         }
 
         private void Search()

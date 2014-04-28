@@ -61,8 +61,10 @@
             <TextBlock x:Name="ApplicationTitle" Text="{Binding Source={StaticResource Strings}, Path=Resources.PageTitleSearch}" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBox
                 x:Name="SearchTextBox"
+                AcceptsReturn="False"
                 VerticalAlignment="Top"
                 InputScope="Search"
+                KeyUp="SearchTextBox_OnKeyUp"
                 TextInput="SearchTextBox_TextInput"
                 LostFocus="SearchTextBox_OnLostFocus"/>
         </StackPanel>
