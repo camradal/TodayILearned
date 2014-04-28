@@ -100,29 +100,23 @@ namespace TodayILearned.Core
             if (!IsTargetedVersion)
                 return;
 
-            Type flipTileDataType = Type.GetType("Microsoft.Phone.Shell.FlipTileData, Microsoft.Phone");
-            if (flipTileDataType == null)
-                return;
-
-            Type shellTileType = Type.GetType("Microsoft.Phone.Shell.ShellTile, Microsoft.Phone");
-            if (shellTileType == null)
-                return;
+            var flipTileData = new FlipTileData
+            {
+                Title = title,
+                Count = count,
+                BackTitle = backTitle,
+                BackContent = backContent,
+                SmallBackgroundImage = smallBackgroundImage,
+                BackgroundImage = backgroundImage,
+                BackBackgroundImage = backBackgroundImage,
+                WideBackgroundImage = wideBackgroundImage,
+                WideBackBackgroundImage = wideBackBackgroundImage,
+                WideBackContent = wideBackContent
+            };
 
             foreach (var tileToUpdate in ShellTile.ActiveTiles)
             {
-                var UpdateTileData = flipTileDataType.GetConstructor(new Type[] { }).Invoke(null);
-                SetProperty(UpdateTileData, "Title", title);
-                SetProperty(UpdateTileData, "Count", count);
-                SetProperty(UpdateTileData, "BackTitle", backTitle);
-                SetProperty(UpdateTileData, "BackContent", backContent);
-                SetProperty(UpdateTileData, "SmallBackgroundImage", smallBackgroundImage);
-                SetProperty(UpdateTileData, "BackgroundImage", backgroundImage);
-                SetProperty(UpdateTileData, "BackBackgroundImage", backBackgroundImage);
-                SetProperty(UpdateTileData, "WideBackgroundImage", wideBackgroundImage);
-                SetProperty(UpdateTileData, "WideBackBackgroundImage", wideBackBackgroundImage);
-                SetProperty(UpdateTileData, "WideBackContent", wideBackContent);
-
-                shellTileType.GetMethod("Update").Invoke(tileToUpdate, new Object[] { UpdateTileData });
+                tileToUpdate.Update(flipTileData);
             }
         }
 
@@ -139,12 +133,10 @@ namespace TodayILearned.Core
         protected static string WriteTileToDisk(string year, string description, int width, int height, string fontSize, Thickness margins)
         {
             Grid container = new Grid()
-            //Grid container = new Grid()
             {
                 Width = width,
                 Height = height,
-                Background = (SolidColorBrush)Application.Current.Resources["PhoneAccentBrush"],
-                //Background = (Brush)Application.Current.Resources["TransparentBrush"]
+                Background = (Brush)Application.Current.Resources["TransparentBrush"]
             };
 
             container.Children.Add(GetTextBlockToRender(description, fontSize, margins));
@@ -155,14 +147,14 @@ namespace TodayILearned.Core
 
             var writeableBitmap = new WriteableBitmap(container, null);
 
-            string fileName = SharedImagePath + "tile" + height + width + ".jpg";
+            string fileName = SharedImagePath + "tile" + height + width + ".png";
             using (IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication())
             {
                 using (var stream = new IsolatedStorageFileStream(fileName, FileMode.Create, storage))
                 {
                     if (writeableBitmap.PixelHeight > 0)
                     {
-                        writeableBitmap.SaveJpeg(stream, width, height, 0, 100);
+                        writeableBitmap.WritePNG(stream);
                     }
                 }
             }

@@ -17,7 +17,7 @@ namespace TodayILearned
         {
             InitializeComponent();
 
-            webBrowser1.Navigated += webBrowser1_Navigated;
+            webBrowser1.Navigating += webBrowser1_OnNavigating;
             webBrowser1.LoadCompleted += webBrowser1_LoadCompleted;
 
             this.DataContext = App.ViewModel.Item;
@@ -70,7 +70,7 @@ namespace TodayILearned
 
         #region Web browser
 
-        void webBrowser1_Navigated(object sender, NavigationEventArgs e)
+        private void webBrowser1_OnNavigating(object sender, NavigatingEventArgs navigatingEventArgs)
         {
             if (!navigating)
             {

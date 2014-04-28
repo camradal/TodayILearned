@@ -200,6 +200,15 @@ namespace TodayILearned
             }
         }
 
+        private void contextMenu_Unloaded(object sender, RoutedEventArgs e)
+        {
+            var menu = sender as ContextMenu;
+            if (menu != null)
+            {
+                menu.ClearValue(FrameworkElement.DataContextProperty);
+            }
+        }
+
         private void OpenDetailsPage(string url)
         {
             string encodedUri = HttpUtility.HtmlEncode(url);
@@ -296,17 +305,17 @@ namespace TodayILearned
 
         #endregion
 
-        private void NewListBox_Link(object sender, LinkUnlinkEventArgs e)
+        private void AllListBox_OnItemRealized(object sender, ItemRealizationEventArgs e)
         {
             if (App.ViewModel.IsLoading) return;
 
             var listBox = sender as LongListSelector;
             if (listBox == null) return;
-            
+
             var items = listBox.ItemsSource as ObservableCollection<ItemViewModel>;
             if (items == null) return;
 
-            var currentItem = e.ContentPresenter.Content as ItemViewModel;
+            var currentItem = e.Container.Content as ItemViewModel;
             if (currentItem == null) return;
 
             if (currentItem.Equals(App.ViewModel.Items.Last()))
