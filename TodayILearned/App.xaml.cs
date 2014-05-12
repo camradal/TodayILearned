@@ -4,7 +4,6 @@ using System.Net;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Navigation;
-using BugSense;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TodayILearned.Core;
@@ -57,9 +56,6 @@ namespace TodayILearned
         /// </summary>
         public App()
         {
-            // Global handler for uncaught exceptions. 
-            BugSenseHandler.Instance.Init(this, "a971fc13");
-
             // Standard Silverlight initialization
             InitializeComponent();
 
@@ -100,7 +96,7 @@ namespace TodayILearned
                 }
                 else
                 {
-                    BugSenseHandler.Instance.LogError(ex);                    
+                    // TODO: log exception
                 }
             }
             else
