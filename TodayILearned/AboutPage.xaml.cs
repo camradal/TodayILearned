@@ -27,6 +27,12 @@ namespace TodayILearned
                     },
                     new NewItem
                     {
+                        Version = "1.8.2",
+                        Description =
+                            "- Bug fixes"
+                    },
+                    new NewItem
+                    {
                         Version = "1.8.1",
                         Description =
                             "- Full support for Windows Phone resolutions\n" +
@@ -137,7 +143,7 @@ namespace TodayILearned
 
         private void ReadVersionFromManifest()
         {
-            versionText.Text = "1.8.1";
+            versionText.Text = "1.8.2";
         }
     }
 }
