@@ -21,12 +21,13 @@ namespace TodayILearned
         public MainPage()
         {
             InitializeComponent();
-            LoadData();
+            int numberOfStarts = AppSettings.NumberOfStarts;
 
-            AppSettings.NumberOfStarts++;
-            ShowReviewPane();
+            LoadData(numberOfStarts);
+            ShowReviewPane(numberOfStarts);
 
             DataContext = App.ViewModel;
+            AppSettings.NumberOfStarts = numberOfStarts + 1;
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -38,15 +39,13 @@ namespace TodayILearned
 
             if (App.FontSizeChanged)
             {
-                LoadData();
+                LoadData(AppSettings.NumberOfStarts);
             }
         }
 
         // Load data for the ViewModel Items
-        private void LoadData()
+        private void LoadData(int numberOfStarts)
         {
-            int numberOfStarts = AppSettings.NumberOfStarts;
-
             if (numberOfStarts == 0)
             {
                 GlobalLoading.Instance.LoadingText = "Please wait while we set up...";
@@ -102,10 +101,10 @@ namespace TodayILearned
             }
         }
 
-        private void ShowReviewPane()
+        private void ShowReviewPane(int numberOfStarts)
         {
             var rate = new ReviewThisAppTask();
-            rate.ShowAfterThreshold();
+            rate.ShowAfterThreshold(numberOfStarts);
         }
 
         private void SetOrientation(bool locked)

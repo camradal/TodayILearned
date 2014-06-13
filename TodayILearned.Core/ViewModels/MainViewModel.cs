@@ -15,6 +15,9 @@ namespace TodayILearned.Core
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        private static readonly object favoritesLocker = new object();
+        private static readonly object offlineLocker = new object();
+
         private volatile bool isInitialized;
         private volatile bool isLoading;
         private volatile bool isSearching;
@@ -199,102 +202,118 @@ namespace TodayILearned.Core
 
         public void LoadFavorites()
         {
-            this.Favorites.Clear();
+            lock (favoritesLocker)
+            { 
+                this.Favorites.Clear();
 
-            using (var store = IsolatedStorageFile.GetUserStoreForApplication())
-            using (var stream = new IsolatedStorageFileStream("favorites.json", FileMode.OpenOrCreate, FileAccess.Read, store))
-            using (var reader = new StreamReader(stream))
-            using (var jsonReader = new JsonTextReader(reader))
-            {
-                if (reader.EndOfStream) return;
-
-                var result = JArray.Load(jsonReader);
-                storageFavorites = Serializer.GetItems(result).ToList();
-
-                if (AppSettings.ReverseSort)
+                using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+                using (var stream = new IsolatedStorageFileStream("favorites.json", FileMode.OpenOrCreate, FileAccess.Read, store))
+                using (var reader = new StreamReader(stream))
+                using (var jsonReader = new JsonTextReader(reader))
                 {
-                    for (int i = storageFavorites.Count - 1; i >= 0; i--)
+                    if (reader.EndOfStream) return;
+
+                    var result = JArray.Load(jsonReader);
+                    storageFavorites = Serializer.GetItems(result).ToList();
+
+                    if (AppSettings.ReverseSort)
                     {
-                        this.Favorites.Add(storageFavorites[i]);
+                        for (int i = storageFavorites.Count - 1; i >= 0; i--)
+                        {
+                            this.Favorites.Add(storageFavorites[i]);
+                        }
                     }
-                }
-                else
-                {
-                    foreach (var favorite in storageFavorites)
+                    else
                     {
-                        this.Favorites.Add(favorite);
-                    }    
+                        foreach (var favorite in storageFavorites)
+                        {
+                            this.Favorites.Add(favorite);
+                        }    
+                    }
                 }
             }
         }
 
         public void SaveFavorites()
         {
-            using (var store = IsolatedStorageFile.GetUserStoreForApplication())
-            using (var stream = new IsolatedStorageFileStream("favorites.json", FileMode.Create, FileAccess.Write, store))
-            using (var writer = new StreamWriter(stream))
-            {
-                string serialized = JsonConvert.SerializeObject(this.storageFavorites);
-                writer.Write(serialized);
+            lock (favoritesLocker)
+            { 
+                using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+                using (var stream = new IsolatedStorageFileStream("favorites.json", FileMode.Create, FileAccess.Write, store))
+                using (var writer = new StreamWriter(stream))
+                {
+                    string serialized = JsonConvert.SerializeObject(this.storageFavorites);
+                    writer.Write(serialized);
+                }
             }
         }
 
         public void LoadOffline()
         {
-            using (var store = IsolatedStorageFile.GetUserStoreForApplication())
-            using (var stream = new IsolatedStorageFileStream("offline.json", FileMode.OpenOrCreate, FileAccess.Read, store))
-            using (var reader = new StreamReader(stream))
-            using (var jsonReader = new JsonTextReader(reader))
+            lock (offlineLocker)
             {
-                if (reader.EndOfStream) return;
-
-                var result = JObject.Load(jsonReader);
-                var itemViewModels = Serializer.GetItems(result);
-
-                foreach (var model in itemViewModels)
+                using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+                using (var stream = new IsolatedStorageFileStream("offline.json", FileMode.OpenOrCreate, FileAccess.Read, store))
+                using (var reader = new StreamReader(stream))
+                using (var jsonReader = new JsonTextReader(reader))
                 {
-                    this.Items.Add(model);
+                    if (reader.EndOfStream) return;
+
+                    var result = JObject.Load(jsonReader);
+                    var itemViewModels = Serializer.GetItems(result);
+
+                    foreach (var model in itemViewModels)
+                    {
+                        this.Items.Add(model);
+                    }
                 }
             }
         }
 
         public void SaveOffline(string json)
         {
-            using (var store = IsolatedStorageFile.GetUserStoreForApplication())
-            using (var stream = new IsolatedStorageFileStream("offline.json", FileMode.Create, FileAccess.Write, store))
-            using (var writer = new StreamWriter(stream))
+            lock (offlineLocker)
             {
-                writer.Write(json);
+                using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+                using (var stream = new IsolatedStorageFileStream("offline.json", FileMode.Create, FileAccess.Write, store))
+                using (var writer = new StreamWriter(stream))
+                {
+                    writer.Write(json);
+                }
             }
         }
 
         public void AddFavorite(ItemViewModel model)
         {
-            // do not insert dupes
-            if (Favorites.Any(favorite => favorite.Title == model.Title))
+            lock (favoritesLocker)
             {
-                return;
-            }
+                // do not insert dupes
+                if (Favorites.Any(favorite => favorite.Title == model.Title))
+                {
+                    return;
+                }
 
-            storageFavorites.Add(model);
+                storageFavorites.Add(model);
 
-            if (AppSettings.ReverseSort)
-            {
-                Favorites.Insert(0, model);
+                if (AppSettings.ReverseSort)
+                {
+                    Favorites.Insert(0, model);
+                }
+                else
+                {
+                    Favorites.Add(model);
+                }
             }
-            else
-            {
-                Favorites.Add(model);
-            }
-
             NotifyPropertyChanged("Favorites");
         }
 
         public void RemoveFavorite(ItemViewModel model)
         {
-            storageFavorites.Remove(model);
-            Favorites.Remove(model);
-
+            lock (favoritesLocker)
+            {
+                storageFavorites.Remove(model);
+                Favorites.Remove(model);
+            }
             NotifyPropertyChanged("Favorites");
         }
 

@@ -27,9 +27,11 @@ namespace TodayILearned
         {
             try
             {
-                var task = new ShareStatusTask()
+                var task = new ShareLinkTask()
                 {
-                    Status = model.Title + "\n" + model.Url
+                    Title = model.Title,
+                    Message = model.Title,
+                    LinkUri = new Uri(model.Url, UriKind.Absolute)
                 };
                 task.Show();
             }
