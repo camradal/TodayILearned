@@ -43,7 +43,10 @@ namespace TodayILearned.Core
                     Domain = token["data"]["domain"].Value<string>(),
                     Thumbnail = token["data"]["thumbnail"].Value<string>()
                 };
-                items.Add(itemViewModel);
+                if (!token["data"]["stickied"].Value<bool>())
+                {
+                    items.Add(itemViewModel);
+                }
             }
             return items;
         }
