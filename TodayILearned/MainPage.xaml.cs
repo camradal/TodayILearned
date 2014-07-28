@@ -150,7 +150,7 @@ namespace TodayILearned
             }
             else
             {
-                OpenDetailsPage(selectedItem.Url);                
+                OpenDetailsPage();                
             }
 
             // reset selected index to null (no selection)
@@ -208,10 +208,9 @@ namespace TodayILearned
             }
         }
 
-        private void OpenDetailsPage(string url)
+        private void OpenDetailsPage()
         {
-            string encodedUri = HttpUtility.HtmlEncode(url);
-            var uri = new Uri("/DetailsPage.xaml?uri=" + encodedUri, UriKind.Relative);
+            var uri = new Uri("/DetailsPage.xaml", UriKind.Relative);
             Dispatcher.BeginInvoke(() =>
             {
                 try
