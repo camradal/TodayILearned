@@ -25,7 +25,7 @@
             <Grid Margin="0,0,6,17">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
                     <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Margin="12,0,9,1" Style="{Binding Source={StaticResource appSettings}, Path=DisplayFontSize, Converter={StaticResource fontSizeConverter}}"/>
