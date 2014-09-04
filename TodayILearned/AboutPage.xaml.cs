@@ -27,7 +27,7 @@ namespace TodayILearned
                     },
                     new NewItem
                     {
-                        Version = "1.8.6",
+                        Version = "1.8.7",
                         Description =
                             "- Bug fixes"
                     },
@@ -143,7 +143,7 @@ namespace TodayILearned
 
         private void ReadVersionFromManifest()
         {
-            versionText.Text = "1.8.6";
+            versionText.Text = "1.8.7";
         }
     }
 }

@@ -4,6 +4,8 @@ using System.Net;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using BugSense;
+using BugSense.Core.Model;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TodayILearned.Core;
@@ -56,6 +58,8 @@ namespace TodayILearned
         /// </summary>
         public App()
         {
+            BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), RootFrame, "4809b491");
+
             // Standard Silverlight initialization
             InitializeComponent();
 
@@ -96,7 +100,7 @@ namespace TodayILearned
                 }
                 else
                 {
-                    // TODO: log exception
+                    BugSenseLogResult logResult = BugSenseHandler.Instance.LogException(ex, "Trivia Buff", "Handled Exception");
                 }
             }
             else
