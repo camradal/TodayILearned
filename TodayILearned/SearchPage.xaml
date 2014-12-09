@@ -31,7 +31,7 @@
                     <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Margin="12,0,9,1" Style="{Binding Source={StaticResource appSettings}, Path=DisplayFontSize, Converter={StaticResource fontSizeConverter}}"/>
                     <TextBlock Text="{Binding Domain}" Style="{StaticResource PhoneTextSmallStyle}" Margin="12,0,9,0"/>
                 </StackPanel>
-                <Image Grid.Column="1" Margin="0,6,15,0" Stretch="Uniform" VerticalAlignment="Top">
+                <Image Grid.Column="1" Margin="0,6,15,0" Stretch="Uniform" VerticalAlignment="Top" MaxWidth="100">
                     <Image.Source>
                         <BitmapImage UriSource="{Binding Thumbnail}"/>
                     </Image.Source>
