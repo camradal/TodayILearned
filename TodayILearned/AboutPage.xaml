@@ -20,6 +20,11 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
         <controls:Pivot Title="{Binding Source={StaticResource Strings}, Path=Resources.AppTitleCapitalized}">
+            <phone:Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" FontSize="65"/>
+                </DataTemplate>
+            </phone:Pivot.HeaderTemplate>
             <!--Pivot item one-->
             <controls:PivotItem Header="{Binding Resources.PageTitleAbout, Source={StaticResource Strings}}">
                 <StackPanel Margin="0">

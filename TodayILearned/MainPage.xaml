@@ -81,7 +81,12 @@
             Grid.Row="0"
             LoadingPivotItem="MainPivot_OnLoadingPivotItem"
             Title="{Binding Source={StaticResource Strings}, Path=Resources.AppTitleCapitalized}">
-            <controls:PivotItem Header="new" Margin="12,20,12,0">
+            <phone:Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" FontSize="65"/>
+                </DataTemplate>
+            </phone:Pivot.HeaderTemplate>
+            <controls:PivotItem Header="new" Margin="12,12,12,0">
                 <phone:LongListSelector
                     x:Name="AllListBox"
                     Margin="0,0,-12,0"
@@ -91,7 +96,7 @@
                     SelectionChanged="ListBox_SelectionChanged">
                 </phone:LongListSelector>
             </controls:PivotItem>
-            <controls:PivotItem Header="favorites" Margin="12,20,12,0">
+            <controls:PivotItem Header="favorites" Margin="12,12,12,0">
                 <phone:LongListSelector
                     x:Name="FavoritesListBox"
                     Margin="0,0,-12,0"
