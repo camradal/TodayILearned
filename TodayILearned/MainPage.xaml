@@ -33,7 +33,7 @@
                     <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Margin="12,0,9,1" Style="{Binding Source={StaticResource appSettings}, Path=DisplayFontSize, Converter={StaticResource fontSizeConverter}}"/>
                     <TextBlock Text="{Binding Domain}" Style="{StaticResource PhoneTextSmallStyle}" Margin="12,0,9,0"/>
                 </StackPanel>
-                <Image Grid.Column="1" Margin="0,6,15,0" Stretch="Uniform" VerticalAlignment="Top">
+                <Image Grid.Column="1" Margin="0,6,15,0" Stretch="Uniform" VerticalAlignment="Top" MaxWidth="100">
                     <Image.Source>
                         <BitmapImage UriSource="{Binding Thumbnail}"/>
                     </Image.Source>
@@ -56,7 +56,7 @@
                     <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Margin="12,0,9,1" Style="{Binding Source={StaticResource appSettings}, Path=DisplayFontSize, Converter={StaticResource fontSizeConverter}}"/>
                     <TextBlock Text="{Binding Domain}" Style="{StaticResource PhoneTextSmallStyle}" Margin="12,0,9,0"/>
                 </StackPanel>
-                <Image Grid.Column="1" Margin="0,6,15,0" Stretch="Uniform" VerticalAlignment="Top">
+                <Image Grid.Column="1" Margin="0,6,15,0" Stretch="Uniform" VerticalAlignment="Top" MaxWidth="100">
                     <Image.Source>
                         <BitmapImage UriSource="{Binding Thumbnail}"/>
                     </Image.Source>
@@ -81,7 +81,12 @@
             Grid.Row="0"
             LoadingPivotItem="MainPivot_OnLoadingPivotItem"
             Title="{Binding Source={StaticResource Strings}, Path=Resources.AppTitleCapitalized}">
-            <controls:PivotItem Header="new">
+            <phone:Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" FontSize="65"/>
+                </DataTemplate>
+            </phone:Pivot.HeaderTemplate>
+            <controls:PivotItem Header="new" Margin="12,12,12,0">
                 <phone:LongListSelector
                     x:Name="AllListBox"
                     Margin="0,0,-12,0"
@@ -91,7 +96,7 @@
                     SelectionChanged="ListBox_SelectionChanged">
                 </phone:LongListSelector>
             </controls:PivotItem>
-            <controls:PivotItem Header="favorites">
+            <controls:PivotItem Header="favorites" Margin="12,12,12,0">
                 <phone:LongListSelector
                     x:Name="FavoritesListBox"
                     Margin="0,0,-12,0"
