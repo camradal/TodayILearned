@@ -68,7 +68,7 @@ namespace TodayILearned.Core
 
             if (value[0] == '"')
             {
-                value = char.ToUpper(value[1]) + value.Substring(2);
+                value = "\"" + char.ToUpper(value[1]) + value.Substring(2);
             }
             else
             {
@@ -79,7 +79,7 @@ namespace TodayILearned.Core
 
         private static string Trim(string value)
         {
-            value = value.TrimStart(new[] {' ', '-', '.', ':', ',', '/', ']'});
+            value = value.TrimStart(new[] {' ', '-', '.', ':', ';', ',', '/', ']'});
             if (value.StartsWith("that", StringComparison.OrdinalIgnoreCase) && !value.StartsWith("that's", StringComparison.OrdinalIgnoreCase))
             {
                 value = value.Substring("that".Length);
