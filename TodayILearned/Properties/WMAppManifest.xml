@@ -4,7 +4,7 @@
   <AppExtra xmlns="" AppPlatformVersion="8.0">
     <Extra Name="Tiles" />
   </AppExtra>
-  <App xmlns="" ProductID="{722d2aba-a0a6-49c1-85ff-79b885c76745}" Title="Trivia Buff Pro" RuntimeType="Silverlight" Version="1.8.7.0" Genre="apps.normal" Author="Dapper Panda" Description="Trivia Buff is a perfect app for trivia &amp; random fact lovers. Updated daily with new interesting facts and includes sources for even more info!" Publisher="Dapper Panda" PublisherID="{d3f2105e-d331-4dfe-8322-3629f6d98368}">
+  <App xmlns="" ProductID="{722d2aba-a0a6-49c1-85ff-79b885c76745}" Title="Trivia Buff Pro" RuntimeType="Silverlight" Version="1.8.8.0" Genre="apps.normal" Author="Dapper Panda" Description="Trivia Buff is a perfect app for trivia &amp; random fact lovers. Updated daily with new interesting facts and includes sources for even more info!" Publisher="Dapper Panda" PublisherID="{d3f2105e-d331-4dfe-8322-3629f6d98368}">
     <IconPath IsRelative="true" IsResource="false">icons\Application_Icon_159.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_IDENTITY_DEVICE" />

@@ -42,7 +42,9 @@ namespace TodayILearned.AndroidApp
             {
                 try
                 {
-                    var triviaTask = new WebClient().DownloadStringTaskAsync("http://reddit.com/r/todayilearned.json");
+					var client = new WebClient();
+					client.Headers.Set(HttpRequestHeader.UserAgent, "android:com.trivia.buff:v1.3.0 (by /u/camradal)");
+                    var triviaTask = client.DownloadStringTaskAsync("http://reddit.com/r/todayilearned.json");
                     
                     var result = JObject.Parse(await triviaTask);
                     var items = Serializer.GetItems(result);

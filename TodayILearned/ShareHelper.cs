@@ -13,7 +13,7 @@ namespace TodayILearned
                 var task = new EmailComposeTask
                 {
                     Subject = model.Title,
-                    Body = model.Title + "\n\n" + model.Url
+                    Body = model.Title + "\n\n" + model.Url + "\n\n" + "Shared via Trivia Buff\nhttp://www.triviabuffapp.com"
                 };
                 task.Show();
             }

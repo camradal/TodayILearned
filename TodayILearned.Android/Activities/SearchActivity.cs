@@ -42,7 +42,9 @@ namespace TodayILearned.AndroidApp
                     {
                         SetProgressBarIndeterminateVisibility(true);
                         var query = Intent.GetStringExtra(SearchManager.Query);
-                        var triviaTask = new WebClient().DownloadStringTaskAsync(SearchUrl + query);
+						var client = new WebClient();
+						client.Headers.Set(HttpRequestHeader.UserAgent, "android:com.trivia.buff:v1.3.0 (by /u/camradal)");
+                        var triviaTask = client.DownloadStringTaskAsync(SearchUrl + query);
 
                         var result = JObject.Parse(await triviaTask);
                         var items = Serializer.GetItems(result);
