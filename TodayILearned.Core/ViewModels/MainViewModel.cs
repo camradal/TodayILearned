@@ -90,7 +90,7 @@ namespace TodayILearned.Core
                 BeginLoading();
             }
 
-            string uriString = "https://www.reddit.com/r/todayilearned.json";
+            string uriString = "http://www.reddit.com/r/todayilearned.json";
             if (!string.IsNullOrEmpty(lastItem))
             {
                 uriString += "?after=" + lastItem;
@@ -164,7 +164,7 @@ namespace TodayILearned.Core
                 BeginLoading();
             }
 
-            string uriString = "https://www.reddit.com/r/todayilearned/search.json?sort=relevance&restrict_sr=on&t=all&q=" + term;
+            string uriString = "http://www.reddit.com/r/todayilearned/search.json?sort=relevance&restrict_sr=on&t=all&q=" + term;
             if (!string.IsNullOrEmpty(lastItem))
             {
                 uriString += "&after=" + lastItem;
