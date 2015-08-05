@@ -17,13 +17,19 @@ namespace TodayILearned.Core
             foreach (JToken token in tokens)
             {
                 string title = ProcessString(token["Title"].Value<string>());
+                string thumbnail = token["Thumbnail"].Value<string>();
                 var itemViewModel = new ItemViewModel
                 {
                     Title = title,
                     Url = token["Url"].Value<string>(),
-                    Domain = token["Domain"].Value<string>(),
-                    Thumbnail = token["Thumbnail"].Value<string>()
+                    Domain = token["Domain"].Value<string>()
                 };
+                
+                if (thumbnail != "default")
+                {
+                    itemViewModel.Thumbnail = thumbnail;
+                }
+                
                 items.Add(itemViewModel);
             }
             return items;
@@ -36,13 +42,19 @@ namespace TodayILearned.Core
             foreach (JToken token in tokens)
             {
                 string title = ProcessString(token["data"]["title"].Value<string>());
+                string thumbnail = token["Thumbnail"].Value<string>();
                 var itemViewModel = new ItemViewModel
                 {
                     Title = title,
                     Url = token["data"]["url"].Value<string>(),
-                    Domain = token["data"]["domain"].Value<string>(),
-                    Thumbnail = token["data"]["thumbnail"].Value<string>()
+                    Domain = token["data"]["domain"].Value<string>()
                 };
+                
+                if (thumbnail != "default")
+                {
+                    itemViewModel.Thumbnail = thumbnail;
+                }
+                
                 if (!token["data"]["stickied"].Value<bool>())
                 {
                     items.Add(itemViewModel);
