@@ -216,6 +216,9 @@
   <data name="PageTitleShare" xml:space="preserve">
     <value>SHARE</value>
   </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>privacy policy</value>
+  </data>
   <data name="Rate" xml:space="preserve">
     <value>Please rate and comment on this app in Marketplace</value>
   </data>

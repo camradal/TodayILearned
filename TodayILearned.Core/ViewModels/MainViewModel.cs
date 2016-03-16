@@ -97,7 +97,7 @@ namespace TodayILearned.Core
             }
             var uri = new Uri(uriString);
             var client = new GZipWebClient();
-            client.Headers["User-Agent"] = "windowsphone:com.trivia.buff:v1.8.8 (by /u/camradal)";
+            client.Headers["User-Agent"] = "windowsphone:com.trivia.buff:v1.8.9 (by /u/camradal)";
             client.DownloadStringCompleted += client_DownloadStringCompleted;
             client.DownloadStringAsync(uri);
         }
@@ -176,7 +176,7 @@ namespace TodayILearned.Core
 
             var uri = new Uri(uriString);
             var client = new GZipWebClient();
-            client.Headers["User-Agent"] = "windowsphone:com.trivia.buff:v1.8.8 (by /u/camradal)";
+            client.Headers["User-Agent"] = "windowsphone:com.trivia.buff:v1.8.9 (by /u/camradal)";
             client.DownloadStringCompleted += client_DownloadSearchStringCompleted;
             client.DownloadStringAsync(uri);
         }
